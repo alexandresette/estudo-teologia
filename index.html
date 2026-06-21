@@ -878,9 +878,6 @@
     if(e.key==='Home')go(0); if(e.key==='End')go(slides.length-1);
     if(e.key.toLowerCase()==='m')openIdx();
   });
-
-  let x0=null;
-  document.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
   document.addEventListener('touchend',e=>{if(x0===null||!curDeck)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50){dx<0?go(cur+1):go(cur-1);}x0=null;},{passive:true});
 
   goHome();

@@ -470,9 +470,6 @@
   wrap.innerHTML=html;
   function openIdx(){document.getElementById('idx').classList.add('open');}
   function closeIdx(){document.getElementById('idx').classList.remove('open');}
-  // swipe (mobile)
-  let x0=null;
-  document.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
   document.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50){dx<0?go(cur+1):go(cur-1);}x0=null;},{passive:true});
   render();
 </script>
