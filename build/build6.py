@@ -366,6 +366,37 @@ __THEOLOGY_COVER_CSS__
 #idx .item .t{font-size:15px}
 #idx .close{position:fixed;top:18px;right:24px;color:#f0e2bc;font-size:26px;cursor:pointer;font-family:Arial}
 
+/* ---- notes side panel (per-book, docked, never blocks the book) ---- */
+#notesBtn{position:fixed;top:13px;right:246px;z-index:40;background:rgba(243,231,201,.08);border:1px solid rgba(217,185,104,.28);color:#f0e2bc;border-radius:9px;padding:7px 12px;font-size:12px;letter-spacing:.12em;cursor:pointer;font-family:"Helvetica Neue",Arial,sans-serif;backdrop-filter:blur(6px);display:none}
+#notesBtn:hover{background:rgba(243,231,201,.16)}
+#notesBtn.has-note::after{content:"";position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--gold-soft)}
+@media(max-width:600px){#notesBtn{right:190px;font-size:11px;padding:6px 10px}}
+@media(min-width:1200px){body.notes-open .reader-slot{transform:translateX(-100px)}}
+.reader-slot{transition:transform .32s ease}
+#notesPanel{position:fixed;top:0;right:0;height:100dvh;width:min(400px,92vw);z-index:65;background:var(--paper);box-shadow:-18px 0 40px rgba(20,14,8,.45);transform:translateX(100%);transition:transform .32s ease;display:flex;flex-direction:column;font-family:"Helvetica Neue",Arial,sans-serif}
+#notesPanel.open{transform:translateX(0)}
+#notesPanel .notes-head{background:rgba(20,14,8,.94);border-bottom:1px solid rgba(217,185,104,.28);backdrop-filter:blur(10px);flex:none}
+#notesPanel .notes-head-top{display:flex;align-items:center;gap:8px;padding:12px 14px 8px}
+#notesPanel .notes-title{color:#f0e2bc;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#notesPanel .notes-status{color:#a08f6a;font-size:11px;opacity:0;transition:opacity .25s}
+#notesPanel .notes-status.show{opacity:1}
+#notesPanel .notes-close{color:#f0e2bc;font-size:20px;cursor:pointer;line-height:1;padding:2px 4px}
+#notesPanel .notes-close:hover{color:var(--gold-soft)}
+#notesPanel .notes-toolbar{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 12px}
+#notesPanel .toolbtn{background:rgba(243,231,201,.08);border:1px solid rgba(217,185,104,.28);color:#f0e2bc;border-radius:7px;padding:5px 9px;font-size:12px;cursor:pointer;font-family:"Helvetica Neue",Arial,sans-serif}
+#notesPanel .toolbtn:hover{background:rgba(243,231,201,.16)}
+#notesPanel .toolbtn.active{background:rgba(217,185,104,.28);border-color:var(--gold-soft);color:var(--gold-soft)}
+#notesPanel .toolbar-sep{width:1px;background:rgba(217,185,104,.28);margin:2px 2px}
+#notesBody{flex:1;overflow-y:auto;padding:18px 22px 18px 46px;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-size:15px;line-height:27px;color:var(--ink);outline:none;background-color:var(--paper);background-attachment:local;background-image:linear-gradient(90deg,transparent 28px,rgba(139,48,48,.24) 28px,rgba(139,48,48,.24) 29px,transparent 29px),repeating-linear-gradient(to bottom,transparent 0,transparent 25px,rgba(43,33,23,.16) 25px,rgba(43,33,23,.16) 26px)}
+#notesBody:empty::before{content:attr(data-placeholder);color:rgba(43,33,23,.4)}
+#notesBody h2{font-size:19px;line-height:27px;color:var(--rust);margin:0;font-weight:700}
+#notesBody h3{font-size:16px;line-height:27px;color:var(--navy2);margin:0;font-weight:700}
+#notesBody p{font-size:15px;line-height:27px;color:var(--ink);margin:0}
+#notesBody::-webkit-scrollbar{width:9px}
+#notesBody::-webkit-scrollbar-thumb{background:rgba(139,124,47,.35);border-radius:5px}
+#notesBody::-webkit-scrollbar-track{background:transparent}
+@media(max-width:600px){#notesPanel{width:100vw}#notesBody{padding:16px 16px 16px 38px}}
+
 /* ---- reader stage (StPageFlip) — the book resting on a real painted wooden table.
    The container's aspect-ratio is locked to the exact spread aspect (920:640) that
    StPageFlip's own 'stretch' sizing computes internally, so the two can never drift
@@ -627,6 +658,28 @@ TAIL_END = """
 <div class="reader-hint">setas do teclado ou clique na borda da página pra virar</div>
 
 <div id="idx"><span class="close" onclick="closeIdx()">&#10005;</span><div class="wrap" id="idxWrap"></div></div>
+<button id="notesBtn" onclick="toggleNotes()" title="Minhas anotações" aria-label="Minhas anotações">&#9998; NOTAS</button>
+<div id="notesPanel">
+  <div class="notes-head">
+    <div class="notes-head-top">
+      <span class="notes-title" id="notesTitle">Notas</span>
+      <span class="notes-status" id="notesStatus">salvo</span>
+      <span class="notes-close" onclick="closeNotes()" title="Fechar anotações">&#10005;</span>
+    </div>
+    <div class="notes-toolbar">
+      <button type="button" class="toolbtn" data-cmd="bold" title="Negrito"><b>N</b></button>
+      <button type="button" class="toolbtn" data-cmd="italic" title="Itálico"><i>I</i></button>
+      <button type="button" class="toolbtn" data-cmd="underline" title="Sublinhado"><u>S</u></button>
+      <span class="toolbar-sep"></span>
+      <button type="button" class="toolbtn" data-block="H2" title="Título">Título</button>
+      <button type="button" class="toolbtn" data-block="H3" title="Subtítulo">Subtítulo</button>
+      <button type="button" class="toolbtn" data-block="P" title="Corpo">Corpo</button>
+      <span class="toolbar-sep"></span>
+      <button type="button" class="toolbtn" id="notesCopyBtn" title="Copiar anotação">Copiar</button>
+    </div>
+  </div>
+  <div id="notesBody" contenteditable="true" spellcheck="false" data-placeholder="Escreva sua anotação..."></div>
+</div>
 
 <script>
   const BOOKS=__BOOKS_ARRAY__;
@@ -656,6 +709,7 @@ TAIL_END = """
   const backBtn=document.getElementById('backBtn');
   const homeBtn=document.getElementById('homeBtn');
   const menuBtn=document.getElementById('menuBtn');
+  const notesBtn=document.getElementById('notesBtn');
   const containers={};
   BOOKS.forEach(b=>{containers[b.id]=document.getElementById('book-'+b.id);});
   DEVOS.forEach(d=>{containers[d.id]=document.getElementById('book-'+d.id);});
@@ -865,6 +919,8 @@ TAIL_END = """
     });
     showChrome(true);
     menuBtn.style.display=hasNoToc?'none':'block';
+    notesBtn.style.display=hasNoToc?'none':'block';
+    notesRefreshDot();
     bar.style.display='block';
     requestAnimationFrame(()=>{
       ensureFlip(id);
@@ -896,6 +952,7 @@ TAIL_END = """
     const originEl=document.querySelector('.bcover[data-id="'+id+'"]');
     sfxClose();
     closeIdx();
+    closeNotes();
     reader.classList.remove('shown');
     showChrome(false);
     setTimeout(()=>{
@@ -949,6 +1006,57 @@ TAIL_END = """
     document.getElementById('idx').classList.add('open');
   }
   function closeIdx(){document.getElementById('idx').classList.remove('open');}
+
+  /* ---- notes (per-book, contenteditable, persisted per browser in localStorage) ---- */
+  function notesKey(id){ return 'estudoNotas_'+id; }
+  function notesHasContent(id){
+    const v=localStorage.getItem(notesKey(id));
+    return !!(v && v.replace(/<[^>]*>/g,'').trim().length);
+  }
+  function notesRefreshDot(){
+    if(!curDeck) return;
+    notesBtn.classList.toggle('has-note', notesHasContent(curDeck));
+  }
+  let notesSaveTimer=null;
+  function notesStatus(msg,show){
+    const el=document.getElementById('notesStatus');
+    el.textContent=msg;
+    el.classList.toggle('show',!!show);
+  }
+  function openNotes(){
+    if(!curDeck) return;
+    const book=BOOKS.find(b=>b.id===curDeck);
+    document.getElementById('notesTitle').textContent='Notas · '+(book?book.title.replace(/\n/g,' '):'');
+    const body=document.getElementById('notesBody');
+    body.innerHTML=localStorage.getItem(notesKey(curDeck))||'';
+    document.getElementById('notesPanel').classList.add('open');
+    document.body.classList.add('notes-open');
+    notesStatus('',false);
+    setTimeout(()=>body.focus(),260);
+  }
+  function closeNotes(){
+    document.getElementById('notesPanel').classList.remove('open');
+    document.body.classList.remove('notes-open');
+  }
+  function toggleNotes(){
+    if(!curDeck) return;
+    document.getElementById('notesPanel').classList.contains('open') ? closeNotes() : openNotes();
+  }
+  function notesSave(){
+    if(!curDeck) return;
+    const body=document.getElementById('notesBody');
+    localStorage.setItem(notesKey(curDeck), body.innerHTML);
+    notesRefreshDot();
+    notesStatus('salvo',true);
+    clearTimeout(notesSaveTimer);
+    notesSaveTimer=setTimeout(()=>notesStatus('',false),1400);
+  }
+  function notesUpdateToolbarState(){
+    ['bold','italic','underline'].forEach(cmd=>{
+      const btn=document.querySelector('#notesPanel .toolbtn[data-cmd="'+cmd+'"]');
+      if(btn) btn.classList.toggle('active', document.queryCommandState(cmd));
+    });
+  }
   function jumpTo(folio){
     if(!curDeck||!flips[curDeck])return;
     flips[curDeck].flip(folio-1);
@@ -956,16 +1064,45 @@ TAIL_END = """
   }
 
   document.addEventListener('keydown',e=>{
+    if(document.getElementById('notesPanel').classList.contains('open')){ if(e.key==='Escape')closeNotes(); return; }
     if(document.getElementById('idx').classList.contains('open')){ if(e.key==='Escape')closeIdx(); return; }
     if(curDeck){
       if(e.key==='Escape'){goShelf();return;}
       if(e.key==='ArrowRight'){flipNext();}
       if(e.key==='ArrowLeft'){flipPrev();}
       if(e.key.toLowerCase()==='m')openIdx();
+      if(e.key.toLowerCase()==='n')openNotes();
       return;
     }
     if(curCorridor && e.key==='Escape'){ exitCorridor(); }
   });
+
+  const notesBodyEl=document.getElementById('notesBody');
+  notesBodyEl.addEventListener('input', ()=>{ clearTimeout(notesSaveTimer); notesSaveTimer=setTimeout(notesSave,500); });
+  document.querySelectorAll('#notesPanel .toolbtn[data-cmd]').forEach(btn=>{
+    btn.addEventListener('mousedown', e=>e.preventDefault());
+    btn.addEventListener('click', ()=>{ document.execCommand(btn.dataset.cmd); notesBodyEl.focus(); notesUpdateToolbarState(); notesSave(); });
+  });
+  document.querySelectorAll('#notesPanel .toolbtn[data-block]').forEach(btn=>{
+    btn.addEventListener('mousedown', e=>e.preventDefault());
+    btn.addEventListener('click', ()=>{ document.execCommand('formatBlock', false, '<'+btn.dataset.block+'>'); notesBodyEl.focus(); notesSave(); });
+  });
+  document.getElementById('notesCopyBtn').addEventListener('click', ()=>{
+    const text=notesBodyEl.innerText.trim();
+    if(!text) return;
+    if(navigator.clipboard) navigator.clipboard.writeText(text).then(()=>notesStatus('copiado',true)).catch(()=>{});
+  });
+  document.addEventListener('selectionchange', ()=>{
+    if(document.getElementById('notesPanel').classList.contains('open') && document.activeElement===notesBodyEl){
+      notesUpdateToolbarState();
+    }
+  });
+  document.addEventListener('click', e=>{
+    const panel=document.getElementById('notesPanel');
+    if(panel.classList.contains('open') && !panel.contains(e.target) && e.target!==notesBtn){
+      closeNotes();
+    }
+  }, true);
 
   /* ============================================================
      Efeitos sonoros -- sintetizados na hora via Web Audio, sem
@@ -1030,7 +1167,7 @@ TAIL_END = """
   function toggleSfx(){ setSfxOn(!sfxOn); if(sfxOn) sfxClick(); }
   setSfxOn(sfxOn);
 
-  const SFX_SELECTOR='.bcover,.corridor-zone,.flipbtn,#backBtn,#homeBtn,#menuBtn,.corridorExitBtn,#idx .item,#idx .close,#sfxBtn,#musicBtn,#musicPanel .track';
+  const SFX_SELECTOR='.bcover,.corridor-zone,.flipbtn,#backBtn,#homeBtn,#menuBtn,.corridorExitBtn,#idx .item,#idx .close,#sfxBtn,#musicBtn,#musicPanel .track,#notesBtn,#notesPanel .toolbtn,#notesPanel .notes-close';
   let sfxLastHoverEl=null;
   document.addEventListener('mouseover',e=>{
     const el=e.target.closest(SFX_SELECTOR);
