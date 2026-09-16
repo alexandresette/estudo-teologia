@@ -387,15 +387,15 @@ __THEOLOGY_COVER_CSS__
 #notesPanel .toolbtn:hover{background:rgba(243,231,201,.16)}
 #notesPanel .toolbtn.active{background:rgba(217,185,104,.28);border-color:var(--gold-soft);color:var(--gold-soft)}
 #notesPanel .toolbar-sep{width:1px;background:rgba(217,185,104,.28);margin:2px 2px}
-#notesBody{flex:1;overflow-y:auto;padding:18px 22px 18px 46px;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-size:15px;line-height:27px;color:var(--ink);outline:none;background-color:var(--paper);background-attachment:local;background-image:linear-gradient(90deg,transparent 28px,rgba(139,48,48,.24) 28px,rgba(139,48,48,.24) 29px,transparent 29px),repeating-linear-gradient(to bottom,transparent 0,transparent 25px,rgba(43,33,23,.16) 25px,rgba(43,33,23,.16) 26px)}
+#notesBody{flex:1;overflow-y:auto;padding:18px 22px;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-size:15px;line-height:1.6;color:var(--ink);outline:none;background:linear-gradient(155deg,var(--paper) 0%,var(--paper2) 100%)}
 #notesBody:empty::before{content:attr(data-placeholder);color:rgba(43,33,23,.4)}
-#notesBody h2{font-size:19px;line-height:27px;color:var(--rust);margin:0;font-weight:700}
-#notesBody h3{font-size:16px;line-height:27px;color:var(--navy2);margin:0;font-weight:700}
-#notesBody p{font-size:15px;line-height:27px;color:var(--ink);margin:0}
+#notesBody h2{font-size:19px;line-height:1.3;color:var(--rust);margin:0 0 6px;font-weight:700}
+#notesBody h3{font-size:16px;line-height:1.3;color:var(--navy2);margin:0 0 6px;font-weight:700}
+#notesBody p{font-size:15px;line-height:1.6;color:var(--ink);margin:0 0 10px}
 #notesBody::-webkit-scrollbar{width:9px}
 #notesBody::-webkit-scrollbar-thumb{background:rgba(139,124,47,.35);border-radius:5px}
 #notesBody::-webkit-scrollbar-track{background:transparent}
-@media(max-width:600px){#notesPanel{width:100vw}#notesBody{padding:16px 16px 16px 38px}}
+@media(max-width:600px){#notesPanel{width:100vw}#notesBody{padding:16px}}
 
 /* ---- reader stage (StPageFlip) — the book resting on a real painted wooden table.
    The container's aspect-ratio is locked to the exact spread aspect (920:640) that
