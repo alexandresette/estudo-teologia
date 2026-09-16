@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import base64
 import json
 import html as htmlmod
 
@@ -99,6 +100,18 @@ corshelf_b64 = open("/tmp/corridor-shelf_b64.txt", encoding="ascii").read().stri
 table_art_b64 = open("/tmp/table_art_b64.txt", encoding="ascii").read().strip()
 devo_manifest = json.load(open("/tmp/secreto_manifest.json", encoding="utf-8"))
 livros_manifest = json.load(open("/tmp/livros_manifest.json", encoding="utf-8"))
+
+# ---- "Divinamente" (Dr. Jonatas Leonio) -- a rich Livros-shelf book, real
+# HTML pages + toc like the theology resumões, but shelved under "Livros"
+# with its own designed cover image instead of a CSS-gradient cover. Content
+# lives in build/divinamente/ (chapters.py is the authored source; run
+# build/divinamente/build_divinamente.py after editing it to refresh the two
+# files below plus the human-readable RESUMO-DIVINAMENTE.html deck) -- all
+# committed to the repo, not /tmp, so this book stays rebuildable.
+_DIVINAMENTE_DIR = "/home/claude/estudo-teologia/build/divinamente"
+divinamente_pages = open(_DIVINAMENTE_DIR + "/pages_divinamente.html", encoding="utf-8").read()
+divinamente_toc = json.load(open(_DIVINAMENTE_DIR + "/toc_divinamente.json", encoding="utf-8"))
+divinamente_cover_b64 = base64.b64encode(open(_DIVINAMENTE_DIR + "/cover.jpg", "rb").read()).decode("ascii")
 
 
 def build_pdf_book(d):
@@ -355,6 +368,12 @@ __THEOLOGY_COVER_CSS__
    opened a growing gap between the shrunken photo and the frame around it,
    which read as the cover "cutting" at the edges. */
 
+/* ---- full-bleed illustration pages ("Divinamente" and any future rich
+   Livros book) -- same borderless photo treatment as .devo-page, plus a
+   small caption pill so the chapter number survives without a text box */
+.art-page{position:relative}
+.art-page .art-cap{position:absolute;bottom:14px;right:16px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#e7d9b6;background:rgba(12,8,4,.55);padding:5px 10px;border-radius:999px;backdrop-filter:blur(3px)}
+
 /* ---- index overlay (unit jump menu) ---- */
 #idx{position:fixed;inset:0;background:rgba(15,10,6,.88);backdrop-filter:blur(8px);z-index:60;display:none;padding:60px 24px;overflow:auto}
 #idx.open{display:block}
@@ -371,7 +390,7 @@ __THEOLOGY_COVER_CSS__
 #notesBtn:hover{background:rgba(243,231,201,.16)}
 #notesBtn.has-note::after{content:"";position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--gold-soft)}
 @media(max-width:600px){#notesBtn{right:190px;font-size:11px;padding:6px 10px}}
-@media(min-width:1200px){body.notes-open .reader-slot{transform:translateX(-100px)}}
+@media(min-width:1000px){body.notes-open .reader-slot{transform:translateX(-160px)}}
 .reader-slot{transition:transform .32s ease}
 #notesPanel{position:fixed;top:0;right:0;height:100dvh;width:min(400px,92vw);z-index:65;background:var(--paper);box-shadow:-18px 0 40px rgba(20,14,8,.45);transform:translateX(100%);transition:transform .32s ease;display:flex;flex-direction:column;font-family:"Helvetica Neue",Arial,sans-serif}
 #notesPanel.open{transform:translateX(0)}
@@ -387,15 +406,15 @@ __THEOLOGY_COVER_CSS__
 #notesPanel .toolbtn:hover{background:rgba(243,231,201,.16)}
 #notesPanel .toolbtn.active{background:rgba(217,185,104,.28);border-color:var(--gold-soft);color:var(--gold-soft)}
 #notesPanel .toolbar-sep{width:1px;background:rgba(217,185,104,.28);margin:2px 2px}
-#notesBody{flex:1;overflow-y:auto;padding:18px 22px;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-size:15px;line-height:1.6;color:var(--ink);outline:none;background:linear-gradient(155deg,var(--paper) 0%,var(--paper2) 100%)}
+#notesBody{flex:1;overflow-y:auto;padding:18px 22px 18px 46px;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-size:15px;line-height:27px;color:var(--ink);outline:none;background-color:var(--paper);background-attachment:local;background-image:linear-gradient(90deg,transparent 28px,rgba(139,48,48,.24) 28px,rgba(139,48,48,.24) 29px,transparent 29px),repeating-linear-gradient(to bottom,transparent 0,transparent 25px,rgba(43,33,23,.16) 25px,rgba(43,33,23,.16) 26px)}
 #notesBody:empty::before{content:attr(data-placeholder);color:rgba(43,33,23,.4)}
-#notesBody h2{font-size:19px;line-height:1.3;color:var(--rust);margin:0 0 6px;font-weight:700}
-#notesBody h3{font-size:16px;line-height:1.3;color:var(--navy2);margin:0 0 6px;font-weight:700}
-#notesBody p{font-size:15px;line-height:1.6;color:var(--ink);margin:0 0 10px}
+#notesBody h2{font-size:19px;line-height:27px;color:var(--rust);margin:0;font-weight:700}
+#notesBody h3{font-size:16px;line-height:27px;color:var(--navy2);margin:0;font-weight:700}
+#notesBody p{font-size:15px;line-height:27px;color:var(--ink);margin:0}
 #notesBody::-webkit-scrollbar{width:9px}
 #notesBody::-webkit-scrollbar-thumb{background:rgba(139,124,47,.35);border-radius:5px}
 #notesBody::-webkit-scrollbar-track{background:transparent}
-@media(max-width:600px){#notesPanel{width:100vw}#notesBody{padding:16px}}
+@media(max-width:600px){#notesPanel{width:100vw}#notesBody{padding:16px 16px 16px 38px}}
 
 /* ---- reader stage (StPageFlip) — the book resting on a real painted wooden table.
    The container's aspect-ratio is locked to the exact spread aspect (920:640) that
@@ -685,9 +704,12 @@ TAIL_END = """
   const BOOKS=__BOOKS_ARRAY__;
   const DEVOS=__DEVOS__;
   const LIVROS=__LIVROS__;
-  // any book flipped from plain PDF pages (devotionals, general "Livros" shelf)
-  // has no per-unit table of contents, unlike the theology resumões
-  const NO_TOC_IDS=new Set([...DEVOS,...LIVROS].filter(x=>x.id).map(x=>x.id));
+  // any book flipped from plain PDF pages (devotionals, most of the general
+  // "Livros" shelf) has no per-unit table of contents, unlike the theology
+  // resumões -- but a rich Livros book (real HTML pages, like "Divinamente")
+  // ships its own .toc same as a theology book, so only items without one
+  // land in the no-toc set
+  const NO_TOC_IDS=new Set([...DEVOS,...LIVROS].filter(x=>x.id && !x.toc).map(x=>x.id));
   const CORRIDORS={
     teologia:{num:1,title:'Teologia',items:BOOKS},
     secreto:{num:2,title:'No Secreto',items:DEVOS},
@@ -995,7 +1017,9 @@ TAIL_END = """
 
   function openIdx(){
     if(!curDeck)return;
-    const book=BOOKS.find(b=>b.id===curDeck);
+    // a book's toc can live on BOOKS (theology) or, for a rich Livros title
+    // like "Divinamente", on LIVROS -- look it up wherever it actually is
+    const book=BOOKS.find(b=>b.id===curDeck) || LIVROS.find(b=>b.id===curDeck);
     if(!book||!book.toc)return;
     const wrap=document.getElementById('idxWrap');
     let html='<h4>'+book.title.replace(/\\n/g,' ')+'</h4>';
@@ -1025,7 +1049,7 @@ TAIL_END = """
   }
   function openNotes(){
     if(!curDeck) return;
-    const book=BOOKS.find(b=>b.id===curDeck);
+    const book=BOOKS.find(b=>b.id===curDeck) || LIVROS.find(b=>b.id===curDeck);
     document.getElementById('notesTitle').textContent='Notas · '+(book?book.title.replace(/\n/g,' '):'');
     const body=document.getElementById('notesBody');
     body.innerHTML=localStorage.getItem(notesKey(curDeck))||'';
@@ -1304,10 +1328,25 @@ theology_books_html = "".join(
 
 TAIL_END = TAIL_END.replace("__BOOKS_ARRAY__", books_js_array)
 
+# "Divinamente" -- its cover is the designed photo (not a CSS gradient), so
+# it rides the shelf like a devo/Livros PDF book (renderItem dispatches on
+# .cover first), but it also ships a real .toc like a theology book, which
+# is what keeps ÍNDICE and NOTAS switched on for it (see NO_TOC_IDS above).
+divinamente_js = {
+    "id": "divinamente",
+    "title": "Divinamente",
+    "cover": divinamente_cover_b64,
+    "toc": divinamente_toc,
+}
+divinamente_book_html = (
+    '<div id="book-divinamente" class="stbook" data-theme="divinamente">\n%s\n</div>\n'
+    % divinamente_pages
+)
+
 devos_json = json.dumps(devos_js, ensure_ascii=False)
 # the "Livros" shelf mixes real books already added with empty placeholder slots
 # for what's not on it yet, so ship both in one JS array
-livros_json = json.dumps(livros_js + [{"label": "Próxima\nleitura"}], ensure_ascii=False)
+livros_json = json.dumps(livros_js + [divinamente_js] + [{"label": "Próxima\nleitura"}], ensure_ascii=False)
 TAIL_END = TAIL_END.replace("__DEVOS__", devos_json).replace("__LIVROS__", livros_json)
 for b in THEOLOGY_BOOKS:
     TAIL_END = TAIL_END.replace(
@@ -1315,7 +1354,7 @@ for b in THEOLOGY_BOOKS:
         json.dumps(b["toc"], ensure_ascii=False),
     )
 
-books_html = theology_books_html + devo_books_html + livro_books_html
+books_html = theology_books_html + devo_books_html + livro_books_html + divinamente_book_html
 
 out = HEAD + books_html + TAIL_END
 out = (out.replace("__LANDING_ART__", landing_b64)

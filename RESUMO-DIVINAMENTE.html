@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumão · Divinamente</title>
+<style>
+  :root{
+    --ink:#1a1c2e;
+    --paper:#f5f0e6;
+    --paper2:#efe8d8;
+    --navy:#1f2b4d;
+    --navy2:#27376a;
+    --gold:#c8973f;
+    --gold-soft:#e4c178;
+    --rust:#a8482f;
+    --teal:#2f6f6a;
+    --muted:#6b6657;
+    --line:rgba(31,43,77,.14);
+    --shadow:0 18px 50px rgba(20,24,46,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    background:
+      radial-gradient(1200px 700px at 80% -10%, #243463 0%, rgba(36,52,99,0) 55%),
+      radial-gradient(900px 600px at -5% 110%, #2c1f3f 0%, rgba(44,31,63,0) 55%),
+      #15182b;
+    color:var(--ink);
+    min-height:100%;height:100dvh;overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  #bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));z-index:50;transition:width .35s ease;box-shadow:0 0 14px rgba(200,151,63,.6)}
+  #counter{position:fixed;top:16px;right:22px;z-index:40;color:#e7ddc7;font-size:13px;letter-spacing:.14em;font-family:"Helvetica Neue",Arial,sans-serif;opacity:.8}
+  #menuBtn{position:fixed;top:13px;left:20px;z-index:40;background:rgba(245,240,230,.08);border:1px solid rgba(232,221,199,.25);color:#e7ddc7;border-radius:9px;padding:7px 12px;font-size:12px;letter-spacing:.12em;cursor:pointer;font-family:"Helvetica Neue",Arial,sans-serif;backdrop-filter:blur(6px)}
+  #menuBtn:hover{background:rgba(245,240,230,.16)}
+  #deck{position:relative;height:100%;width:100%;display:flex;align-items:center;justify-content:center;padding:46px 22px}
+  .slide{
+    display:none;width:min(960px,100%);max-height:calc(100dvh - 92px);
+    background:linear-gradient(180deg,var(--paper) 0%,var(--paper2) 100%);
+    border-radius:20px;box-shadow:var(--shadow);
+    padding:48px 56px 60px;overflow:auto;position:relative;
+    border:1px solid rgba(255,255,255,.4);
+    animation:fade .5s ease;
+  }
+  .slide.active{display:block}
+  .slide.art{padding:0;background:#0c0804}
+  .slide.art img{width:100%;height:100%;object-fit:cover;display:block;border-radius:20px}
+  @keyframes fade{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:none}}
+  .slide::-webkit-scrollbar{width:9px}
+  .slide::-webkit-scrollbar-thumb{background:rgba(31,43,77,.22);border-radius:9px}
+  .kicker{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  h1{font-size:clamp(30px,4.4vw,50px);line-height:1.08;color:var(--navy);font-weight:700;letter-spacing:-.01em}
+  h2{font-size:clamp(24px,3.2vw,34px);line-height:1.14;color:var(--navy);margin-bottom:6px;font-weight:700}
+  .lead{font-size:17px;color:var(--muted);margin-top:12px;line-height:1.55}
+  .lead::first-letter{float:left;font-family:"Iowan Old Style",Georgia,serif;font-size:2.6em;line-height:.78;padding:.04em .09em 0 0;color:var(--rust);font-weight:700}
+  p{margin-top:12px;font-size:15.5px;line-height:1.55}
+  .rule{height:2px;width:52px;background:linear-gradient(90deg,var(--gold),var(--rust));border-radius:3px;margin:14px 0 4px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{background:rgba(43,33,23,.05);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .card .tag{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);font-weight:700;display:block;margin-bottom:4px}
+  .card p{margin-top:0;font-size:13.5px;line-height:1.45}
+  .verse{background:var(--navy);color:#f1e4c4;border-radius:10px;padding:16px 18px;margin:16px 0 4px;font-size:15px;line-height:1.5;position:relative;box-shadow:0 8px 18px rgba(20,14,8,.28)}
+  .verse .ref{display:block;margin-top:8px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.14em;color:var(--gold-soft);text-transform:uppercase}
+  .units{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:20px}
+  .meta{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;letter-spacing:.05em;color:var(--muted);margin-top:22px;line-height:1.7}
+  .hint{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;color:var(--muted);margin-top:18px;letter-spacing:.03em}
+  .chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin-top:12px}
+  .chain .step{flex:1;min-width:120px;background:rgba(43,33,23,.045);border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:9px;padding:11px 12px}
+  .chain .step b{display:block;color:var(--navy);font-size:13.5px;font-family:"Helvetica Neue",Arial,sans-serif}
+  .chain .step span{font-size:12.5px;color:var(--muted);line-height:1.4}
+  #idx{position:fixed;inset:0;background:rgba(10,8,20,.72);backdrop-filter:blur(6px);z-index:60;display:none;padding:60px 20px}
+  #idx.open{display:block}
+  #idx .close{position:fixed;top:18px;right:22px;color:#e7ddc7;font-size:22px;cursor:pointer}
+  #idx .wrap{max-width:640px;margin:0 auto;background:var(--paper);border-radius:16px;padding:24px 10px;max-height:calc(100dvh - 120px);overflow:auto}
+  #idx h4{font-family:"Helvetica Neue",Arial,sans-serif;padding:0 16px 10px;color:var(--navy)}
+  #idx .item{display:flex;gap:12px;align-items:center;padding:10px 16px;cursor:pointer;border-radius:8px}
+  #idx .item:hover{background:rgba(31,43,77,.07)}
+  #idx .item .n{font-family:"Helvetica Neue",Arial,sans-serif;color:var(--gold);font-weight:700;font-size:12px}
+  .nav{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:40}
+  .nav button{background:rgba(245,240,230,.1);border:1px solid rgba(232,221,199,.28);color:#e7ddc7;border-radius:9px;padding:9px 16px;cursor:pointer;font-size:16px}
+  .nav button:disabled{opacity:.3;cursor:default}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<button id="menuBtn" onclick="openIdx()">☰ ÍNDICE</button>
+<div id="counter"></div>
+
+<div id="deck">
+
+  <section class="slide cover active" data-title="Capa">
+    <div class="kicker">Livros</div>
+    <h1>Divinamente</h1>
+    <div class="rule"></div>
+    <p class="lead">Aprendendo a pensar e sentir como Cristo.</p>
+    <div class="meta">Dr. Jonatas Leonio</div>
+    <div class="hint">Capa ilustrada: build/divinamente/cover.jpg</div>
+  </section>
+
+  <section class="slide" data-title="Uma mente em obras">
+    <div class="kicker">Sobre este livro</div>
+    <h1>Uma mente em obras</h1>
+    <div class="rule"></div>
+    <p class="lead">Todo mundo carrega um pensamento que não escolheu ter. Um medo que volta sempre na mesma hora da noite, uma voz interna que já decidiu o veredito antes de qualquer prova, um cansaço que não tem relação nenhuma com quanto se dormiu. Divinamente nasce dessa constatação simples: a mente humana está ferida, e boa parte do que se escreve sobre saúde mental trata o sintoma sem tocar na raiz.</p>
+  </section>
+
+  <section class="slide" data-title="Uma mente em obras (cont.)">
+    <div class="kicker">Uma mente em obras · continua</div>
+    <p>Dr. Jonatas Leonio parte de um lugar incomum para tratar o assunto: a mente de Cristo como modelo real de funcionamento, não como frase de efeito de púlpito. A tese atravessa os vinte capítulos inteira: existe uma mentalidade específica, descrita em Filipenses 2 pela palavra grega phroneo, e essa mentalidade pode ser aprendida, praticada e, aos poucos, herdada.</p>
+<p>Este resumo condensa esse percurso capítulo a capítulo, sempre com uma pintura ao lado de cada ideia central. A imagem não ilustra o versículo, ilustra o raciocínio: convida a olhar antes de ler, e a sentir antes de concordar.</p>
+    <div class="meta">Dr. Jonatas Leonio · Aprendendo a pensar e sentir como Cristo</div>
+    <div class="hint">Use as setas do teclado, os botões abaixo, ou o índice no canto.</div>
+  </section>
+
+  <section class="slide" data-title="Cap. 1 — Como a mente humana adoeceu">
+    <div class="kicker"><span class="u">Capítulo 1</span></div>
+    <h2>Como a mente humana adoeceu</h2>
+    <div class="rule"></div>
+    <p class="lead">Imagine a humanidade como um paciente. Não um paciente qualquer: um que nasceu perfeito, projetado à imagem de quem o fez, capaz de pensar e sentir exatamente como o Criador pensa e sente. Foi assim que Deus formou o ser humano, o único ser vivo que recebeu o próprio Espírito e se tornou alma vivente.</p>
+<p>A queda não destruiu essa matéria-prima. Ela a distorceu. É a diferença entre um transplante e uma transformação: Deus não descarta o que criou para substituir por outra coisa, Ele restaura o que já existe. A mente humana, adoecida pela distância de Deus, passou a se moldar pelos padrões do mundo, e o resultado aparece em sintomas que qualquer pessoa reconhece: angústia, medo, vazio, insegurança, inveja, cansaço, vício.</p>
+<p>Romanos 12 chama isso de conformação, e propõe o caminho oposto: renovar a mente para provar a boa e perfeita vontade de Deus. Jesus Cristo é essa cura, não como quem troca uma peça quebrada, mas como quem reconecta a fonte que sempre esteve lá.</p>
+    
+    <div class="verse">“Não vos conformeis com este século, mas transformai-vos pela renovação da vossa mente, para que experimenteis qual seja a boa, agradável e perfeita vontade de Deus.”<span class="ref">Romanos 12:1-2</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 1 — ilustração" data-img="images_jpg/ch1.jpg">
+    <img src="build/divinamente/images_jpg/ch1.jpg" alt="Ilustração do capítulo 1">
+  </section>
+
+  <section class="slide" data-title="Cap. 2 — Como a mente de Cristo é a cura">
+    <div class="kicker"><span class="u">Capítulo 2</span></div>
+    <h2>Como a mente de Cristo é a cura</h2>
+    <div class="rule"></div>
+    <p class="lead">Existe uma palavra grega em Filipenses 2 que muda a leitura do capítulo inteiro: phroneo. Não significa só pensar, significa um padrão inteiro de pensamentos, sentimentos e desejos, uma mentalidade. Paulo pede aos filipenses que tenham a mesma phroneo de Cristo. Ele está dizendo, sem meio-termo, que é possível pensar, sentir e viver como Jesus pensou, sentiu e viveu.</p>
+<p>Isso porque nenhuma mente na história foi tão equilibrada, tão inteira, quanto a de Cristo. E ela tem dois lados que precisam ser vistos juntos. Um é a natureza divina, que não depende de esforço nem mérito humano, só de graça: é o que permite romper padrões e traumas que pareciam definitivos. O outro é a natureza humana, o Cristo que se esvaziou, que assumiu carne e emoção reais, e mostrou que dá para viver sentimentos humanos de um jeito que redime em vez de destruir.</p>
+<p>Ter a mente de Cristo não apaga o que é humano em nós. Alinha esse humano ao padrão dele. É esse alinhamento, mais do que qualquer técnica, que a Bíblia chama de saúde mental.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">Os dois lados da mente de Cristo</p><div class="grid g2"><div class="card"><span class="tag">Natureza divina</span><p>não é mérito humano, é graça: rompe traumas e padrões que pareciam travados para sempre.</p></div><div class="card"><span class="tag">Natureza humana</span><p>Cristo esvaziado, que viveu emoção real e mostrou como atravessá-la sem se perder nela.</p></div></div>
+    <div class="verse">“Tenham em vocês o mesmo modo de pensar e sentir de Cristo Jesus: mesmo sendo em forma de Deus, esvaziou-se a si mesmo e assumiu a forma humana.”<span class="ref">Filipenses 2:5-7</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 2 — ilustração" data-img="images_jpg/ch2.jpg">
+    <img src="build/divinamente/images_jpg/ch2.jpg" alt="Ilustração do capítulo 2">
+  </section>
+
+  <section class="slide" data-title="Cap. 3 — Como ter a mente de Cristo">
+    <div class="kicker"><span class="u">Capítulo 3</span></div>
+    <h2>Como ter a mente de Cristo</h2>
+    <div class="rule"></div>
+    <p class="lead">Filipenses 2:1 esconde três portas de entrada para a mente de Cristo, e nenhuma delas é uma técnica. São relações: consolação, comunhão e compaixão.</p>
+<p>A consolação não é a ausência de dor, é companhia dentro dela. O Espírito Santo, o Consolador prometido, não tira o sofrimento do caminho, fica ao lado enquanto ele passa. Jó e Lázaro aprenderam isso: a dor pode ter propósito sem deixar de doer.</p>
+<p>A comunhão é o que a cruz costura de volta. Toda doença espiritual é, no fundo, uma separação. Toda cura é reconexão. Quando Cristo se une às nossas dores, ele não observa de fora, torna a dor parte da própria história dele com a gente.</p>
+<p>E a compaixão é o motor que movia Jesus a agir. É o que faz o samaritano da parábola parar, tratar o ferido, pagar a pousada, sem dever nada a ninguém. Consolação, comunhão e compaixão juntas não são um conceito para admirar. São o convite prático para pensar e sentir como Cristo pensa e sente, mesmo no meio da dor.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">Três portas de acesso</p><div class="grid g2"><div class="card"><span class="tag">Consolação</span><p>o Espírito não remove a dor, permanece nela ao seu lado.</p></div><div class="card"><span class="tag">Comunhão</span><p>a cruz reconecta o que a queda separou.</p></div><div class="card"><span class="tag">Compaixão</span><p>o gatilho que movia Jesus a curar, libertar e agir.</p></div></div>
+    <div class="verse">“Se há, pois, alguma consolação em Cristo, se algum conforto de amor, se alguma comunhão do Espírito, se alguns entranháveis afetos e compaixões.”<span class="ref">Filipenses 2:1</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 3 — ilustração" data-img="images_jpg/ch3.jpg">
+    <img src="build/divinamente/images_jpg/ch3.jpg" alt="Ilustração do capítulo 3">
+  </section>
+
+  <section class="slide" data-title="Cap. 4 — Como a mente é renovada">
+    <div class="kicker"><span class="u">Capítulo 4</span></div>
+    <h2>Como a mente é renovada</h2>
+    <div class="rule"></div>
+    <p class="lead">Existe uma palavra que a neurociência confirmou bem depois da Bíblia já ter dito: neuroplasticidade. O cérebro não é uma peça fixa, é moldável a vida inteira. Isso é uma metáfora espiritual perfeita para o que Romanos 12 chama de renovação da mente.</p>
+<p>Renovar não é trocar a mente antiga por uma nova do zero. É redimir a que já existe, marcas e tudo. O Evangelho entra exatamente aí: dá um entendimento correto sobre Deus, e esse entendimento muda o sabor da vida inteira, inclusive das partes doloridas. A dor deixa de ser só sinal de fracasso e passa a ser, às vezes, instrumento de alinhamento com o que Deus está fazendo.</p>
+<p>Jesus chorou. Jesus se alegrou. Se saúde mental fosse ausência de sentimento, ele não teria saúde mental nenhuma. O que ele tinha era a mente certa para sentir cada coisa na hora certa. É essa mente que o Evangelho vem redimir em nós, não substituir.</p>
+    
+    <div class="verse">“Não vos conformeis com este século, mas transformai-vos pela renovação da vossa mente.”<span class="ref">Romanos 12:2</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 4 — ilustração" data-img="images_jpg/ch4.jpg">
+    <img src="build/divinamente/images_jpg/ch4.jpg" alt="Ilustração do capítulo 4">
+  </section>
+
+  <section class="slide" data-title="Cap. 5 — Como destruir a mente velha e construir a mente nova">
+    <div class="kicker"><span class="u">Capítulo 5</span></div>
+    <h2>Como destruir a mente velha e construir a mente nova</h2>
+    <div class="rule"></div>
+    <p class="lead">Paulo usa linguagem de guerra em 2 Coríntios 10: armas poderosas para destruir fortalezas. Fortalezas mentais, no caso, estruturas de pensamento construídas ao longo de uma vida inteira de crenças, experiências e repetição.</p>
+<p>A neurociência tem um nome pra isso também. Cada crença vira ação, cada ação repetida vira conexão neural, cada conexão repetida cria um caminho cada vez mais fácil de percorrer. Crenças falsas, repetidas o suficiente, viram labirintos, prisões de onde é difícil sair sozinho. Crenças verdadeiras, repetidas o suficiente, viram jardins.</p>
+<p>O processo tem três passos, e nenhum deles é instantâneo: crer, criar, crescer. Cada pensamento entregue a Cristo é um tijolo a menos na prisão antiga e um tijolo a mais no caminho novo. Não é mágica, é construção, repetida até que o labirinto vire jardim.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">Três princípios da renovação</p><div class="grid g2"><div class="card"><span class="tag">Crer</span><p>a crença é o primeiro tijolo, o que você aceita como verdade molda a estrutura.</p></div><div class="card"><span class="tag">Criar</span><p>a fé verdadeira gera conexões novas, que libertam ou aprisionam.</p></div><div class="card"><span class="tag">Crescer</span><p>o que se repete se fortalece, para o bem ou para o mal.</p></div></div>
+    <div class="verse">“As armas da nossa milícia não são carnais, antes, poderosas em Deus, para destruição de fortalezas.”<span class="ref">2 Coríntios 10:4-5</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 5 — ilustração" data-img="images_jpg/ch5.jpg">
+    <img src="build/divinamente/images_jpg/ch5.jpg" alt="Ilustração do capítulo 5">
+  </section>
+
+  <section class="slide" data-title="Cap. 6 — Como cultivar a mente com os pensamentos de Jesus">
+    <div class="kicker"><span class="u">Capítulo 6</span></div>
+    <h2>Como cultivar a mente com os pensamentos de Jesus</h2>
+    <div class="rule"></div>
+    <p class="lead">Se a mente é só campo de batalha, a vida inteira vira uma guerra ansiosa contra si mesmo. Falta a outra metade do mandato original: cultivar. Deus não pediu para Adão só defender o jardim, pediu para cuidar dele.</p>
+<p>O Éden era comunhão plena. A queda trocou o jardim por deserto, lugar de sobrevivência e combate. Jesus entra como o segundo Adão, e o próprio batismo dele é um sepultamento simbólico da criação velha. Onde o primeiro Adão perdeu a batalha contra a serpente dentro do jardim, Jesus vence a mesma serpente no deserto, e reabre o acesso ao jardim da intimidade com Deus.</p>
+<p>A ferramenta de replantio é simples de nomear e difícil de praticar: a semente do Evangelho, plantada onde antes só havia terra rachada. Deixar essa semente enraizar é o que transforma uma mentalidade adoecida e desértica num jardim cheio do fruto do Espírito.</p>
+    
+    <div class="verse">“Levando cativo todo pensamento à obediência de Cristo.”<span class="ref">2 Coríntios 10:5</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 6 — ilustração" data-img="images_jpg/ch6.jpg">
+    <img src="build/divinamente/images_jpg/ch6.jpg" alt="Ilustração do capítulo 6">
+  </section>
+
+  <section class="slide" data-title="Cap. 7 — Como vencer os principais inimigos da renovação da mente">
+    <div class="kicker"><span class="u">Capítulo 7</span></div>
+    <h2>Como vencer os principais inimigos da renovação da mente</h2>
+    <div class="rule"></div>
+    <p class="lead">A parábola do semeador não fala do tipo de semente, fala do tipo de solo. E o solo é o coração. Antes de qualquer renovação, tem que haver arrependimento, que é preparar esse solo para receber a Palavra sem sufocá-la.</p>
+<p>Três inimigos aparecem direto no caminho. A superficialidade é o solo à beira do caminho, raso demais para qualquer raiz, alimentado pelo excesso de estímulo e distração que qualquer pessoa com um celular reconhece de imediato. A pressa é o solo pedregoso, que faz a semente crescer rápido e sem raiz nenhuma, e é comum demais essa pressa por resultado imediato levar direto ao desânimo e, em quadros mais graves, à depressão. E a sobrecarga é o solo entre espinhos, o excesso de preocupação em cinco frentes ao mesmo tempo (física, mental, emocional, financeira, espiritual) que sufoca antes mesmo da planta crescer.</p>
+<p>Reconhecer qual desses três domina o próprio solo já é meio caminho andado. O resto é o convite de sempre: descansar, deixar a mente de Cristo cultivar o jardim de novo.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">Três inimigos da renovação</p><div class="grid g2"><div class="card"><span class="tag">Superficialidade</span><p>solo raso, raiz nenhuma, alimentado pelo excesso de estímulo.</p></div><div class="card"><span class="tag">Pressa</span><p>cresce rápido e murcha rápido, sem raiz que aguente a dificuldade.</p></div><div class="card"><span class="tag">Sobrecarga</span><p>preocupação em cinco frentes ao mesmo tempo, que sufoca antes de florescer.</p></div></div>
+    <div class="verse">“A semente é a palavra de Deus [...] mas a que caiu em boa terra são os que, ouvindo a palavra, a retêm num coração honesto e bom e dão fruto com perseverança.”<span class="ref">Lucas 8:5-15</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 7 — ilustração" data-img="images_jpg/ch7.jpg">
+    <img src="build/divinamente/images_jpg/ch7.jpg" alt="Ilustração do capítulo 7">
+  </section>
+
+  <section class="slide" data-title="Cap. 8 — Como guardar a mente dos pensamentos tóxicos">
+    <div class="kicker"><span class="u">Capítulo 8</span></div>
+    <h2>Como guardar a mente dos pensamentos tóxicos</h2>
+    <div class="rule"></div>
+    <p class="lead">Ninguém escapa de ter um pensamento ruim de vez em quando. Isso não é falha de caráter, é parte de ter uma mente que ainda está em processo de cura. O problema não é o pensamento tóxico aparecer, é o que se faz com ele depois que aparece.</p>
+<p>O autor propõe seis movimentos, e a graça deles está na ordem: primeiro descansar a mente em vez de reagir de imediato, depois desconfiar dela, sabendo que uma mente ainda deformada pode produzir mentira convincente. Em seguida desarmar qualquer bomba mental antes que ela exploda em ação, desapegar do pensamento sem precisar concordar com ele nem lutar contra ele, direcionar a atenção para o que é verdadeiro e puro, como pede Filipenses 4:8, e por fim desculpar a própria mente, com a mesma graça que se estenderia a qualquer outra pessoa em processo de cura.</p>
+<p>Pensamentos que vêm de transtornos reais como ansiedade, depressão ou TOC pedem também cuidado médico. Não é falta de fé precisar de ajuda profissional, é reconhecer que a mente é um sistema complexo demais para se tratar sozinho com força de vontade.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">Seis passos contra o pensamento tóxico</p><div class="grid g2"><div class="card"><span class="tag">Descansar</span><p>não reagir de imediato ao primeiro impulso.</p></div><div class="card"><span class="tag">Desconfiar</span><p>uma mente ainda ferida pode produzir mentira convincente.</p></div><div class="card"><span class="tag">Desarmar</span><p>neutralizar a bomba mental antes que vire ação.</p></div><div class="card"><span class="tag">Desapegar</span><p>não é preciso concordar nem lutar, só soltar.</p></div><div class="card"><span class="tag">Direcionar</span><p>focar no que é verdadeiro, puro, de boa fama.</p></div><div class="card"><span class="tag">Desculpar</span><p>tratar a própria mente com a graça que ela merece.</p></div></div>
+    <div class="verse">“Tudo o que é verdadeiro, tudo o que é respeitável, tudo o que é justo, tudo o que é puro, tudo o que é amável, seja isso o que ocupe o vosso pensamento.”<span class="ref">Filipenses 4:8</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 8 — ilustração" data-img="images_jpg/ch8.jpg">
+    <img src="build/divinamente/images_jpg/ch8.jpg" alt="Ilustração do capítulo 8">
+  </section>
+
+  <section class="slide" data-title="Cap. 9 — Aprendendo a sentir como Cristo sente">
+    <div class="kicker"><span class="u">Capítulo 9</span></div>
+    <h2>Aprendendo a sentir como Cristo sente</h2>
+    <div class="rule"></div>
+    <p class="lead">Hebreus 4 diz que o Sumo Sacerdote entende as nossas fraquezas porque enfrentou as mesmas tentações. Isso muda tudo: cada emoção difícil deixa de ser motivo de vergonha e vira um convite para se aproximar, não para se esconder.</p>
+<p>Emoção não é o inimigo. É um sistema de proteção com inteligência própria, só que ainda precisa de redenção, não de repressão. Três parábolas ajudam a entender como lidar com ela. A onda: a emoção chega quer se queira ou não, a escolha real é como se posicionar diante dela, não se ela vai chegar. O motor: emoção é impulso pra ação, poderosa demais para conduzir a vida sozinha, útil demais para ser ignorada. A semente: toda emoção crua tem potencial de virar fruto maduro quando semeada em Cristo.</p>
+<p>Tristeza, raiva, culpa, ansiedade não precisam ser reprimidas nem obedecidas cegamente. Precisam ser entregues, para que o mesmo processo que transforma sementes em fruto do Espírito aconteça também nelas.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">Três parábolas da emoção</p><div class="grid g2"><div class="card"><span class="tag">A onda</span><p>não dá pra impedir que chegue, só como se posicionar diante dela.</p></div><div class="card"><span class="tag">O motor</span><p>impulsiona a ação, mas não deveria conduzir a vida sozinho.</p></div><div class="card"><span class="tag">A semente</span><p>imatura agora, mas com potencial de virar fruto do Espírito.</p></div></div>
+    <div class="verse">“Não temos um sumo sacerdote que não possa compadecer-se das nossas fraquezas, mas um que foi tentado em tudo, à nossa semelhança, mas sem pecado.”<span class="ref">Hebreus 4:14-16</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 9 — ilustração" data-img="images_jpg/ch9.jpg">
+    <img src="build/divinamente/images_jpg/ch9.jpg" alt="Ilustração do capítulo 9">
+  </section>
+
+  <section class="slide" data-title="Cap. 10 — Como organizar as emoções">
+    <div class="kicker"><span class="u">Capítulo 10</span></div>
+    <h2>Como organizar as emoções</h2>
+    <div class="rule"></div>
+    <p class="lead">Uma mulher perde uma moeda de prata e vira a casa de cabeça para baixo até achar. A parábola da dracma perdida, em Lucas 15, é um manual de organização emocional disfarçado de história simples: o que a gente busca com desespero revela, sem mentir, o que a gente mais valoriza.</p>
+<p>Crise emocional quase sempre aponta para um valor fora do lugar. E a boa notícia é que dá para aprender até com a emoção mais desagradável, porque ela funciona como porta de entrada para o autoconhecimento, não como prova de fracasso espiritual.</p>
+<p>Cinco movimentos ajudam a organizar essa bagunça interna: acender a luz para enxergar o que está desorganizado, passar o passado a limpo sem reescrever a história, amar o que Deus ama em vez de perseguir o que o mundo valoriza, não desistir de si mesmo mesmo quando a busca demora, e fechar as feridas sem fechar o coração. Organizar emoção, no fim, é alinhar valor: o que se valoriza revela para onde a vida está indo.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">Cinco atitudes práticas</p><div class="grid g2"><div class="card"><span class="tag">Acender a luz de dentro</span><p>encarar a desordem interna em vez de evitá-la.</p></div><div class="card"><span class="tag">Passar o passado a limpo</span><p>soltar o que trava, guardar só o que redime.</p></div><div class="card"><span class="tag">Amar o que Deus ama</span><p>buscar valor certo por amor, não por culpa.</p></div><div class="card"><span class="tag">Não desistir de si mesmo</span><p>Deus não desiste, mesmo quando parece perdido.</p></div><div class="card"><span class="tag">Fechar as feridas, não o coração</span><p>curar sem se isolar do amor.</p></div></div>
+    <div class="verse">“Ou qual é a mulher que, tendo dez dracmas, se perder uma dracma, não acende a candeia, e não varre a casa, e não busca com diligência até que a encontre?”<span class="ref">Lucas 15:8-10</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 10 — ilustração" data-img="images_jpg/ch10.jpg">
+    <img src="build/divinamente/images_jpg/ch10.jpg" alt="Ilustração do capítulo 10">
+  </section>
+
+  <section class="slide" data-title="Cap. 11 — Como os amigos de Jesus adoecem emocionalmente">
+    <div class="kicker"><span class="u">Capítulo 11</span></div>
+    <h2>Como os amigos de Jesus adoecem emocionalmente</h2>
+    <div class="rule"></div>
+    <p class="lead">Lázaro fica doente. Marta e Maria, os amigos mais próximos que Jesus tinha na terra, mandam avisar, achando que a proximidade compraria uma cura imediata. Não compra. E é exatamente aí que o capítulo aponta algo desconfortável: nem os mais íntimos de Cristo estão livres de sofrimento emocional.</p>
+<p>A doença não é castigo nem falta de fé, é parte da fragilidade humana. Às vezes ela também é parte de um processo, Deus operando como cirurgião, usando inclusive a dor para lapidar algo que só se forma sob pressão. Jesus chora com quem chora, no túmulo de Lázaro, sem pressa nenhuma de explicar o sofrimento antes de senti-lo junto.</p>
+<p>Maria aparece três vezes no relato, sempre no mesmo lugar: aos pés de Jesus. No luto, na gratidão, na alegria. Estabilidade emocional não é ausência de mudança de sentimento, é manter o mesmo endereço espiritual não importa qual emoção esteja passando por ele.</p>
+    
+    <div class="verse">“Tendo, pois, Maria chegado aonde Jesus estava [...] prostrou-se a seus pés.”<span class="ref">João 11:32</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 11 — ilustração" data-img="images_jpg/ch11.jpg">
+    <img src="build/divinamente/images_jpg/ch11.jpg" alt="Ilustração do capítulo 11">
+  </section>
+
+  <section class="slide" data-title="Cap. 12 — Como os transtornos emocionais afetam os cristãos">
+    <div class="kicker"><span class="u">Capítulo 12</span></div>
+    <h2>Como os transtornos emocionais afetam os cristãos</h2>
+    <div class="rule"></div>
+    <p class="lead">Depressão, ansiedade, burnout, TOC, transtorno bipolar, TDAH: todos afetam também quem tem fé sólida. Isaías 53 já chamava Cristo de homem de dores, alguém que conhece o sofrimento por dentro, não por teoria.</p>
+<p>O problema não é a existência desses transtornos, é o tabu em volta deles dentro de comunidades cristãs. Quando pastor e liderança não conhecem os sinais, quem sofre fica sem apoio médico e sem graça ao mesmo tempo, os dois cuidados que deveriam andar juntos.</p>
+<p>A Organização Mundial da Saúde já mapeou como esses quadros nascem: uma mistura de atributos pessoais, circunstância social, ambiente e funcionamento cerebral. Não existe explicação única nem culpa única. Existe, isso sim, uma tarefa clara para quem lidera comunidade: aprender o suficiente para não responder sofrimento complexo com fórmula simples.</p>
+    
+    <div class="verse">“Foi desprezado e rejeitado pelos homens, homem de dores, experimentado no sofrimento.”<span class="ref">Isaías 53:3</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 12 — ilustração" data-img="images_jpg/ch12.jpg">
+    <img src="build/divinamente/images_jpg/ch12.jpg" alt="Ilustração do capítulo 12">
+  </section>
+
+  <section class="slide" data-title="Cap. 13 — Como tratar os transtornos da mente">
+    <div class="kicker"><span class="u">Capítulo 13</span></div>
+    <h2>Como tratar os transtornos da mente</h2>
+    <div class="rule"></div>
+    <p class="lead">Tratar a mente machucada é parecido com reconstruir depois de um terremoto. Precisa de três coisas ao mesmo tempo: matéria-prima, mão de obra e um modelo para seguir.</p>
+<p>A matéria-prima são os neurotransmissores, os neurônios, os vasos sanguíneos, a química real que sustenta cada pensamento. Quando ela falha, remédio não é falta de fé, é graça em forma de comprimido, a mesma graça que usou ervas para curar Ezequias e óleo para curar o homem na estrada de Jericó. A mão de obra é o esforço de repetir, treinar, se expor à terapia certa: psicoterapia não substitui a Palavra, ajuda a fazer as perguntas certas sobre a própria estrutura emocional.</p>
+<p>E o modelo é Cristo. Reconstrução sem modelo vira só alívio de sintoma. Com Cristo como padrão, cada remédio, cada sessão de terapia, cada hábito novo deixa de ser fim em si mesmo e vira meio de se parecer cada vez mais com ele.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">Os 3 Ms da reconstrução</p><div class="grid g2"><div class="card"><span class="tag">Matéria-prima</span><p>neurotransmissores e química cerebral, onde o remédio é graça, não falha de fé.</p></div><div class="card"><span class="tag">Mão de obra</span><p>treino, repetição e terapia, o esforço de reorganizar a mente.</p></div><div class="card"><span class="tag">Modelo</span><p>Cristo como padrão, o que dá direção para todo o resto.</p></div></div>
+    <div class="verse">“E o mesmo Deus de paz vos santifique em tudo; e todo o vosso espírito, e alma, e corpo, sejam plenamente conservados irrepreensíveis.”<span class="ref">1 Tessalonicenses 5:23</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 13 — ilustração" data-img="images_jpg/ch13.jpg">
+    <img src="build/divinamente/images_jpg/ch13.jpg" alt="Ilustração do capítulo 13">
+  </section>
+
+  <section class="slide" data-title="Cap. 14 — Como gerenciar as emoções">
+    <div class="kicker"><span class="u">Capítulo 14</span></div>
+    <h2>Como gerenciar as emoções</h2>
+    <div class="rule"></div>
+    <p class="lead">Paulo escreve Filipenses de dentro de uma prisão, e ainda assim entrega o que talvez seja o manual mais prático de gestão emocional já escrito, cinco passos cabendo em quatro versículos.</p>
+<p>Primeiro, a preocupação: identificar e nomear a emoção presente, em vez de deixá-la vaga demais para ser tratada. Depois a petição: transformar cada emoção nomeada em oração, sem editar antes de levar a Deus. Em seguida a paz, que chega não como resultado de vencer a emoção na força, mas como fruto de entregá-la. Só então vêm os pensamentos, a revisão do que é verdadeiro, puro, justo, digno de ocupar espaço na mente. E por fim a presença, o destino final de todo esse processo: não gerenciar emoção por gerenciar, mas viver mais perto de Deus por causa dela.</p>
+<p>A ciência moderna reconhece hoje boa parte desse mesmo caminho. Paulo só chegou lá dois mil anos antes.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">Os 5Ps de Filipenses 4</p><div class="grid g2"><div class="card"><span class="tag">Preocupação</span><p>identificar e nomear a emoção presente.</p></div><div class="card"><span class="tag">Petição</span><p>transformar a emoção nomeada em oração, sem editar antes.</p></div><div class="card"><span class="tag">Paz</span><p>fruto de entregar a emoção, não de vencê-la na força.</p></div><div class="card"><span class="tag">Pensamentos</span><p>revisar o que é verdadeiro, puro e justo.</p></div><div class="card"><span class="tag">Presença</span><p>o destino final: viver mais perto de Deus por causa disso.</p></div></div>
+    <div class="verse">“Não estejais inquietos por coisa alguma [...] e a paz de Deus [...] guardará os vossos corações e os vossos sentimentos em Cristo Jesus.”<span class="ref">Filipenses 4:6-7</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 14 — ilustração" data-img="images_jpg/ch14.jpg">
+    <img src="build/divinamente/images_jpg/ch14.jpg" alt="Ilustração do capítulo 14">
+  </section>
+
+  <section class="slide" data-title="Cap. 15 — Como curar feridas emocionais">
+    <div class="kicker"><span class="u">Capítulo 15</span></div>
+    <h2>Como curar feridas emocionais</h2>
+    <div class="rule"></div>
+    <p class="lead">Toda ferida emocional é, primeiro, uma perda de integridade. Como pele rompida expõe o corpo, conexão rompida no cérebro expõe a mente, geralmente por abandono, rejeição ou traição. E essa raiz remonta ao Éden: desde a queda, todo ser humano nasce um pouco ferido, dependendo de outros para preencher o que falta.</p>
+<p>A rejeição dói, mas nem sempre é só perda: às vezes gera crescimento, do mesmo jeito que um nascimento nasce de ruptura. O Evangelho entra como sutura, reconectando o que a queda separou, e a cura da rejeição segue uma lógica simples de enunciar: ela se cura quando alguém maior do que quem rejeitou aceita de volta.</p>
+<p>Jesus ressuscitado não escondeu as cicatrizes, mostrou a Tomé. Cicatriz exposta não é vergonha, é testemunho de que a vida venceu a morte. Quando duas pessoas feridas se mantêm unidas depois da cura, isso prega mais sobre o Evangelho do que qualquer sermão sobre ele.</p>
+    
+    <div class="verse">“Põe aqui o teu dedo, e vê as minhas mãos; chega também a tua mão, e põe-na no meu lado; e não sejas incrédulo, mas crente.”<span class="ref">João 20:27</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 15 — ilustração" data-img="images_jpg/ch15.jpg">
+    <img src="build/divinamente/images_jpg/ch15.jpg" alt="Ilustração do capítulo 15">
+  </section>
+
+  <section class="slide" data-title="Cap. 16 — Como Deus lida com cristãos com problemas emocionais">
+    <div class="kicker"><span class="u">Capítulo 16</span></div>
+    <h2>Como Deus lida com cristãos com problemas emocionais</h2>
+    <div class="rule"></div>
+    <p class="lead">Elias foge para o deserto depois da maior vitória espiritual da vida dele e pede para morrer debaixo de uma árvore. Tristeza profunda, isolamento, perda de prazer, vontade de sumir: os critérios modernos de depressão batem quase palavra por palavra. E Elias era profeta, usado por Deus, cheio de fé.</p>
+<p>A resposta de Deus a ele não foi repreensão. Foi comida, sono e tempo. Só depois de cuidar do corpo é que Deus reorienta Elias para o propósito de novo, reconectando-o com pessoas. E o detalhe mais bonito: Deus não estava no vento forte, nem no terremoto, nem no fogo. Estava no murmúrio de uma brisa suave.</p>
+<p>Solidão costuma doer mais do que o próprio sofrimento, e é para isso que existe igreja: para que ninguém precise atravessar o deserto sozinho. Cuidar de quem sofre emocionalmente pede o mesmo tom da brisa, não o do vento forte.</p>
+    
+    <div class="verse">“Depois do fogo houve um murmúrio de uma brisa suave. E o Senhor estava no murmúrio.”<span class="ref">1 Reis 19:11-12</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 16 — ilustração" data-img="images_jpg/ch16.jpg">
+    <img src="build/divinamente/images_jpg/ch16.jpg" alt="Ilustração do capítulo 16">
+  </section>
+
+  <section class="slide" data-title="Cap. 17 — Como viver com os hábitos de Jesus: o estilo de vida do jardim">
+    <div class="kicker"><span class="u">Capítulo 17</span></div>
+    <h2>Como viver com os hábitos de Jesus: o estilo de vida do jardim</h2>
+    <div class="rule"></div>
+    <p class="lead">Antes da queda, Deus já tinha prescrito um estilo de vida inteiro em Gênesis: água, luz natural, contato com a natureza, alimentação ordenada, propósito, descanso, relacionamento saudável, relacionamento com Deus, limites. Dez hábitos que sustentam corpo, mente e espírito ao mesmo tempo, porque nenhum dos três funciona isolado dos outros dois.</p>
+<p>Do outro lado, cinco hábitos corroem essa mesma saúde: dar ouvido à serpente, pensar em extremos de tudo ou nada, fixar o olhar no que falta em vez do que já existe, fugir de Deus quando o medo aperta, e não saber lidar com culpa sem a graça de Cristo.</p>
+<p>O convite não é imitar um estilo de vida saudável qualquer, é voltar ao padrão original do Éden, o jardim que Deus desenhou antes de qualquer coisa dar errado.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">10 hábitos que criam saúde</p><div class="grid g2"><div class="card"><span class="tag">Água, luz natural e natureza</span><p>a base física prevista desde a criação.</p></div><div class="card"><span class="tag">Alimentação ordenada e descanso</span><p>seguir a ordem que Deus estabeleceu, não a pressa do mundo.</p></div><div class="card"><span class="tag">Autoconhecimento e propósito</span><p>ser boa companhia de si mesmo, trabalhar com sentido.</p></div><div class="card"><span class="tag">Relacionamentos e relação com Deus</span><p>comunhão horizontal e vertical.</p></div><div class="card"><span class="tag">Limites</span><p>proteção estabelecida por Deus, não imposição externa.</p></div></div>
+    <div class="verse">“Tomou, pois, o Senhor Deus ao homem e o colocou no jardim do Éden para o cultivar e o guardar.”<span class="ref">Gênesis 2:15</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 17 — ilustração" data-img="images_jpg/ch17.jpg">
+    <img src="build/divinamente/images_jpg/ch17.jpg" alt="Ilustração do capítulo 17">
+  </section>
+
+  <section class="slide" data-title="Cap. 18 — Como criar hábitos como Jesus">
+    <div class="kicker"><span class="u">Capítulo 18</span></div>
+    <h2>Como criar hábitos como Jesus</h2>
+    <div class="rule"></div>
+    <p class="lead">O cérebro consome cerca de 20% de toda a energia do corpo, e hábito é a forma que ele achou de economizar: transformar decisão repetida em caminho automático. Isso libera espaço para raciocínio de verdade, mas tem um custo, porque hábito ruim se forma pelo mesmo mecanismo que hábito bom, muitas vezes antes mesmo de perceber a consequência.</p>
+<p>Cinco elementos moldam qualquer hábito: os atributos que já vêm de herança e identidade, o ambiente que costuma pesar mais do que a força de vontade, os amores que ativam o sistema de recompensa, as angústias que também deixam marca, e a agenda, a repetição programada que funciona como um cérebro externo até virar automático.</p>
+<p>Jesus formava hábito com rotina de oração, ambiente escolhido a dedo, o Monte das Oliveiras, e companhia certa, os discípulos ao lado. O método dele não tinha segredo nenhum. Tinha constância.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">Os 5 ingredientes do hábito</p><div class="grid g2"><div class="card"><span class="tag">Atributos</span><p>herança, identidade, o que já vem de fábrica.</p></div><div class="card"><span class="tag">Ambiente</span><p>pesa mais do que a força de vontade na maioria das vezes.</p></div><div class="card"><span class="tag">Amores</span><p>o que se ama ativa o sistema de recompensa.</p></div><div class="card"><span class="tag">Angústias</span><p>a dor também molda hábito, para o bem ou para o mal.</p></div><div class="card"><span class="tag">Agenda</span><p>repetição programada até virar automático.</p></div></div>
+    <div class="verse">“E, saindo, foi, como de costume, para o Monte das Oliveiras; e também os seus discípulos o seguiram.”<span class="ref">Lucas 22:39</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 18 — ilustração" data-img="images_jpg/ch18.jpg">
+    <img src="build/divinamente/images_jpg/ch18.jpg" alt="Ilustração do capítulo 18">
+  </section>
+
+  <section class="slide" data-title="Cap. 19 — Como destruir vícios">
+    <div class="kicker"><span class="u">Capítulo 19</span></div>
+    <h2>Como destruir vícios</h2>
+    <div class="rule"></div>
+    <p class="lead">Vício é sequestro neuronal, um labirinto que fecha a mente por dentro. E sair dele exige cinco pilares ao mesmo tempo, não um de cada vez: motivação, o porquê forte o bastante para sustentar o esforço quando a vontade falha; acompanhamento, porque sozinho tudo fica mais difícil; processo, a paciência de entender que recaída é aprendizado, não fracasso definitivo; prazer, porque o hábito novo precisa entregar alguma recompensa real, já que o vício ocupava justamente essa área cerebral; e ambiente, o contexto que ou sustenta ou sabota a mudança.</p>
+<p>A prática entra em detalhes pequenos: manter o que ajuda a menos de vinte segundos de distância e o que atrapalha a mais de vinte segundos, trocar intensidade por constância, empilhar hábito novo sobre hábito bom que já existe. Nenhuma dessas dicas troca a raiz espiritual da mudança: agir pela identidade de filho de Deus, não só atrás de resultado.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">MAPPA: os 5 pilares</p><div class="grid g2"><div class="card"><span class="tag">Motivação</span><p>o propósito forte que sustenta o esforço.</p></div><div class="card"><span class="tag">Acompanhamento</span><p>ninguém sai sozinho de um labirinto.</p></div><div class="card"><span class="tag">Processo</span><p>recaída é aprendizado, não sentença final.</p></div><div class="card"><span class="tag">Prazer</span><p>o hábito novo precisa recompensar de verdade.</p></div><div class="card"><span class="tag">Ambiente</span><p>o contexto sustenta ou sabota a mudança.</p></div></div>
+    <div class="verse">“Tendo, pois, ousadia para entrar no santuário pelo sangue de Jesus [...] aproximemo-nos com verdadeiro coração, em plena certeza de fé.”<span class="ref">Hebreus 10:19-22</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 19 — ilustração" data-img="images_jpg/ch19.jpg">
+    <img src="build/divinamente/images_jpg/ch19.jpg" alt="Ilustração do capítulo 19">
+  </section>
+
+  <section class="slide" data-title="Cap. 20 — Como os hábitos de Jesus guardam o coração">
+    <div class="kicker"><span class="u">Capítulo 20</span></div>
+    <h2>Como os hábitos de Jesus guardam o coração</h2>
+    <div class="rule"></div>
+    <p class="lead">Guarde o seu coração, diz Provérbios 4, porque dele depende toda a vida. Não é responsabilidade que se terceiriza. E o coração, nessa lógica bíblica, é onde corpo, alma e espírito se encontram: o que afeta um afeta os outros dois, para melhor ou para pior.</p>
+<p>Três camadas de hábito protegem essas três partes. Os hábitos externos cuidam do corpo: alimentação, atividade física, sono de qualidade. Os hábitos internos cuidam da alma: observar o próprio pensamento e sentimento, reconhecer o que está ali, acolher sem se identificar completamente, e só então responder de acordo com valor e fé, não com reação crua. E os hábitos eternos cuidam do espírito: jejum, que funciona quase como um detox comprovado para o cérebro, e oração, que reconstrói literalmente conexão neural além de guardar o coração em Cristo.</p>
+<p>A proteção final do coração não é uma técnica isolada, é mantê-lo dentro do coração de Jesus, esperando a saúde plena que só a eternidade entrega por completo.</p>
+    <p style="margin:16px 0 6px;font-weight:700;color:var(--navy);font-family:'Helvetica Neue',Arial,sans-serif;font-size:12.5px;letter-spacing:.03em">Três camadas de proteção</p><div class="grid g2"><div class="card"><span class="tag">Hábitos externos</span><p>corpo: alimentação, atividade física, sono de qualidade.</p></div><div class="card"><span class="tag">Hábitos internos</span><p>alma: observar, reconhecer, acolher e só então responder.</p></div><div class="card"><span class="tag">Hábitos eternos</span><p>espírito: jejum e oração, que reconstroem de verdade a conexão neural.</p></div></div>
+    <div class="verse">“Acima de tudo, guarda o teu coração, porque dele procedem as saídas da vida.”<span class="ref">Provérbios 4:23</span></div>
+  </section>
+
+  <section class="slide art" data-title="Cap. 20 — ilustração" data-img="images_jpg/ch20.jpg">
+    <img src="build/divinamente/images_jpg/ch20.jpg" alt="Ilustração do capítulo 20">
+  </section>
+
+  <section class="slide cover" data-title="Síntese final">
+    <div class="kicker">Síntese</div>
+    <h1>O que fica depois da leitura</h1>
+    <div class="rule"></div>
+    <p class="lead">Vinte capítulos depois, a pergunta que abriu o livro muda de figura. Não é mais só por que dói, é o que fazer com a dor enquanto ela ainda está aqui. Esse é o deslocamento real que Divinamente propõe: sair do diagnóstico e entrar no tratamento, sem pular a parte difícil do meio.</p>
+<p>A mente adoece, a mente de Cristo cura, a mente se renova, se guarda e cria hábitos que sustentam essa cura no dia a dia. Cada bloco do livro corresponde a uma dessas etapas, e nenhuma substitui a outra: remédio sem oração vira paliativo, e oração sem remédio, quando o corpo precisa dele, vira negação disfarçada de fé.</p>
+<p>Fica um convite direto: guardar o coração não é tarefa de um dia, é rotina que se cultiva. Água, luz, descanso, oração, comunhão, os hábitos do jardim do Éden continuam sendo, dois mil anos depois de Cristo, o desenho mais saudável que existe para uma mente inteira.</p>
+    <div class="verse">“Não vos conformeis com este século, mas transformai-vos pela renovação da vossa mente.”<span class="ref">Romanos 12:2</span></div>
+  </section>
+
+</div>
+
+<div id="idx"><span class="close" onclick="closeIdx()">✕</span><div class="wrap" id="idxWrap"></div></div>
+
+<div class="nav">
+  <button id="prev" onclick="go(cur-1)">←</button>
+  <button id="next" onclick="go(cur+1)">→</button>
+</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  let cur=0;
+  const bar=document.getElementById('bar');
+  const counter=document.getElementById('counter');
+  function render(){
+    slides.forEach((s,i)=>s.classList.toggle('active',i===cur));
+    bar.style.width=((cur)/(slides.length-1)*100)+'%';
+    counter.textContent=String(cur+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+    document.getElementById('prev').disabled=cur===0;
+    document.getElementById('next').disabled=cur===slides.length-1;
+    const a=slides[cur]; if(a) a.scrollTop=0;
+  }
+  function go(i){ if(i<0||i>=slides.length)return; cur=i; render(); closeIdx(); }
+  document.addEventListener('keydown',e=>{
+    if(document.getElementById('idx').classList.contains('open')){ if(e.key==='Escape')closeIdx(); return; }
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(cur+1);}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur-1);}
+    if(e.key==='Home')go(0); if(e.key==='End')go(slides.length-1);
+    if(e.key.toLowerCase()==='m')openIdx();
+  });
+  const wrap=document.getElementById('idxWrap');
+  let html='<h4>Índice</h4>';
+  slides.forEach((s,i)=>{
+    const t=s.getAttribute('data-title')||('Slide '+(i+1));
+    html+=`<div class="item" onclick="go(${i})"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="t">${t}</span></div>`;
+  });
+  wrap.innerHTML=html;
+  function openIdx(){document.getElementById('idx').classList.add('open');}
+  function closeIdx(){document.getElementById('idx').classList.remove('open');}
+  render();
+</script>
+</body>
+</html>
