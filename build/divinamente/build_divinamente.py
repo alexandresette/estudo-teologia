@@ -27,6 +27,25 @@ from chapters import CHAPTERS
 
 IMG_DIR = os.path.join(HERE, "images_jpg")
 COVER_JPG = os.path.join(HERE, "cover.jpg")
+
+# Todas as 20 ilustracoes sao paisagem 1408x768 (razao ~1.833) espremidas por
+# object-fit:cover no quadro retrato da pagina (razao ~0.719): o corte final
+# mostra so ~39% da largura original, centrado por padrao. Nas imagens abaixo
+# o objeto de importancia (mao, figura, vulto) cai fora dessa janela central
+# e precisa de um viés horizontal; valor = object-position-x em % (50 =
+# centro/padrao, que e o que a maioria das imagens ja usa sem entrada aqui).
+# Levantado por inspecao manual (grade de referencia a cada 10%) comparando
+# a posicao real do sujeito com a janela de corte central.
+ART_FOCUS_X = {
+    3: 75,   # bom samaritano: acao central-direita
+    5: 80,   # luz/jardim rompendo a ruina: abertura fica a direita
+    8: 90,   # mao fechando o portao no meio da fumaca: mao bem a direita
+    9: 85,   # figura junto a onda: figura a direita, sacrifica a onda
+    12: 75,  # monge no banco: corpo cai a direita do vitral
+    14: 25,  # mao entre as grades: mao e grade ficam a esquerda
+    17: 90,  # figura ajoelhada no pomar: corpo cai bem a direita
+    19: 65,  # mao erguida entre raizes: a mao que estende fica a direita
+}
 # RESUMO-DIVINAMENTE.html is the human-facing authored source and lives at
 # the repo root next to the other RESUMAO-*.html decks; the flipbook
 # fragments this script also produces (pages/toc) stay beside chapters.py
@@ -406,11 +425,13 @@ def build_flipbook():
         folio += 1
 
         img_b64 = b64_of(os.path.join(IMG_DIR, "ch%d.jpg" % c["num"]))
+        focus_x = ART_FOCUS_X.get(c["num"])
+        style_attr = ' style="object-position:%d%% 50%%"' % focus_x if focus_x else ""
         pages.append(
             '<div class="page devo-page art-page"><img src="data:image/jpeg;base64,%s" '
-            'alt="Ilustração do capítulo %d: %s" draggable="false">'
+            'alt="Ilustração do capítulo %d: %s" draggable="false"%s>'
             '<div class="art-cap">Cap. %02d</div></div>'
-            % (img_b64, c["num"], esc(c["title"]), c["num"])
+            % (img_b64, c["num"], esc(c["title"]), style_attr, c["num"])
         )
         folio += 1
 
