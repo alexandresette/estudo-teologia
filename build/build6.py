@@ -113,6 +113,11 @@ divinamente_pages = open(_DIVINAMENTE_DIR + "/pages_divinamente.html", encoding=
 divinamente_toc = json.load(open(_DIVINAMENTE_DIR + "/toc_divinamente.json", encoding="utf-8"))
 divinamente_cover_b64 = base64.b64encode(open(_DIVINAMENTE_DIR + "/cover.jpg", "rb").read()).decode("ascii")
 
+_MUNDOESPIRITUAL_DIR = "/home/claude/estudo-teologia/build/mundoespiritual"
+mundoespiritual_pages = open(_MUNDOESPIRITUAL_DIR + "/pages_mundoespiritual.html", encoding="utf-8").read()
+mundoespiritual_toc = json.load(open(_MUNDOESPIRITUAL_DIR + "/toc_mundoespiritual.json", encoding="utf-8"))
+mundoespiritual_cover_b64 = base64.b64encode(open(_MUNDOESPIRITUAL_DIR + "/cover.jpg", "rb").read()).decode("ascii")
+
 
 def build_pdf_book(d):
     """Turn one manifest entry (a PDF rendered page-by-page to JPEGs) into its
@@ -1343,10 +1348,27 @@ divinamente_book_html = (
     % divinamente_pages
 )
 
+# "Anjos, Demônios e o Mundo Espiritual" -- mesmo esquema do Divinamente:
+# capa fotográfica própria (gerada por código, não pintura de IA -- ver
+# build/mundoespiritual/art_gen.py) + toc real, também no corredor Livros.
+mundoespiritual_js = {
+    "id": "mundoespiritual",
+    "title": "Anjos, Demônios e\no Mundo Espiritual",
+    "cover": mundoespiritual_cover_b64,
+    "toc": mundoespiritual_toc,
+}
+mundoespiritual_book_html = (
+    '<div id="book-mundoespiritual" class="stbook" data-theme="mundoespiritual">\n%s\n</div>\n'
+    % mundoespiritual_pages
+)
+
 devos_json = json.dumps(devos_js, ensure_ascii=False)
 # the "Livros" shelf mixes real books already added with empty placeholder slots
 # for what's not on it yet, so ship both in one JS array
-livros_json = json.dumps(livros_js + [divinamente_js] + [{"label": "Próxima\nleitura"}], ensure_ascii=False)
+livros_json = json.dumps(
+    livros_js + [divinamente_js, mundoespiritual_js] + [{"label": "Próxima\nleitura"}],
+    ensure_ascii=False,
+)
 TAIL_END = TAIL_END.replace("__DEVOS__", devos_json).replace("__LIVROS__", livros_json)
 for b in THEOLOGY_BOOKS:
     TAIL_END = TAIL_END.replace(
@@ -1354,7 +1376,10 @@ for b in THEOLOGY_BOOKS:
         json.dumps(b["toc"], ensure_ascii=False),
     )
 
-books_html = theology_books_html + devo_books_html + livro_books_html + divinamente_book_html
+books_html = (
+    theology_books_html + devo_books_html + livro_books_html
+    + divinamente_book_html + mundoespiritual_book_html
+)
 
 out = HEAD + books_html + TAIL_END
 out = (out.replace("__LANDING_ART__", landing_b64)
