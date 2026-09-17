@@ -9,7 +9,10 @@ formato que build_divinamente.py usa para "Divinamente":
      flipbook, com as imagens já embutidas em base64.
   3. toc_mundoespiritual.json    -- [{"folio": N, "title": "..."}] pro índice.
   4. images_jpg/ch1..7.jpg + cover.jpg -- artes geradas por código (ver
-     art_gen.py: sem crédito no Gemini, essas não são pinturas de IA).
+     paint_scenes.py: sem crédito no Gemini, essas não são pinturas de IA,
+     mas aquarela procedural via paintkit -- céu dramático, nuvens em
+     camadas, feixes de luz, figura humana minúscula. art_gen.py é a
+     primeira versão, mais plana, mantida como fallback).
 
 Rodar este script sempre que chapters.py mudar. Tudo fica versionado dentro
 de build/mundoespiritual/, sem depender de /tmp.
@@ -24,6 +27,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from chapters import ABERTURA, SINTESE, CHAPTERS
 import art_gen
+import paint_scenes
+import cv2
 
 IMG_DIR = os.path.join(HERE, "images_jpg")
 COVER_JPG = os.path.join(HERE, "cover.jpg")
@@ -75,19 +80,28 @@ def declaration_html(num, text):
 # ---------- 0) gera as imagens (arte procedural, ver art_gen.py) ----------
 
 def gen_images():
+    """Segunda geração das artes: aquarela procedural (paint_scenes.py), bem
+    mais 'pintada' e dramática do que a primeira versão em silhueta plana
+    (art_gen.py, mantido no repo como fallback caso o paint skill suma)."""
     for c in CHAPTERS:
         path = os.path.join(IMG_DIR, "ch%d.jpg" % c["num"])
-        art_gen.make_chapter_art(
-            path, 1408, 768,
-            base_hex=c["art"]["base"], glow_hex=c["art"]["glow"],
-            motif=c["art"]["motif"], seed=c["num"] * 17,
+        a = c["art"]
+        img = paint_scenes.render_chapter(
+            1408, 768, seed=c["num"] * 17,
+            sky_top=a["sky_top"], sky_mid=a["sky_mid"], sky_glow=a["sky_glow"],
+            hill_colors=a["hill_colors"], scene=paint_scenes.SCENES[a["scene"]],
+            accent=a.get("rim_color") or a.get("sun_color") or a["sky_glow"],
         )
-    art_gen.make_cover(
-        COVER_JPG, 900, 1320,
+        cv2.imwrite(path, cv2.cvtColor(img, cv2.COLOR_RGB2BGR),
+                    [int(cv2.IMWRITE_JPEG_QUALITY), 92])
+    cover_img = paint_scenes.render_cover(
+        900, 1320,
         title="Anjos, Demônios e o Mundo Espiritual",
         subtitle="Sete declarações para viver com discernimento e autoridade espiritual",
         author="A partir do estudo de Ingrid Marianno",
     )
+    cv2.imwrite(COVER_JPG, cv2.cvtColor(cover_img, cv2.COLOR_RGB2BGR),
+                [int(cv2.IMWRITE_JPEG_QUALITY), 93])
     print("Imagens geradas em %s e %s" % (IMG_DIR, COVER_JPG))
 
 
@@ -340,7 +354,11 @@ def re_findall_pages(pages_html):
 
 
 def main():
-    gen_images()
+    # As imagens (images_jpg/ch1..7.jpg + cover.jpg) sao pintura de IA feita
+    # por gemini_gen.py e versionada no repo -- nao regeneradas a cada build
+    # (mesmo padrao do build_divinamente.py). Rodar gemini_gen.py a parte se
+    # precisar gerar arte nova; gen_images() (paint_scenes/art_gen) fica so
+    # como fallback manual caso o credito do Gemini acabe de novo.
     build_source_deck()
     build_flipbook()
 

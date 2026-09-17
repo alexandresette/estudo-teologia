@@ -113,7 +113,10 @@ CHAPTERS = [
             "já decidida. Minha atenção vai para o tamanho do meu Deus, "
             "não para o tamanho da minha luta."
         ),
-        "art": {"motif": "crown", "base": "#0b0e1c", "glow": "#d4af6a"},
+        "art": {
+            "scene": "throne", "sky_top": "#080a16", "sky_mid": "#1c2242", "sky_glow": "#e2b264",
+            "hill_colors": ["#171a2c", "#0f1120", "#0a0b14"], "rim_color": "#f3d089",
+        },
     },
     {
         "num": 2,
@@ -152,7 +155,10 @@ CHAPTERS = [
             "a paranoia espiritual. Escolho enxergar com precisão, não "
             "com medo."
         ),
-        "art": {"motif": "eye", "base": "#0a1420", "glow": "#e8b45a"},
+        "art": {
+            "scene": "sunrise_eye", "sky_top": "#061019", "sky_mid": "#173248", "sky_glow": "#f0a94e",
+            "hill_colors": ["#123041", "#0c222f", "#071620"], "sun_color": "#ffe9b8",
+        },
     },
     {
         "num": 3,
@@ -189,7 +195,10 @@ CHAPTERS = [
             "oposição. Prefiro conhecer princípios de governo a decorar "
             "palavras de guerra."
         ),
-        "art": {"motif": "bow", "base": "#120b18", "glow": "#e0a870"},
+        "art": {
+            "scene": "submission", "sky_top": "#0e0a17", "sky_mid": "#2a1c30", "sky_glow": "#e2a273",
+            "hill_colors": ["#251a2c", "#170f1e", "#0f0913"],
+        },
     },
     {
         "num": 4,
@@ -227,7 +236,10 @@ CHAPTERS = [
             "preciso, no tempo certo. Minha fé não está no instrumento. "
             "Está em quem envia o instrumento."
         ),
-        "art": {"motif": "wings", "base": "#0a1626", "glow": "#efe0b0"},
+        "art": {
+            "scene": "wings", "sky_top": "#050b1a", "sky_mid": "#152449", "sky_glow": "#e9dca6",
+            "hill_colors": ["#141d38", "#0d1428", "#080c18"],
+        },
     },
     {
         "num": 5,
@@ -265,7 +277,10 @@ CHAPTERS = [
             "encontra um escudo levantado. Minha identidade é definida "
             "pela Palavra, não pela acusação."
         ),
-        "art": {"motif": "fracture", "base": "#170d10", "glow": "#bcd4e6"},
+        "art": {
+            "scene": "fracture", "sky_top": "#08090c", "sky_mid": "#232833", "sky_glow": "#b9d3e8",
+            "hill_colors": ["#1b1e26", "#121419", "#0a0b0e"], "rim_color": "#d8ecf7",
+        },
     },
     {
         "num": 6,
@@ -304,7 +319,10 @@ CHAPTERS = [
             "casa conhecerá oração, verdade, presença e o governo de "
             "Deus."
         ),
-        "art": {"motif": "house", "base": "#0e1712", "glow": "#d8a862"},
+        "art": {
+            "scene": "house", "sky_top": "#0c1210", "sky_mid": "#2c1f1a", "sky_glow": "#e2a15c",
+            "hill_colors": ["#20180f", "#150f0a", "#0b0806"], "rim_color": "#ffd699",
+        },
     },
     {
         "num": 7,
@@ -342,6 +360,9 @@ CHAPTERS = [
             "chorando e ainda assim seguir andando. Depois de ter feito "
             "tudo, permanecerei firme."
         ),
-        "art": {"motif": "pillar", "base": "#0b0f1a", "glow": "#e6c98a"},
+        "art": {
+            "scene": "standing", "sky_top": "#070a13", "sky_mid": "#1b2436", "sky_glow": "#e9c988",
+            "hill_colors": ["#161c28", "#0f131c", "#090b10"],
+        },
     },
 ]
