@@ -170,54 +170,59 @@ def compose_cover(raw_bytes, w, h, title, subtitle, author):
     cream = (238, 227, 202)
     gold = (223, 186, 122)
 
+    # todo o bloco de texto e' construido de cima pra baixo, cada elemento
+    # a partir de onde o anterior terminou -- nada de y fixo pro rodape,
+    # senao um titulo de 3 linhas empurra o autor pra cima do que sobrar e
+    # fica espremido (ou cortado) contra a borda inferior
     kicker = "SÉRIE DECLARAÇÕES PROFÉTICAS"
-    f_kicker = ImageFont.truetype(F_LABEL, int(w * 0.024))
-    letter_gap = w * 0.014
+    f_kicker = ImageFont.truetype(F_LABEL, int(w * 0.022))
+    letter_gap = w * 0.013
     char_widths = [draw.textbbox((0, 0), ch, font=f_kicker)[2] for ch in kicker]
     total_w = sum(char_widths) + letter_gap * (len(kicker) - 1)
-    ky = h * 0.575
+    ky = h * 0.535
     xk = (w - total_w) / 2
     for ch, cw in zip(kicker, char_widths):
         draw.text((xk, ky), ch, font=f_kicker, fill=gold)
         xk += cw + letter_gap
-    draw.line([(w * 0.5 - w * 0.09, ky + h * 0.028), (w * 0.5 + w * 0.09, ky + h * 0.028)],
+    draw.line([(w * 0.5 - w * 0.09, ky + h * 0.026), (w * 0.5 + w * 0.09, ky + h * 0.026)],
               fill=gold, width=2)
 
     words = title.upper().split(" ")
-    f_title = ImageFont.truetype(F_TITLE, int(w * 0.135))
+    f_title = ImageFont.truetype(F_TITLE, int(w * 0.115))
     lines = _wrap_lines(draw, words, f_title, w * 0.86)
     while True:
         total_h = 0
         for ln in lines:
             b = draw.textbbox((0, 0), ln, font=f_title)
-            total_h += (b[3] - b[1]) * 1.06
-        if total_h <= h * 0.29 or f_title.size <= 40:
+            total_h += (b[3] - b[1]) * 1.04
+        if total_h <= h * 0.215 or f_title.size <= 36:
             break
         f_title = ImageFont.truetype(F_TITLE, f_title.size - 4)
         lines = _wrap_lines(draw, words, f_title, w * 0.86)
 
-    ty = h * 0.625
+    ty = ky + h * 0.075
     for ln in lines:
         b = draw.textbbox((0, 0), ln, font=f_title)
         lw = b[2] - b[0]
         lh = b[3] - b[1]
         draw.text(((w - lw) / 2, ty), ln, font=f_title, fill=cream)
-        ty += lh * 1.1
+        ty += lh * 1.08
 
-    f_sub = ImageFont.truetype(F_SUBTITLE, int(w * 0.032))
+    f_sub = ImageFont.truetype(F_SUBTITLE, int(w * 0.028))
     sub_lines = _wrap_lines(draw, subtitle.split(" "), f_sub, w * 0.7)
-    ty += h * 0.02
+    ty += h * 0.018
     for ln in sub_lines:
         b = draw.textbbox((0, 0), ln, font=f_sub)
         lw = b[2] - b[0]
         draw.text(((w - lw) / 2, ty), ln, font=f_sub, fill=(214, 205, 184))
-        ty += (b[3] - b[1]) * 1.35
+        ty += (b[3] - b[1]) * 1.3
 
-    ly = h * 0.935
+    # autor: pelo menos 9% de margem livre ate a borda inferior, sempre
+    ly = min(ty + h * 0.035, h * 0.91)
     draw.line([(w * 0.5 - w * 0.1, ly), (w * 0.5 + w * 0.1, ly)], fill=gold, width=2)
-    f_auth = ImageFont.truetype(F_AUTHOR, int(w * 0.028))
+    f_auth = ImageFont.truetype(F_AUTHOR, int(w * 0.026))
     ab = draw.textbbox((0, 0), author, font=f_auth)
-    draw.text(((w - (ab[2] - ab[0])) / 2, ly + h * 0.015), author, font=f_auth, fill=cream)
+    draw.text(((w - (ab[2] - ab[0])) / 2, ly + h * 0.014), author, font=f_auth, fill=cream)
 
     return img
 
