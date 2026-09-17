@@ -744,7 +744,7 @@ HEAD = """<!DOCTYPE html>
       <div class="gate-kicker">Êxodo 24:15&ndash;18</div>
       <h1 class="gate-title">Sobe ao monte</h1>
       <p class="gate-verse">&ldquo;Então Moisés subiu ao monte, e a nuvem cobriu o monte... e a aparência da glória do Senhor era como um fogo consumidor no cume do monte, aos olhos dos filhos de Israel. E entrou Moisés no meio da nuvem, depois que subiu ao monte.&rdquo;</p>
-      <button id="gateKnockBtn" type="button" onclick="gateReveal()">Bater à porta</button>
+      <button id="gateKnockBtn" type="button" onclick="gateReveal()">Entrar</button>
       <form id="gateForm" onsubmit="return gateSubmit(event)" autocomplete="off">
         <input type="password" id="gatePass" name="gatePass" placeholder="a senha para entrar" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
         <button type="submit">Entrar</button>
