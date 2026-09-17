@@ -95,6 +95,17 @@ for _b in THEOLOGY_BOOKS:
     _b["toc"] = json.load(open(_b["toc_file"], encoding="utf-8"))
 
 pageflip_js = open("/home/claude/estudo-teologia/vendor/page-flip.browser.js", encoding="utf-8").read()
+
+# Portão de entrada (fora da biblioteca): vídeo em loop gerado com Veo
+# (build/gate/gemini_gen.py) -- um monte com uma porta de pedra no topo,
+# referência ao monte Sinai. O clipe bruto do Veo (8s) foi cortado do
+# letterbox e transformado num loop "ping-pong" (ida + volta invertida,
+# ~16s) via ffmpeg pra garantir emenda perfeita sem depender de o
+# primeiro e o último frame do clipe baterem sozinhos.
+_GATE_DIR = "/home/claude/estudo-teologia/build/gate"
+gate_video_b64 = base64.b64encode(open(_GATE_DIR + "/gate-loop.mp4", "rb").read()).decode("ascii")
+gate_poster_b64 = base64.b64encode(open(_GATE_DIR + "/gate-poster.jpg", "rb").read()).decode("ascii")
+
 landing_b64 = open("/tmp/landing-corridors_b64.txt", encoding="ascii").read().strip()
 corshelf_b64 = open("/tmp/corridor-shelf_b64.txt", encoding="ascii").read().strip()
 table_art_b64 = open("/tmp/table_art_b64.txt", encoding="ascii").read().strip()
@@ -607,6 +618,35 @@ __THEOLOGY_BCOVER_CSS__
 @media(max-width:600px){
   #counter{top:14px;right:14px;font-size:11px}
 }
+
+/* ============ portão de entrada (fora da biblioteca, no alto do monte) ============ */
+#gate{position:fixed;inset:0;z-index:500;background:#0a0703;overflow:hidden;opacity:1;transition:opacity .85s ease}
+#gate.leaving{opacity:0;pointer-events:none}
+#gateVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0a0703}
+.gate-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 82%, rgba(8,5,2,.1) 0%, rgba(8,5,2,.7) 68%, rgba(6,4,2,.94) 100%),
+    linear-gradient(180deg, rgba(6,4,2,.6) 0%, rgba(6,4,2,.05) 32%, rgba(6,4,2,.08) 55%, rgba(6,4,2,.55) 100%);
+}
+.gate-scroll{position:relative;z-index:2;height:100%;display:flex;align-items:flex-end;justify-content:center;padding:0 22px calc(8vh + 18px);text-align:center}
+.gate-content{max-width:580px}
+.gate-kicker{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-soft);opacity:.9;margin-bottom:16px}
+.gate-title{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-size:clamp(30px,5vw,50px);font-weight:700;color:#f6ecd6;text-shadow:0 10px 34px rgba(0,0,0,.75);margin-bottom:16px;letter-spacing:-.01em}
+.gate-verse{font-family:"Iowan Old Style",Georgia,serif;font-style:italic;font-size:clamp(13px,1.5vw,16px);line-height:1.65;color:#e7d9b6;opacity:.92;margin-bottom:32px;text-shadow:0 4px 18px rgba(0,0,0,.65)}
+#gateKnockBtn{background:rgba(243,231,201,.1);border:1px solid rgba(217,185,104,.45);color:#f6ecd6;border-radius:999px;padding:15px 36px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px);transition:.2s}
+#gateKnockBtn:hover{background:rgba(217,185,104,.24);border-color:var(--gold-soft)}
+#gateForm{display:none;gap:10px;justify-content:center;flex-wrap:wrap}
+#gateForm.show{display:flex}
+#gatePass{background:rgba(6,4,2,.45);border:1px solid rgba(217,185,104,.4);color:#f6ecd6;border-radius:999px;padding:14px 22px;font-size:14px;min-width:230px;text-align:center;letter-spacing:.05em;font-family:"Helvetica Neue",Arial,sans-serif}
+#gatePass::placeholder{color:rgba(246,236,214,.4)}
+#gatePass:focus{outline:none;border-color:var(--gold-soft)}
+#gateForm button[type=submit]{background:var(--gold);border:1px solid var(--gold-soft);color:#1a1204;border-radius:999px;padding:14px 26px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-weight:700}
+#gateForm button[type=submit]:hover{background:var(--gold-soft)}
+#gateError{min-height:20px;margin-top:16px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;color:#e79a86;letter-spacing:.03em;opacity:0;transition:opacity .2s}
+#gateError.show{opacity:1}
+#gate.shake .gate-content{animation:gateShake .4s ease}
+@keyframes gateShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+@media(max-width:600px){.gate-scroll{padding-bottom:9vh}#gatePass{min-width:180px}}
 """
 
 # fill in the per-book cover CSS generated from THEOLOGY_BOOKS before CSS
@@ -645,8 +685,8 @@ HALL_HTML = """
               <div class="placard-hang"><span class="n">2</span>No Secreto</div>
               <div class="enter-cue">entrar &#8594;</div>
             </div>
-            <div class="corridor-zone" data-corridor="livros" tabindex="0" role="button" aria-label="Entrar no corredor Livros" onclick="enterCorridor('livros')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();enterCorridor('livros')}">
-              <div class="placard-hang"><span class="n">3</span>Livros</div>
+            <div class="corridor-zone" data-corridor="livros" tabindex="0" role="button" aria-label="Entrar no corredor Resumo de Livros" onclick="enterCorridor('livros')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();enterCorridor('livros')}">
+              <div class="placard-hang"><span class="n">3</span>Resumo de Livros</div>
               <div class="enter-cue">entrar &#8594;</div>
             </div>
           </div>
@@ -679,6 +719,26 @@ HEAD = """<!DOCTYPE html>
 <style>""" + CSS + """</style>
 </head>
 <body>
+<script>(function(){try{if(sessionStorage.getItem('estudoGateUnlocked')==='1'){document.write('<style>#gate{display:none!important}</style>');}}catch(e){}})();</script>
+<div id="gate">
+  <video id="gateVideo" autoplay muted loop playsinline preload="auto" poster="data:image/jpeg;base64,__GATE_POSTER__">
+    <source src="data:video/mp4;base64,__GATE_VIDEO__" type="video/mp4">
+  </video>
+  <div class="gate-veil"></div>
+  <div class="gate-scroll">
+    <div class="gate-content">
+      <div class="gate-kicker">Êxodo 24:15&ndash;18</div>
+      <h1 class="gate-title">Sobe ao monte</h1>
+      <p class="gate-verse">&ldquo;Então Moisés subiu ao monte, e a nuvem cobriu o monte... e a aparência da glória do Senhor era como um fogo consumidor no cume do monte, aos olhos dos filhos de Israel. E entrou Moisés no meio da nuvem, depois que subiu ao monte.&rdquo;</p>
+      <button id="gateKnockBtn" type="button" onclick="gateReveal()">Bater à porta</button>
+      <form id="gateForm" onsubmit="return gateSubmit(event)" autocomplete="off">
+        <input type="password" id="gatePass" name="gatePass" placeholder="a senha para entrar" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <button type="submit">Entrar</button>
+      </form>
+      <div id="gateError"></div>
+    </div>
+  </div>
+</div>
 <script>""" + pageflip_js + """</script>
 <div id="bar"></div>
 <div id="topLeftBtns">
@@ -748,7 +808,7 @@ TAIL_END = """
   const CORRIDORS={
     teologia:{num:1,title:'Teologia',items:BOOKS},
     secreto:{num:2,title:'No Secreto',items:DEVOS},
-    livros:{num:3,title:'Livros',items:LIVROS}
+    livros:{num:3,title:'Resumo de Livros',items:LIVROS}
   };
 
   const shelf=document.getElementById('shelf');
@@ -814,6 +874,7 @@ TAIL_END = """
   function enterCorridor(corId){
     if(curCorridor) return;
     curCorridor=corId;
+    history.pushState(null,'','#/corredor/'+corId);
     sfxWhoosh();
     populateCorridor(corId);
     viewLanding.classList.add('leaving');
@@ -828,6 +889,7 @@ TAIL_END = """
   function exitCorridor(){
     if(!curCorridor) return;
     curCorridor=null;
+    history.pushState(null,'','#/');
     sfxWhoosh();
     viewCorridor.classList.add('leaving');
     setTimeout(()=>{
@@ -859,6 +921,7 @@ TAIL_END = """
     if(curDeck) return;
     const originEl=document.querySelector('.bcover[data-id="'+id+'"]');
     if(!originEl) return;
+    history.pushState(null,'','#/livro/'+id);
     sfxOpen();
     const originRect=originEl.getBoundingClientRect();
 
@@ -925,7 +988,12 @@ TAIL_END = """
     container.querySelectorAll('.page.cover-page, .page.devo-cover')
       .forEach(p=>{ p.dataset.density='hard'; });
     pf.loadFromHTML(container.querySelectorAll('.page'));
-    pf.on('flip',(e)=>{ if(curDeck===id){ updateCounter(id); sfxPage(); } });
+    pf.on('flip',(e)=>{
+      if(curDeck===id){
+        updateCounter(id); sfxPage();
+        history.replaceState(null,'','#/livro/'+id+'/'+(pf.getCurrentPageIndex()+1));
+      }
+    });
     /* A hard cover (front or back) swings as a rigid, non-bending plane
        instead of curling like paper, so for one instant, right in the
        middle of the swing, it is turned exactly edge-on to the camera and
@@ -1006,12 +1074,15 @@ TAIL_END = """
     if(!curDeck||!flips[curDeck]) return;
     const pf=flips[curDeck];
     pf.turnToPage(0);
+    history.replaceState(null,'','#/livro/'+curDeck+'/1');
     setTimeout(()=>{ if(curDeck&&flips[curDeck]===pf) pf.turnToPage(0); }, 700);
   }
 
   function goShelf(){
     if(!curDeck) return;
     const id=curDeck;
+    const backCorridor=corridorOf(id);
+    history.pushState(null,'', backCorridor?('#/corredor/'+backCorridor):'#/');
     const originEl=document.querySelector('.bcover[data-id="'+id+'"]');
     sfxClose();
     closeIdx();
@@ -1129,7 +1200,15 @@ TAIL_END = """
   }
 
   document.addEventListener('keydown',e=>{
-    if(document.getElementById('notesPanel').classList.contains('open')){ if(e.key==='Escape')closeNotes(); return; }
+    if(document.getElementById('notesPanel').classList.contains('open')){
+      if(e.key==='Escape'){ closeNotes(); return; }
+      const typingInNotes=document.activeElement===document.getElementById('notesBody');
+      if(!typingInNotes && curDeck){
+        if(e.key==='ArrowRight'){flipNext();return;}
+        if(e.key==='ArrowLeft'){flipPrev();return;}
+      }
+      return;
+    }
     if(document.getElementById('idx').classList.contains('open')){ if(e.key==='Escape')closeIdx(); return; }
     if(curDeck){
       if(e.key==='Escape'){goShelf();return;}
@@ -1162,12 +1241,13 @@ TAIL_END = """
       notesUpdateToolbarState();
     }
   });
-  document.addEventListener('click', e=>{
-    const panel=document.getElementById('notesPanel');
-    if(panel.classList.contains('open') && !panel.contains(e.target) && e.target!==notesBtn){
-      closeNotes();
-    }
-  }, true);
+  /* Antes havia aqui um listener global de "clique fora fecha o painel",
+     mas ele fechava as NOTAS sempre que o usuário clicava nos botões de
+     flip ou na borda da página pra virar -- ou seja, escrever uma
+     anotação e virar a página perdia o painel aberto sem nenhuma
+     intenção de fechar. As notas agora só fecham por ação explícita: o
+     X do painel, o toggle do botão NOTAS, ou Esc -- assim dá pra ir
+     anotando enquanto lê e passa as páginas. */
 
   /* ============================================================
      Efeitos sonoros -- sintetizados na hora via Web Audio, sem
@@ -1350,6 +1430,130 @@ TAIL_END = """
   const musicVolSlider=document.getElementById('musicVolSlider');
   musicVolSlider.value=Math.round(musicVolume*100);
   musicVolSlider.addEventListener('input', e=>{ musicSetVolume(parseInt(e.target.value,10)/100); });
+
+  /* ============================================================
+     Portão de entrada -- a área de fora da biblioteca, uma porta no
+     topo de um monte (referência a Moisés subindo o monte Sinai pra
+     entrar na presença de Deus). Fica por cima de tudo (z-index alto)
+     até a senha certa ser digitada; o que existe por baixo (a rota
+     certa, veja mais abaixo) já é montado normalmente, só fica
+     escondido atrás da cortina do portão até o desbloqueio.
+     ============================================================ */
+  const GATE_PASSWORD='Jesus';
+  const gateEl=document.getElementById('gate');
+  function gateReveal(){
+    document.getElementById('gateKnockBtn').style.display='none';
+    document.getElementById('gateForm').classList.add('show');
+    document.getElementById('gatePass').focus();
+  }
+  function gateSubmit(e){
+    e.preventDefault();
+    const input=document.getElementById('gatePass');
+    const err=document.getElementById('gateError');
+    if(input.value===GATE_PASSWORD){
+      try{ sessionStorage.setItem('estudoGateUnlocked','1'); }catch(ex){}
+      err.classList.remove('show');
+      sfxOpen();
+      gateEl.classList.add('leaving');
+      const video=document.getElementById('gateVideo');
+      setTimeout(()=>{
+        gateEl.style.display='none';
+        try{ video.pause(); }catch(ex){}
+      }, 900);
+    } else {
+      err.textContent='Essa não é a senha para entrar.';
+      err.classList.add('show');
+      gateEl.classList.remove('shake');
+      void gateEl.offsetWidth;
+      gateEl.classList.add('shake');
+      input.value='';
+      input.focus();
+    }
+    return false;
+  }
+  (function gateInit(){
+    let unlocked=false;
+    try{ unlocked=sessionStorage.getItem('estudoGateUnlocked')==='1'; }catch(ex){}
+    if(unlocked){
+      gateEl.style.display='none';
+      const video=document.getElementById('gateVideo');
+      try{ video.pause(); }catch(ex){}
+    }
+  })();
+
+  /* ============================================================
+     Roteamento por URL (hash) -- cada view tem seu próprio endereço,
+     então dá pra recarregar, voltar/avançar no navegador ou mandar um
+     link direto pra um corredor ou um livro (com página, opcional):
+       #/                          -> página inicial (corredores)
+       #/corredor/<id>             -> estante daquele corredor
+       #/livro/<id>                -> livro aberto (primeira página)
+       #/livro/<id>/<pagina>        -> livro aberto numa página específica
+     As funções normais (enterCorridor, openBook, goShelf...) continuam
+     fazendo a animação de sempre E empurram a URL nova via
+     history.pushState. Carregar a página direto num link, ou usar
+     voltar/avançar do navegador, cai em applyRoute(), que monta o
+     mesmo estado só que instantâneo (sem replay de animação de voo de
+     capa nem de whoosh de corredor). */
+  function corridorOf(id){
+    for(const key in CORRIDORS){ if(CORRIDORS[key].items.some(it=>it.id===id)) return key; }
+    return null;
+  }
+  function routeParse(hash){
+    const h=(hash||'').replace(/^#\\/?/,'');
+    if(!h) return {view:'landing'};
+    const parts=h.split('/').filter(Boolean);
+    if(parts[0]==='corredor' && parts[1]) return {view:'corredor', corId:parts[1]};
+    if(parts[0]==='livro' && parts[1]) return {view:'livro', id:parts[1], page:parts[2]?parseInt(parts[2],10):null};
+    return {view:'landing'};
+  }
+  function instantShowLanding(){
+    curCorridor=null;
+    viewCorridor.classList.remove('show','leaving','entering-from');
+    viewLanding.classList.remove('leaving','entering-from');
+    viewLanding.classList.add('show');
+  }
+  function instantShowCorridor(corId){
+    curCorridor=corId;
+    populateCorridor(corId);
+    viewLanding.classList.remove('show','leaving','entering-from');
+    viewCorridor.classList.remove('leaving','entering-from');
+    viewCorridor.classList.add('show');
+  }
+  function instantLeaveReader(){
+    if(!curDeck) return;
+    closeIdx(); closeNotes();
+    reader.classList.remove('shown','show');
+    showChrome(false);
+    curDeck=null;
+  }
+  function applyRoute(){
+    const r=routeParse(location.hash);
+    if(r.view==='livro' && containers[r.id]){
+      const cid=corridorOf(r.id);
+      if(curDeck && curDeck!==r.id) instantLeaveReader();
+      if(cid) instantShowCorridor(cid); else instantShowLanding();
+      shelf.classList.add('show');
+      if(curDeck!==r.id){ enterReader(r.id); }
+      if(r.page){
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          if(flips[r.id]) flips[r.id].turnToPage(Math.max(0,r.page-1));
+        }));
+      }
+      return;
+    }
+    if(curDeck) instantLeaveReader();
+    shelf.classList.add('show');
+    if(r.view==='corredor' && CORRIDORS[r.corId]){
+      instantShowCorridor(r.corId);
+      return;
+    }
+    instantShowLanding();
+    if(!location.hash) history.replaceState(null,'','#/');
+  }
+  window.addEventListener('popstate', applyRoute);
+  window.addEventListener('hashchange', applyRoute);
+  applyRoute();
 </script>
 </body>
 </html>
@@ -1446,7 +1650,9 @@ books_html = (
 out = HEAD + books_html + TAIL_END
 out = (out.replace("__LANDING_ART__", landing_b64)
           .replace("__CORRIDOR_ART__", corshelf_b64)
-          .replace("__TABLE_ART__", table_art_b64))
+          .replace("__TABLE_ART__", table_art_b64)
+          .replace("__GATE_VIDEO__", gate_video_b64)
+          .replace("__GATE_POSTER__", gate_poster_b64))
 
 with open("/home/claude/estudo-teologia/index.html", "w", encoding="utf-8") as f:
     f.write(out)
