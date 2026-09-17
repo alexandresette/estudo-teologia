@@ -813,6 +813,12 @@ TAIL_END = """
     counter.style.display=on?'block':'none';
     topLeftBtns.classList.toggle('show',on);
     menuBtn.style.display=on?'block':'none';
+    // notesBtn segue o mesmo liga/desliga -- sem isso, ao sair de um livro
+    // com anotacoes (hasNoToc=false, notesBtn 'block') de volta pro shelf/
+    // pagina inicial, showChrome(false) escondia o menuBtn mas deixava o
+    // NOTAS visivel por cima da estante/corredores. Quando on=true o valor
+    // e' sobrescrito logo em seguida por enterReader() de acordo com hasNoToc.
+    notesBtn.style.display=on?'block':'none';
   }
 
   /* ---- FLIP flight using a clone of the REAL front-cover card (transform-only) ----
