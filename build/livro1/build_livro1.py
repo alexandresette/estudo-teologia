@@ -67,6 +67,8 @@ def framework_html(fw):
 
 
 def verse_html(ref, text):
+    if not ref or not text:
+        return ""
     return '<div class="verse">“%s”<span class="ref">%s</span></div>' % (esc(text), esc(ref))
 
 
@@ -75,6 +77,32 @@ def declaration_html(num, text):
     return (
         '<div class="verse" style="background:var(--rust);margin-top:14px">'
         "“%s”<span class=\"ref\">%s</span></div>" % (esc(text), label)
+    )
+
+
+def reflexao_html(questions):
+    """Caixa de 'Reflexão pessoal', recurso próprio deste livro (o
+    original fecha quase toda seção com uma caixa assim, num post-it de
+    papel rasgado). Aqui simplificada pro estilo do resto da coleção."""
+    if not questions:
+        return ""
+    items = "".join("<li>%s</li>" % esc(q) for q in questions)
+    return (
+        '<div class="reflexao">'
+        '<span class="reflexao-tag">Reflexão pessoal</span>'
+        '<ul>%s</ul></div>' % items
+    )
+
+
+def oracao_html(text):
+    """Caixa de oração escrita, recurso próprio deste livro (aparece uma
+    vez no original, ao fim da seção 'A Mulher Cristã e Empoderamento')."""
+    if not text:
+        return ""
+    return (
+        '<div class="oracao">'
+        '<span class="oracao-tag">Uma oração</span>'
+        "<p>%s</p></div>" % esc(text).replace("\n\n", "</p><p>")
     )
 
 
@@ -136,6 +164,14 @@ HEAD_TEMPLATE = """<!DOCTYPE html>
   .recap li{font-family:"Iowan Old Style",Georgia,serif;font-style:italic;color:var(--navy2);font-size:15.5px;line-height:1.8;list-style:none;padding-left:26px;position:relative}
   .recap li::before{content:counter(r);counter-increment:r;position:absolute;left:0;top:2px;font-family:"Helvetica Neue",Arial,sans-serif;font-style:normal;font-size:11px;color:var(--gold);border:1px solid var(--gold);border-radius:50%;width:17px;height:17px;display:flex;align-items:center;justify-content:center}
   .recap{counter-reset:r}
+  .reflexao{background:rgba(47,111,106,.08);border:1px solid rgba(47,111,106,.28);border-radius:10px;padding:14px 16px;margin-top:14px}
+  .reflexao-tag{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:700;display:block;margin-bottom:6px}
+  .reflexao ul{margin:0;padding-left:18px}
+  .reflexao li{font-size:14px;line-height:1.5;color:var(--navy2);margin-top:5px}
+  .oracao{background:rgba(31,43,77,.06);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:14px 16px;margin-top:14px}
+  .oracao-tag{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block;margin-bottom:6px}
+  .oracao p{font-style:italic;font-size:14px;line-height:1.55;margin-top:6px;color:var(--ink)}
+  .oracao p:first-child{margin-top:0}
 </style>
 </head>
 <body>
@@ -184,12 +220,14 @@ def build_source_deck():
     for c in CHAPTERS:
         slides.append(
             '<div class="slide"><div class="kicker">Capítulo %d</div><h2>%s</h2>'
-            '<div class="rule"></div>%s%s%s%s</div>'
+            '<div class="rule"></div>%s%s%s%s%s%s</div>'
             % (
                 c["num"], esc(c["title"]),
                 paras_html(c["lead"].split("\n\n")),
                 framework_html(c["framework"]),
                 verse_html(c["verse_ref"], c["verse_text"]),
+                reflexao_html(c.get("reflexao")),
+                oracao_html(c.get("oracao")),
                 declaration_html(c["num"], c["declaration"]),
             )
         )
@@ -269,13 +307,15 @@ def build_flipbook():
             '<div class="page"><div class="page-inner">'
             '<div class="kicker"><span class="u">Capítulo %d</span></div>'
             "<h2>%s</h2><div class=\"rule\"></div>"
-            "%s%s%s%s"
+            "%s%s%s%s%s%s"
             '</div><div class="folio">%02d</div></div>'
             % (
                 c["num"], esc(c["title"]),
                 paras_html(c["lead"].split("\n\n")),
                 framework_html(c["framework"]),
                 verse_html(c["verse_ref"], c["verse_text"]),
+                reflexao_html(c.get("reflexao")),
+                oracao_html(c.get("oracao")),
                 declaration_html(c["num"], c["declaration"]),
                 folio,
             )

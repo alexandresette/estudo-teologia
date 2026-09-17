@@ -328,6 +328,15 @@ ul.clean li b{color:var(--navy2)}
 .verse{background:var(--navy);color:#f1e4c4;border-radius:10px;padding:14px 16px;margin:12px 0;font-size:14px;line-height:1.5;position:relative;box-shadow:0 8px 18px rgba(20,14,8,.28)}
 .verse .ref{display:block;margin-top:6px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:10.5px;letter-spacing:.14em;color:var(--gold-soft);text-transform:uppercase}
 
+.reflexao{background:rgba(47,111,106,.08);border:1px solid rgba(47,111,106,.28);border-radius:10px;padding:12px 14px;margin-top:12px}
+.reflexao-tag{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:700;display:block;margin-bottom:5px}
+.reflexao ul{margin:0;padding-left:17px}
+.reflexao li{font-size:13px;line-height:1.45;color:var(--navy2);margin-top:4px}
+.oracao{background:rgba(31,43,77,.06);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:12px 14px;margin-top:12px}
+.oracao-tag{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block;margin-bottom:5px}
+.oracao p{font-style:italic;font-size:13px;line-height:1.5;margin-top:5px}
+.oracao p:first-child{margin-top:0}
+
 .chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin-top:10px}
 .chain .step{flex:1;min-width:100px;background:rgba(43,33,23,.045);border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:9px;padding:9px 10px}
 .chain .step b{display:block;color:var(--navy);font-size:12.5px;font-family:"Helvetica Neue",Arial,sans-serif}
