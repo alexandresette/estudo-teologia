@@ -579,6 +579,10 @@ __THEOLOGY_COVER_CSS__
 .corridorExitBtn{position:absolute;top:calc(var(--hdrH) + 14px);left:16px;z-index:6;background:rgba(243,231,201,.08);border:1px solid rgba(217,185,104,.28);
   color:#f0e2bc;border-radius:9px;padding:7px 14px;font-size:12px;letter-spacing:.1em;cursor:pointer;font-family:"Helvetica Neue",Arial,sans-serif;backdrop-filter:blur(6px)}
 .corridorExitBtn:hover{background:rgba(243,231,201,.16)}
+.gateExitBtn{position:absolute;top:50%;right:16px;transform:translateY(-50%);z-index:6;background:rgba(243,231,201,.08);border:1px solid rgba(217,185,104,.28);
+  color:#f0e2bc;border-radius:9px;padding:7px 14px;font-size:12px;letter-spacing:.1em;cursor:pointer;font-family:"Helvetica Neue",Arial,sans-serif;backdrop-filter:blur(6px)}
+.gateExitBtn:hover{background:rgba(243,231,201,.16)}
+@media(max-width:640px){.gateExitBtn{padding:6px 10px;font-size:10.5px}}
 .corridor-area{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:14px 16px 20px}
 .corridor-stage{position:relative;width:100%;height:100%;
   container-type:inline-size;border-radius:6px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.65)}
@@ -678,6 +682,7 @@ HALL_HTML = """
   <header id="libHeader">
     <h1 class="hdr-title">Biblioteca de Estudos</h1>
     <div class="hdr-verse">Colossenses 3:23-24</div>
+    <button id="gateExitBtn" class="gateExitBtn" onclick="exitToGate()" title="Sair da biblioteca">&#8592; Sair</button>
   </header>
 
   <div id="viewport">
@@ -694,8 +699,8 @@ HALL_HTML = """
               <div class="placard-hang"><span class="n">2</span>No Secreto</div>
               <div class="enter-cue">entrar &#8594;</div>
             </div>
-            <div class="corridor-zone" data-corridor="livros" tabindex="0" role="button" aria-label="Entrar no corredor Resumo de Livros" onclick="enterCorridor('livros')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();enterCorridor('livros')}">
-              <div class="placard-hang"><span class="n">3</span>Resumo de Livros</div>
+            <div class="corridor-zone" data-corridor="livros" tabindex="0" role="button" aria-label="Entrar no corredor Livros" onclick="enterCorridor('livros')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();enterCorridor('livros')}">
+              <div class="placard-hang"><span class="n">3</span>Livros</div>
               <div class="enter-cue">entrar &#8594;</div>
             </div>
           </div>
@@ -1489,6 +1494,24 @@ TAIL_END = """
       try{ video.pause(); }catch(ex){}
     }
   })();
+  function exitToGate(){
+    instantLeaveReader();
+    instantShowLanding();
+    history.replaceState(null,'','#/');
+    try{ sessionStorage.removeItem('estudoGateUnlocked'); }catch(ex){}
+    const form=document.getElementById('gateForm');
+    const knock=document.getElementById('gateKnockBtn');
+    const pass=document.getElementById('gatePass');
+    const err=document.getElementById('gateError');
+    if(form) form.classList.remove('show');
+    if(knock) knock.style.display='';
+    if(pass) pass.value='';
+    if(err){ err.classList.remove('show'); err.textContent=''; }
+    gateEl.classList.remove('leaving','shake');
+    gateEl.style.display='';
+    const video=document.getElementById('gateVideo');
+    if(video){ try{ video.currentTime=0; const p=video.play(); if(p&&p.catch) p.catch(()=>{}); }catch(ex){} }
+  }
 
   /* ============================================================
      Roteamento por URL (hash) -- cada view tem seu próprio endereço,
