@@ -128,6 +128,21 @@ passadoresolvido_pages = open(_PASSADORESOLVIDO_DIR + "/pages_passadoresolvido.h
 passadoresolvido_toc = json.load(open(_PASSADORESOLVIDO_DIR + "/toc_passadoresolvido.json", encoding="utf-8"))
 passadoresolvido_cover_b64 = base64.b64encode(open(_PASSADORESOLVIDO_DIR + "/cover.jpg", "rb").read()).decode("ascii")
 
+# "O Poder de Ser Mulher" (Flavinha Cabral) -- originalmente entrava pelo
+# pipeline plano do build_pdf_book (PDF escaneado, sem capítulos nem toc,
+# via livros_manifest.json). Foi convertido pro mesmo esquema rico do
+# Divinamente/Anjos e Demônios/Passado Resolvido: resumo de estudo com
+# capítulos, versículo, framework e declaração. A capa e a última página
+# (biografia da autora) são as páginas reais do livro físico, mantidas
+# sem alteração -- só as páginas do meio (2 a 31) foram substituídas pelo
+# resumo. As 7 ilustrações internas são pintura de IA (Gemini), ver
+# build/livro1/gemini_gen.py. Este id é filtrado do loop de
+# livros_manifest logo abaixo pra não entrar duas vezes na prateleira.
+_LIVRO1_DIR = "/home/claude/estudo-teologia/build/livro1"
+livro1_pages = open(_LIVRO1_DIR + "/pages_livro1.html", encoding="utf-8").read()
+livro1_toc = json.load(open(_LIVRO1_DIR + "/toc_livro1.json", encoding="utf-8"))
+livro1_cover_b64 = base64.b64encode(open(_LIVRO1_DIR + "/cover.jpg", "rb").read()).decode("ascii")
+
 
 def build_pdf_book(d):
     """Turn one manifest entry (a PDF rendered page-by-page to JPEGs) into its
@@ -173,9 +188,14 @@ for d in devo_manifest:
     devos_js.append(js_part)
 
 # ---- build the real books on the "Livros" shelf (same PDF-to-flipbook pipeline) ----
+# "livro1" (O Poder de Ser Mulher) foi convertido pro esquema rico (ver
+# _LIVRO1_DIR acima) e é montado à parte, então é pulado aqui pra não
+# entrar duas vezes na prateleira.
 livro_books_html = ""
 livros_js = []
 for d in livros_manifest:
+    if d.get("id") == "livro1":
+        continue
     html_part, js_part = build_pdf_book(d)
     livro_books_html += html_part
     livros_js.append(js_part)
@@ -1389,11 +1409,25 @@ passadoresolvido_book_html = (
     % passadoresolvido_pages
 )
 
+# "O Poder de Ser Mulher" -- mesmo esquema, mas ocupa o primeiro lugar da
+# prateleira Livros (posição original do livro antes da conversão).
+livro1_js = {
+    "id": "livro1",
+    "title": "O Poder de Ser Mulher",
+    "cover": livro1_cover_b64,
+    "toc": livro1_toc,
+}
+livro1_book_html = (
+    '<div id="book-livro1" class="stbook" data-theme="livro1">\n%s\n</div>\n'
+    % livro1_pages
+)
+
 devos_json = json.dumps(devos_js, ensure_ascii=False)
 # the "Livros" shelf mixes real books already added with empty placeholder slots
-# for what's not on it yet, so ship both in one JS array
+# for what's not on it yet, so ship both in one JS array. livro1_js vem
+# primeiro pra manter a posição original do livro na prateleira.
 livros_json = json.dumps(
-    livros_js + [divinamente_js, mundoespiritual_js, passadoresolvido_js]
+    [livro1_js] + livros_js + [divinamente_js, mundoespiritual_js, passadoresolvido_js]
     + [{"label": "Próxima\nleitura"}],
     ensure_ascii=False,
 )
@@ -1406,7 +1440,7 @@ for b in THEOLOGY_BOOKS:
 
 books_html = (
     theology_books_html + devo_books_html + livro_books_html
-    + divinamente_book_html + mundoespiritual_book_html + passadoresolvido_book_html
+    + livro1_book_html + divinamente_book_html + mundoespiritual_book_html + passadoresolvido_book_html
 )
 
 out = HEAD + books_html + TAIL_END
