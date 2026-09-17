@@ -118,6 +118,16 @@ mundoespiritual_pages = open(_MUNDOESPIRITUAL_DIR + "/pages_mundoespiritual.html
 mundoespiritual_toc = json.load(open(_MUNDOESPIRITUAL_DIR + "/toc_mundoespiritual.json", encoding="utf-8"))
 mundoespiritual_cover_b64 = base64.b64encode(open(_MUNDOESPIRITUAL_DIR + "/cover.jpg", "rb").read()).decode("ascii")
 
+# "Passado Resolvido, Futuro Decidido" (Márcio Micheli) -- mesmo esquema do
+# Divinamente/Anjos e Demônios, com uma diferença: a capa é a foto real do
+# livro físico (não gerada por IA nem por código), só recortada pro formato
+# padrão do site. As 8 ilustrações internas são pintura de IA (Gemini), ver
+# build/passadoresolvido/gemini_gen.py.
+_PASSADORESOLVIDO_DIR = "/home/claude/estudo-teologia/build/passadoresolvido"
+passadoresolvido_pages = open(_PASSADORESOLVIDO_DIR + "/pages_passadoresolvido.html", encoding="utf-8").read()
+passadoresolvido_toc = json.load(open(_PASSADORESOLVIDO_DIR + "/toc_passadoresolvido.json", encoding="utf-8"))
+passadoresolvido_cover_b64 = base64.b64encode(open(_PASSADORESOLVIDO_DIR + "/cover.jpg", "rb").read()).decode("ascii")
+
 
 def build_pdf_book(d):
     """Turn one manifest entry (a PDF rendered page-by-page to JPEGs) into its
@@ -1368,11 +1378,23 @@ mundoespiritual_book_html = (
     % mundoespiritual_pages
 )
 
+passadoresolvido_js = {
+    "id": "passadoresolvido",
+    "title": "Passado Resolvido,\nFuturo Decidido",
+    "cover": passadoresolvido_cover_b64,
+    "toc": passadoresolvido_toc,
+}
+passadoresolvido_book_html = (
+    '<div id="book-passadoresolvido" class="stbook" data-theme="passadoresolvido">\n%s\n</div>\n'
+    % passadoresolvido_pages
+)
+
 devos_json = json.dumps(devos_js, ensure_ascii=False)
 # the "Livros" shelf mixes real books already added with empty placeholder slots
 # for what's not on it yet, so ship both in one JS array
 livros_json = json.dumps(
-    livros_js + [divinamente_js, mundoespiritual_js] + [{"label": "Próxima\nleitura"}],
+    livros_js + [divinamente_js, mundoespiritual_js, passadoresolvido_js]
+    + [{"label": "Próxima\nleitura"}],
     ensure_ascii=False,
 )
 TAIL_END = TAIL_END.replace("__DEVOS__", devos_json).replace("__LIVROS__", livros_json)
@@ -1384,7 +1406,7 @@ for b in THEOLOGY_BOOKS:
 
 books_html = (
     theology_books_html + devo_books_html + livro_books_html
-    + divinamente_book_html + mundoespiritual_book_html
+    + divinamente_book_html + mundoespiritual_book_html + passadoresolvido_book_html
 )
 
 out = HEAD + books_html + TAIL_END
