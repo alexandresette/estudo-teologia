@@ -154,6 +154,20 @@ livro1_pages = open(_LIVRO1_DIR + "/pages_livro1.html", encoding="utf-8").read()
 livro1_toc = json.load(open(_LIVRO1_DIR + "/toc_livro1.json", encoding="utf-8"))
 livro1_cover_b64 = base64.b64encode(open(_LIVRO1_DIR + "/cover.jpg", "rb").read()).decode("ascii")
 
+# "Novo Nascimento" (Bispo Paulo Filho) -- mesmo esquema rico do
+# Divinamente/Anjos e Demônios/Passado Resolvido/O Poder de Ser Mulher,
+# mas com estrutura PRÓPRIA (dez capítulos reais do livro, sem framework
+# genérico, reflexão, oração ou declaração emprestados de outro título
+# da coleção -- ver build/novonascimento/chapters.py). Ocupa o primeiro
+# lugar da prateleira Livros. A capa é a foto real da capa física do
+# livro (recortada/redimensionada, ver build/novonascimento/patch_index.py
+# ou o crop feito na hora), e as 10 ilustrações internas são pintura de
+# IA (Gemini), ver build/novonascimento/gemini_gen.py.
+_NOVONASCIMENTO_DIR = "/home/claude/estudo-teologia/build/novonascimento"
+novonascimento_pages = open(_NOVONASCIMENTO_DIR + "/pages_novonascimento.html", encoding="utf-8").read()
+novonascimento_toc = json.load(open(_NOVONASCIMENTO_DIR + "/toc_novonascimento.json", encoding="utf-8"))
+novonascimento_cover_b64 = base64.b64encode(open(_NOVONASCIMENTO_DIR + "/cover.jpg", "rb").read()).decode("ascii")
+
 
 def build_pdf_book(d):
     """Turn one manifest entry (a PDF rendered page-by-page to JPEGs) into its
@@ -599,6 +613,15 @@ __THEOLOGY_COVER_CSS__
 
 .cshelf{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-wrap:wrap;gap:clamp(10px,1.6cqw,26px);
   align-items:center;justify-content:center;max-width:88%;z-index:2}
+/* em telas estreitas a prateleira pode ter mais livros do que cabem na altura
+   visivel (o palco de fundo tem overflow:hidden e nao rola sozinho) -- aqui a
+   propria .cshelf vira sua camada de rolagem, sem mexer no fundo/imagem nem
+   no grid de telas largas */
+@media(max-width:640px){
+  .cshelf{position:absolute;inset:0;left:0;top:0;transform:none;max-width:100%;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;align-content:flex-start;
+    padding:66px 14px 30px;box-sizing:border-box}
+}
 
 .bcover{position:relative;width:clamp(100px,9.6cqw,190px);aspect-ratio:11/15.4;cursor:pointer;border-radius:4px;overflow:hidden;outline:none;
   box-shadow:0 1cqw 2.2cqw rgba(0,0,0,.55);transition:transform .25s cubic-bezier(.2,.8,.3,1), box-shadow .25s ease;
@@ -1670,12 +1693,25 @@ livro1_book_html = (
     % livro1_pages
 )
 
+novonascimento_js = {
+    "id": "novonascimento",
+    "title": "Novo Nascimento",
+    "cover": novonascimento_cover_b64,
+    "toc": novonascimento_toc,
+}
+novonascimento_book_html = (
+    '<div id="book-novonascimento" class="stbook" data-theme="novonascimento">\n%s\n</div>\n'
+    % novonascimento_pages
+)
+
 devos_json = json.dumps(devos_js, ensure_ascii=False)
 # the "Livros" shelf mixes real books already added with empty placeholder slots
-# for what's not on it yet, so ship both in one JS array. livro1_js vem
-# primeiro pra manter a posição original do livro na prateleira.
+# for what's not on it yet, so ship both in one JS array. novonascimento_js
+# vem primeiro (o Xande pediu que fosse o primeiro da lista), depois
+# livro1_js mantém a posição original dele na prateleira.
 livros_json = json.dumps(
-    [livro1_js] + livros_js + [divinamente_js, mundoespiritual_js, passadoresolvido_js]
+    [novonascimento_js, livro1_js] + livros_js
+    + [divinamente_js, mundoespiritual_js, passadoresolvido_js]
     + [{"label": "Próxima\nleitura"}],
     ensure_ascii=False,
 )
@@ -1688,6 +1724,7 @@ for b in THEOLOGY_BOOKS:
 
 books_html = (
     theology_books_html + devo_books_html + livro_books_html
+    + novonascimento_book_html
     + livro1_book_html + divinamente_book_html + mundoespiritual_book_html + passadoresolvido_book_html
 )
 
