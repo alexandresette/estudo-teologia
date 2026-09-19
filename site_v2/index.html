@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca de Estudos · Xande</title>
+<meta name="description" content="Biblioteca viva de resumões de estudo do curso de Teologia. Cada disciplina, um livro na estante.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-rel="">
+<div id="gate">
+  <video id="gateVideo" autoplay muted loop playsinline preload="auto" poster="assets/gate-poster.jpg">
+    <source src="assets/gate.mp4" type="video/mp4">
+  </video>
+  <div class="gate-veil"></div>
+  <div class="gate-scroll">
+    <div class="gate-content">
+      <div class="gate-kicker">Êxodo 24:15&ndash;18</div>
+      <h1 class="gate-title">Sobe ao monte</h1>
+      <p class="gate-verse">&ldquo;Então Moisés subiu ao monte, e a nuvem cobriu o monte... e a aparência da glória do Senhor era como um fogo consumidor no cume do monte, aos olhos dos filhos de Israel. E entrou Moisés no meio da nuvem, depois que subiu ao monte.&rdquo;</p>
+      <button id="gateKnockBtn" type="button" onclick="gateReveal()">Entrar</button>
+      <form id="gateForm" onsubmit="return gateSubmit(event)" autocomplete="off">
+        <input type="password" id="gatePass" name="gatePass" placeholder="a senha para entrar" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <button type="submit">Entrar</button>
+      </form>
+      <div id="gateError"></div>
+    </div>
+  </div>
+</div><div class="motes" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+<button id="sfxBtn" onclick="toggleSfx()" title="Ativar ou desativar som" aria-label="Ativar ou desativar som">&#9834;</button>
+<section id="shelf" class="show">
+<header id="libHeader">
+  <h1 class="hdr-title">Biblioteca de Estudos</h1>
+  <div class="hdr-verse">Colossenses 3:23-24</div>
+  <button id="gateExitBtn" class="gateExitBtn" onclick="exitToGate()" title="Sair da biblioteca">&#8592; Sair</button>
+</header>
+<div id="viewport">
+<div id="viewLanding" class="view show">
+  <div class="hall-art">
+    <img src="assets/img/hall-art.jpg" alt="">
+    <div class="hall-picks">
+      <a class="corridor-zone" href="corredor/teologia.html" aria-label="Entrar no corredor Teologia"><div class="placard-hang"><span class="n">1</span>Teologia</div><div class="enter-cue">entrar &#8594;</div></a>
+      <a class="corridor-zone" href="corredor/secreto.html" aria-label="Entrar no corredor No Secreto"><div class="placard-hang"><span class="n">2</span>No Secreto</div><div class="enter-cue">entrar &#8594;</div></a>
+      <a class="corridor-zone" href="corredor/livros.html" aria-label="Entrar no corredor Resumo de Livros"><div class="placard-hang"><span class="n">3</span>Resumo de Livros</div><div class="enter-cue">entrar &#8594;</div></a>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<script src="assets/site.js"></script>
+</body>
+</html>

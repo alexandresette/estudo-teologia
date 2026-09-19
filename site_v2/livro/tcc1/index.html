@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeto de Pesquisa · Biblioteca de Estudos · Xande</title>
+<meta name="description" content="Biblioteca viva de resumões de estudo do curso de Teologia. Cada disciplina, um livro na estante.">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body data-rel="../../">
+<div id="gate">
+  <video id="gateVideo" autoplay muted loop playsinline preload="auto" poster="../../assets/gate-poster.jpg">
+    <source src="../../assets/gate.mp4" type="video/mp4">
+  </video>
+  <div class="gate-veil"></div>
+  <div class="gate-scroll">
+    <div class="gate-content">
+      <div class="gate-kicker">Êxodo 24:15&ndash;18</div>
+      <h1 class="gate-title">Sobe ao monte</h1>
+      <p class="gate-verse">&ldquo;Então Moisés subiu ao monte, e a nuvem cobriu o monte... e a aparência da glória do Senhor era como um fogo consumidor no cume do monte, aos olhos dos filhos de Israel. E entrou Moisés no meio da nuvem, depois que subiu ao monte.&rdquo;</p>
+      <button id="gateKnockBtn" type="button" onclick="gateReveal()">Entrar</button>
+      <form id="gateForm" onsubmit="return gateSubmit(event)" autocomplete="off">
+        <input type="password" id="gatePass" name="gatePass" placeholder="a senha para entrar" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <button type="submit">Entrar</button>
+      </form>
+      <div id="gateError"></div>
+    </div>
+  </div>
+</div><div id="bar"></div>
+<div id="topLeftBtns" class="show">
+  <a id="backBtn" href="../../corredor/teologia.html">&#8592; Estante</a>
+  <button id="homeBtn" onclick="goBookStart()" title="Voltar ao início do livro">&#8607; Início</button>
+</div>
+<button id="menuBtn" style="display:block" onclick="openIdx()">&#9776; ÍNDICE</button>
+<div class="motes" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+<button id="sfxBtn" onclick="toggleSfx()" title="Ativar ou desativar som" aria-label="Ativar ou desativar som">&#9834;</button>
+<div id="counter"></div>
+<div id="reader" class="show shown" data-book-id="tcc1">
+  <div class="reader-slot">
+  <div class="reader-stage">
+<div id="book-tcc1" class="stbook" data-theme="tcc1">
+<div class="page cover-page" data-density="hard"><div class="page-inner">
+<div class="kicker">Resumão de Estudo · Módulo 2</div>
+<h1>Projeto de Pesquisa</h1>
+<div class="rule"></div>
+<p class="lead">De "o que é ciência" a uma monografia pronta para banca, seguindo um único caso do começo ao fim: o perdão e a autoridade de Jesus em Marcos 2.1-12.</p>
+<div class="units">
+<span>1 · Fundamentos</span><span>2 · O projeto</span><span>3 · Leitura e fichamento</span><span>4 · Redação e entrega</span>
+</div>
+<div class="meta">Prof. Josias Costa, MSc · Faculdade das Nações<br/>Base: ebooks das Unidades 1 a 4</div>
+<div class="hint">Use as setas do teclado, os botões da tela, ou o índice no canto.</div>
+</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker">Visão geral</div>
+<h2>O fio condutor da matéria</h2>
+<div class="rule"></div>
+<p>Projeto de Pesquisa é a disciplina que ensina a transformar uma inquietação teológica em um trabalho de conclusão de curso defensável. A Unidade 1 dá o vocabulário: o que é ciência, o que distingue conhecimento científico de senso comum, como a Teologia se encaixa nisso e quais são as regras do jogo, da ABNT à ética acadêmica. A partir da Unidade 2, o material assume um compromisso raro nesse tipo de curso: pega um único tema, o perdão e a autoridade de Jesus em Marcos 2.1-12, e o acompanha por todas as etapas, do assunto amplo à hipótese fechada. A Unidade 3 ensina a ler e fichar as fontes que vão sustentar esse projeto. A Unidade 4 fecha o ciclo, voltando ao mesmo exemplo de Marcos 2 para mostrar como virar fichamento em argumento e argumento em monografia.</p>
+<div class="chain">
+<div class="step"><b>U1 · O alicerce</b><span>Ciência, conhecimento científico, a Teologia como campo acadêmico, ética e ABNT.</span></div>
+<div class="step"><b>U2 · O projeto</b><span>Tema, problema, objetivos, justificativa e hipótese, todos construídos sobre Marcos 2.1-12.</span></div>
+<div class="step"><b>U3 · A leitura</b><span>Leitura científica, fichamento de citação e de resumo, revisão bibliográfica.</span></div>
+<div class="step"><b>U4 · A entrega</b><span>Redação, argumentação, fundamentação teórica e os passos finais até a banca.</span></div>
+</div>
+</div><div class="folio">02</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> Fundamentos da pesquisa científica</div>
+<h2>O que é ciência e conhecimento científico</h2>
+<div class="rule"></div>
+<p class="lead">Antes de ensinar a pesquisar, o material separa os quatro tipos de conhecimento que qualquer pessoa usa no dia a dia, geralmente sem perceber a diferença entre eles.</p>
+<div class="grid g2">
+<div class="card"><span class="tag">Conhecimento popular</span><p>Baseado em experiências cotidianas, tradições e senso comum. Não segue métodos rigorosos, se transmite de forma informal.</p></div>
+<div class="card"><span class="tag">Conhecimento filosófico</span><p>Explica existência e valores pela razão e pela reflexão crítica, sem recorrer a experimentos.</p></div>
+<div class="card"><span class="tag">Conhecimento religioso</span><p>Fundamentado em crenças, doutrinas e revelação. Baseia sua validade na autoridade da fé.</p></div>
+<div class="card"><span class="tag">Conhecimento científico</span><p>Sistemático, verificável, metódico. Aberto a revisão diante de novas evidências.</p></div>
+</div>
+<p class="footnote">Ciência vem do latim <em>scientia</em>: conjunto organizado de conhecimentos obtidos por observação, análise e métodos rigorosos.</p>
+</div><div class="folio">03</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 1 · continua</div>
+<p>O conhecimento científico se reconhece por seis marcas: objetividade (descrever a realidade com base em evidências, não em opinião pessoal), racionalidade (lógica na formulação de hipóteses), metodicidade (métodos e procedimentos definidos com antecedência), sistematicidade (conceitos organizados entre si, não fatos soltos), verificabilidade (afirmações que se pode testar) e provisoriedade.</p>
+<div class="verse">"Provisoriedade: permanece aberto a revisões, atualizações e reformulações diante de novas evidências, descobertas ou métodos de investigação. Isso não significa que o conhecimento científico seja frágil ou sem valor, mas que suas conclusões não são consideradas absolutamente definitivas."<span class="ref">Ebook Unidade 1 · características do conhecimento científico</span></div>
+<p>Sobre a Teologia como campo de saber, o material é direto: ela lida com realidades que transcendem o empírico, e isso não a torna menos rigorosa, porque sua cientificidade está na forma como estuda fontes, textos sagrados e doutrinas, sempre com critérios de análise, interpretação e argumentação.</p>
+</div><div class="folio">04</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> As ferramentas do pesquisador</div>
+<h2>Tipos e métodos de pesquisa</h2>
+<div class="rule"></div>
+<div class="grid g3">
+<div class="card"><span class="tag">Pesquisa básica</span><p>Gera conhecimento novo sem aplicação prática imediata. Exemplo: a evolução do conceito de Deus na história da teologia.</p></div>
+<div class="card"><span class="tag">Pesquisa aplicada</span><p>Soluciona problemas concretos. Exemplo: o papel da religião na promoção da cidadania.</p></div>
+<div class="card"><span class="tag">Pesquisa qualitativa</span><p>Foca significados, valores e interpretações, não números. É o método mais usado em Teologia.</p></div>
+</div>
+<p>Além dessa classificação geral, a Teologia tem três métodos próprios: o <b>exegético</b>, que interpreta textos sagrados considerando contexto histórico, linguístico e literário; o <b>hermenêutico</b>, que reflete sobre os princípios de interpretação de um texto ou tradição; e o <b>sistemático</b>, que organiza os conteúdos da fé em um conjunto coerente. O material se limita a apresentar o método exegético em uma frase e remete quem quiser se aprofundar aos manuais exegéticos já existentes.</p>
+</div><div class="folio">05</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> A arquitetura de uma monografia</div>
+<h2>Estrutura do trabalho e regras da ABNT</h2>
+<div class="rule"></div>
+<p>Todo trabalho acadêmico se organiza em três blocos: pré-textuais (capa, folha de rosto, sumário, resumo de até 250 palavras, palavras-chave), textuais (introdução, desenvolvimento, conclusão) e pós-textuais (referências, e, quando necessário, glossário, apêndices e anexos). A formatação segue um padrão fixo: fonte Times New Roman 12, corpo 10 em citações longas e notas, espaçamento 1,5 no texto e simples nas citações longas, margens de 3 cm em cima e à esquerda, 2 cm embaixo e à direita, recuo de parágrafo de 1,25 cm.</p>
+<div class="verse">"Citações diretas longas: as citações com mais de três linhas devem aparecer em parágrafo separado, com recuo de 4 cm em relação à margem esquerda, fonte menor, espaçamento simples e sem aspas."<span class="ref">Ebook Unidade 1 · regras gerais de formatação</span></div>
+</div><div class="folio">06</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> Honestidade intelectual</div>
+<h2>Ética na pesquisa e normas legais</h2>
+<div class="rule"></div>
+<p class="lead">Plágio tem três formas, e vale memorizar as três porque uma banca examinadora as trata como faltas do mesmo peso.</p>
+<div class="verse">"Plágio integral: cópia de um trabalho inteiro de outro autor; plágio parcial: cópia de trechos, parágrafos ou ideias sem citação; e plágio conceitual: apropriação de ideias, teorias ou interpretações de outrem sem referência."<span class="ref">Ebook Unidade 1 · ética na pesquisa</span></div>
+<p>Na pesquisa teológica, essa exigência ganha um peso extra: violar a integridade de um texto sagrado ou de uma tradição religiosa é tratado como falta intelectual e também como falta cristã. No campo legal, o material cita a Lei 9.610/1998, sobre direitos autorais, e as resoluções do Conselho Nacional de Saúde para pesquisa com seres humanos. Um cuidado prático que vale registrar: normas ABNT mudam de edição com frequência, e usar uma referência desatualizada em uma seção que fala justamente sobre atualizar referências é o tipo de deslize que uma leitura final cuidadosa evita.</p>
+</div><div class="folio">07</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Construção do projeto de pesquisa</div>
+<h2>Escolha e delimitação do tema</h2>
+<div class="rule"></div>
+<p class="lead">A partir daqui, a unidade adota um só exemplo e o carrega até o fim: o perdão no Evangelho de Marcos.</p>
+<p>Tema é o assunto central a ser investigado, o ponto de partida de tudo que vem depois. A escolha passa por oito critérios: afinidade pessoal, relevância acadêmica, relevância social ou eclesial, disponibilidade bibliográfica, viabilidade temporal, acesso às fontes, domínio metodológico e originalidade relativa.</p>
+<div class="verse">"Originalidade relativa: não é obrigatório escolher um assunto completamente inédito, mas a pesquisa deve apresentar uma abordagem, perspectiva ou aplicação própria."<span class="ref">Ebook Unidade 2 · escolha do tema</span></div>
+</div><div class="folio">08</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 2 · continua</div>
+<p>Delimitar um tema é restringi-lo por seis critérios: temático, temporal, espacial, populacional, documental e teórico. O exemplo integrado mostra esse afunilamento em três passos: do tema amplo "o Evangelho de Marcos" para "o perdão no Evangelho de Marcos", até chegar à versão delimitada, "o perdão e a autoridade de Jesus em Marcos 2.1-12: uma análise exegético-teológica".</p>
+<div class="verse">"Nesse exemplo, o assunto foi restringido a uma temática específica: o perdão; a uma passagem determinada: Marcos 2.1-12; e a uma abordagem definida: a análise exegético-teológica. Essa delimitação torna a pesquisa mais clara, viável e propícia ao aprofundamento científico."<span class="ref">Ebook Unidade 2 · delimitação do tema</span></div>
+</div><div class="folio">09</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> A pergunta que guia tudo</div>
+<h2>Formulação do problema de pesquisa</h2>
+<div class="rule"></div>
+<p>O problema de pesquisa nasce de uma dúvida, lacuna, dificuldade ou controvérsia ainda não suficientemente esclarecida. Uma boa formulação tem nove características: clareza, objetividade, delimitação, relevância, viabilidade, investigabilidade, coerência e, a mais fácil de esquecer, neutralidade.</p>
+<div class="verse">"Neutralidade: a formulação não deve antecipar a resposta nem apresentar uma conclusão como se já estivesse comprovada."<span class="ref">Ebook Unidade 2 · formulação do problema</span></div>
+<p>Aplicado ao tema delimitado, o problema fica assim: "Como a narrativa de Marcos 2.1-12 apresenta a relação entre o perdão dos pecados e a autoridade de Jesus?" Repare que a pergunta não pressupõe a resposta, apenas indica a relação que será investigada.</p>
+</div><div class="folio">10</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Do problema à ação</div>
+<h2>Objetivo geral e objetivos específicos</h2>
+<div class="rule"></div>
+<p>O objetivo geral transforma a pergunta de pesquisa em uma declaração de finalidade: "Analisar como a narrativa de Marcos 2.1-12 apresenta a relação entre o perdão dos pecados e a autoridade de Jesus." Ele não antecipa a conclusão, apenas declara a ação investigativa que vai responder ao problema. Os objetivos específicos são as etapas concretas para chegar lá.</p>
+<div class="verse">"Contextualizar histórica e literariamente a narrativa de Marcos 2.1-12; identificar os principais elementos lexicais, narrativos e teológicos relacionados ao perdão dos pecados; examinar a relação estabelecida no texto entre o perdão e a autoridade de Jesus; investigar as principais interpretações exegéticas apresentadas por comentaristas e pesquisadores; e avaliar as implicações teológicas da narrativa."<span class="ref">Ebook Unidade 2 · os cinco objetivos específicos do exemplo</span></div>
+<p class="footnote">Verbos a evitar na redação de objetivos: conhecer, aprender, estudar, vagos demais para indicar uma ação de pesquisa concreta.</p>
+</div><div class="folio">11</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Por que essa pesquisa importa</div>
+<h2>Justificativa e relevância da pesquisa</h2>
+<div class="rule"></div>
+<div class="verse">"A relevância corresponde à importância e ao valor da pesquisa. Enquanto a justificativa explica por que o estudo deve ser realizado, a relevância demonstra quais contribuições poderão resultar de sua realização."<span class="ref">Ebook Unidade 2 · justificativa acadêmica</span></div>
+<p>A relevância de um projeto pode se manifestar em seis dimensões: acadêmica, científica, social, profissional, educacional e eclesial. No exemplo integrado, a justificativa nasce da importância que o perdão ocupa na mensagem cristã e da necessidade de entender sua relação com a autoridade de Jesus, já que a cura do paralítico em Marcos 2 associa esse perdão a um debate direto sobre identidade e autoridade divina.</p>
+</div><div class="folio">12</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Uma resposta provisória</div>
+<h2>Hipóteses e perguntas norteadoras</h2>
+<div class="rule"></div>
+<div class="verse">"A hipótese é uma resposta provisória ao problema de pesquisa, formulada com base nos conhecimentos inicialmente disponíveis sobre o tema. Ela representa uma explicação possível, que será examinada ao longo da investigação e poderá ser confirmada, parcialmente confirmada, reformulada ou rejeitada diante das evidências encontradas."<span class="ref">Ebook Unidade 2 · hipóteses</span></div>
+<p>Aplicada ao exemplo, a hipótese fica assim: a narrativa de Marcos 2.1-12 apresenta o poder de perdoar pecados como manifestação da autoridade divina de Jesus, usando a cura do paralítico como sinal visível que confirma essa declaração. Vale um alerta útil para quem faz pesquisa qualitativa, bibliográfica, exegética ou hermenêutica: nem toda investigação exige uma hipótese formal, às vezes um pressuposto inicial ou um conjunto de perguntas norteadoras já cumpre esse papel.</p>
+</div><div class="folio">13</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> Revisão bibliográfica e metodologia</div>
+<h2>Leitura científica</h2>
+<div class="rule"></div>
+<p class="lead">Ler para uma pesquisa muda o jeito de ler, não a velocidade da leitura.</p>
+<div class="verse">"O leitor não aceita as informações passivamente. Ele analisa, questiona, compara dados e avalia a consistência dos argumentos apresentados pelo autor."<span class="ref">Ebook Unidade 3 · criticidade</span></div>
+<p>A unidade lista dez características da leitura científica: objetividade, criticidade, sistematicidade, seletividade, reflexividade, profundidade, interpretação, analiticidade, fundamentação teórica e produção de conhecimento. É a parte mais abstrata do material, sem um exemplo aplicado a acompanhar cada característica, mas o ponto central se sustenta: ler para uma pesquisa é ler questionando, não ler para concordar.</p>
+</div><div class="folio">14</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> Organizar o que se lê</div>
+<h2>Fichamento: conceito e tipos</h2>
+<div class="rule"></div>
+<div class="verse">"O fichamento é uma técnica sistemática de leitura, seleção, registro e organização das informações extraídas de livros, artigos científicos, capítulos, dissertações, teses, documentos técnicos e outras fontes utilizadas em uma pesquisa."<span class="ref">Ebook Unidade 3 · conceito de fichamento</span></div>
+<div class="grid g2">
+<div class="card"><span class="tag">De citação</span><p>Registra trechos literalmente, preservando palavras, pontuação e grafia, com a página exata.</p></div>
+<div class="card"><span class="tag">De resumo</span><p>Reescreve as ideias centrais com as palavras do pesquisador, sem alterar o sentido nem inserir opinião.</p></div>
+<div class="card"><span class="tag">De conceitos</span><p>Registra termos, definições e categorias teóricas fundamentais da obra.</p></div>
+<div class="card"><span class="tag">Bibliográfico</span><p>Ficha completa e padronizada dos dados de identificação de uma fonte.</p></div>
+</div>
+</div><div class="folio">15</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> Dois modelos na prática</div>
+<h2>Fichamento de citação e de resumo</h2>
+<div class="rule"></div>
+<p>O material traz exemplos completos de cada tipo, todos explicitamente fictícios, sobre temas genéricos como educação e desenvolvimento sustentável, não sobre Teologia. O próprio ebook avisa disso antes que alguém confunda um modelo didático com uma fonte real.</p>
+<div class="verse">"Atenção: os nomes, anos, títulos e citações apresentados nesses modelos possuem finalidade exclusivamente didática. Na pesquisa real, devem ser substituídos pelos dados das fontes efetivamente consultadas."<span class="ref">Ebook Unidade 3 · fichamento de citação</span></div>
+<p>Vale o cuidado inverso também: um fichamento de citação preserva a redação original entre aspas, um fichamento de resumo reescreve com suas próprias palavras. Misturar os dois sem indicar qual é qual é o tipo de deslize que, meses depois, na hora de escrever a monografia, pode virar plágio acidental.</p>
+</div><div class="folio">16</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> A estrutura textual da monografia</div>
+<h2>Introdução, desenvolvimento e conclusão</h2>
+<div class="rule"></div>
+<p class="lead">Uma dica prática que costuma surpreender quem está escrevendo pela primeira vez: escreva a introdução por último.</p>
+<div class="verse">"Muitas pessoas acham difícil começar pela introdução, pois ainda não sabem exatamente o que vai ser escrito no restante do texto. O ideal é fazer um rascunho inicial, mas revisar e finalizar a introdução depois que todo o trabalho estiver pronto, assim, você garante que ela corresponde exatamente ao que foi desenvolvido."<span class="ref">Ebook Unidade 3 · introdução, desenvolvimento e conclusão</span></div>
+<p>Cada parágrafo do desenvolvimento segue a mesma lógica em miniatura: frase tópica que apresenta a ideia, desenvolvimento que a sustenta com dados ou argumentos, e fechamento que conecta ao parágrafo seguinte. A conclusão, por sua vez, não deve trazer informação nova, só fechar o raciocínio já construído e responder de vez à pergunta da introdução.</p>
+</div><div class="folio">17</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> Produção textual e argumentação acadêmica</div>
+<h2>Redação acadêmica e linguagem científica</h2>
+<div class="rule"></div>
+<p>A linguagem acadêmica se reconhece por oito marcas: clareza, objetividade, precisão, coerência, coesão, formalidade, fundamentação e impessoalidade. Essa última não significa esconder um posicionamento, significa argumentá-lo em vez de apenas declará-lo. O exemplo abaixo mostra a diferença entre uma afirmação de fé e uma frase academicamente sustentada sobre o mesmo conteúdo.</p>
+<div class="verse">"Formulação insuficiente: A Bíblia ensina que o perdão é muito importante. Formulação acadêmica: Em Marcos 2.1-12, a declaração do perdão antecede a cura do paralítico e desencadeia uma controvérsia sobre a autoridade de Jesus, conferindo à narrativa significativa dimensão cristológica."<span class="ref">Ebook Unidade 4 · redação da monografia teológica</span></div>
+</div><div class="folio">18</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> Da convicção à demonstração</div>
+<h2>Construção do argumento acadêmico</h2>
+<div class="rule"></div>
+<div class="verse">"Um argumento acadêmico pode ser compreendido como a articulação entre três elementos: afirmação, a ideia ou posição defendida pelo pesquisador; fundamentação, as evidências, fontes ou razões que sustentam a afirmação; e análise, a explicação da relação entre a afirmação e as evidências apresentadas."<span class="ref">Ebook Unidade 4 · construção argumentativa</span></div>
+<p>A tese do exemplo integrado, "Marcos apresenta o poder de perdoar pecados como manifestação da autoridade divina de Jesus", se sustenta em cinco argumentos: o perdão é declarado antes da cura, os escribas entendem a declaração como prerrogativa divina, Jesus conhece os questionamentos interiores deles, a cura confirma visivelmente sua autoridade, e a expressão "Filho do Homem" tem função central na narrativa.</p>
+</div><div class="folio">19</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 4 · continua</div>
+<p>Coerência é a relação lógica entre as partes do texto, do argumento geral até o parágrafo isolado. Coesão é o conjunto de recursos linguísticos, conectivos, pronomes, retomadas, que amarram essas partes na superfície do texto. O contraste entre os dois exemplos abaixo, sobre o mesmo conteúdo de Marcos 2, mostra o que muda quando a coesão entra em cena.</p>
+<div class="verse">"Sem coesão: O texto apresenta uma cura. Os escribas questionam Jesus. O perdão é um tema teológico. Jesus cura o paralítico. A autoridade aparece na narrativa. Com coesão: A narrativa apresenta inicialmente a declaração do perdão, que provoca o questionamento dos escribas. Em resposta, Jesus ordena que o paralítico se levante, utilizando a cura como demonstração de sua autoridade."<span class="ref">Ebook Unidade 4 · coesão textual</span></div>
+</div><div class="folio">20</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> Nem toda fonte serve de base</div>
+<h2>Análise crítica de fontes bibliográficas</h2>
+<div class="rule"></div>
+<p>Sete critérios avaliam uma fonte antes de ela entrar na monografia: autoria, credibilidade, atualidade, pertinência, fundamentação, metodologia e diversidade. Textos bíblicos, comentários, léxicos, artigos e dissertações formam a base recomendada.</p>
+<div class="verse">"Blogs, vídeos, redes sociais, sermões e materiais sem autoria identificada podem contribuir para compreender opiniões contemporâneas, mas não devem constituir a principal fundamentação acadêmica."<span class="ref">Ebook Unidade 4 · fontes adequadas à pesquisa teológica</span></div>
+<p>Comparar autores também tem uma forma certa e uma errada. Listar "Silva afirma... Santos entende... Oliveira comenta..." é só justaposição. Relacionar essas posições entre si, mostrando onde convergem ou divergem, é análise de verdade.</p>
+</div><div class="folio">21</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> Antes de entregar</div>
+<h2>Fundamentação teórica e revisão final</h2>
+<div class="rule"></div>
+<div class="verse">"Ela não deve ser formada por uma sequência de citações ou resumos isolados. É necessário relacionar as contribuições dos autores, comparar interpretações e demonstrar como cada fonte auxilia na construção da resposta ao problema investigado."<span class="ref">Ebook Unidade 4 · fundamentação teórica</span></div>
+<p>A revisão final passa por quatro níveis: conteúdo, estrutura, linguagem e formatação. Um cuidado que o material repete mais de uma vez ao longo do curso, e que vale gravar: toda obra citada no texto precisa aparecer nas referências, e toda referência listada precisa ter sido de fato citada. Referência que sobra sem uso no corpo do texto é sinal de revisão incompleta.</p>
+</div><div class="folio">22</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> A reta final</div>
+<h2>Preparação e entrega da monografia final</h2>
+<div class="rule"></div>
+<p class="lead">A meta de extensão é de aproximadamente 30 páginas, organizadas mais uma vez nos três blocos já conhecidos: pré-textuais, textuais e pós-textuais.</p>
+<p>Antes de entregar, a conferência acadêmica cobre nove pontos: entre eles, a ausência de indícios de plágio, a correspondência entre citações e referências, a formatação segundo o manual da instituição e a coerência entre introdução, desenvolvimento e conclusão. Só depois dessa checagem vem a revisão técnica final, focada em ortografia, pontuação e padronização visual do documento.</p>
+</div><div class="folio">23</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 4 · continua</div>
+<p>Os procedimentos de entrega envolvem prazo, formato de arquivo (DOCX ou PDF), nomeação correta do arquivo e, quando a instituição exige, cópia impressa. Depois da entrega vem a apresentação perante a banca examinadora, o momento em que todo o percurso do projeto, do tema delimitado à hipótese defendida, precisa ser sustentado oralmente diante de quem vai avaliar.</p>
+<div class="verse">"Conclui-se, portanto, que escrever uma monografia não significa apenas cumprir uma exigência curricular. Trata-se de um exercício de investigação, reflexão e comunicação do conhecimento."<span class="ref">Ebook Unidade 4 · conclusão</span></div>
+</div><div class="folio">24</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker">Do tema à hipótese, em um só lugar</div>
+<h2>O estudo de caso completo: Marcos 2.1-12</h2>
+<div class="rule"></div>
+<p class="lead">O material usa o mesmo exemplo do início ao fim. Reunido aqui, ele funciona como modelo para o seu próprio projeto.</p>
+<div class="chain">
+<div class="step"><b>Tema delimitado</b><span>O perdão e a autoridade de Jesus em Marcos 2.1-12: uma análise exegético-teológica.</span></div>
+<div class="step"><b>Problema</b><span>Como a narrativa apresenta a relação entre o perdão dos pecados e a autoridade de Jesus?</span></div>
+<div class="step"><b>Objetivo geral</b><span>Analisar essa relação entre perdão e autoridade na narrativa.</span></div>
+<div class="step"><b>Hipótese</b><span>O perdão dos pecados manifesta a autoridade divina de Jesus, confirmada visivelmente pela cura.</span></div>
+</div>
+<p class="footnote">Cinco objetivos específicos, seis dimensões de justificativa e cinco argumentos de sustentação completam esse mesmo projeto, cada peça já detalhada nas seções anteriores deste resumão.</p>
+</div><div class="folio">25</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker">Uma armadilha comum, vista de perto</div>
+<h2>Como usar bem as suas próprias referências</h2>
+<div class="rule"></div>
+<p>Vale um alerta prático que nasce da leitura atenta do próprio material de apoio deste curso: listar uma bibliografia extensa no fim de um trabalho não substitui citar esses autores dentro do texto. Uma referência que aparece na lista final mas nunca é mencionada, parafraseada ou discutida no corpo do trabalho é o que se chama de referência órfã, e bancas examinadoras percebem isso rápido.</p>
+<p>O antídoto é simples e já apareceu neste resumão: todo autor que sustenta uma afirmação sua deve aparecer citado onde essa afirmação é feita, no formato "Sobrenome (ano)", com a ideia dele claramente atribuída, não apenas guardada na lista de referências como enfeite de credibilidade.</p>
+</div><div class="folio">26</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker">Referência rápida</div>
+<h2>Glossário de termos</h2>
+<div class="rule"></div>
+<div class="grid g2">
+<div class="card"><h3>Delimitação do tema</h3><p>Restrição do tema geral por critério temático, temporal, espacial, populacional, documental ou teórico.</p></div>
+<div class="card"><h3>Hipótese</h3><p>Resposta provisória ao problema de pesquisa, sujeita a confirmação, reformulação ou rejeição.</p></div>
+<div class="card"><h3>Fichamento</h3><p>Técnica sistemática de leitura, seleção, registro e organização das informações de uma fonte.</p></div>
+<div class="card"><h3>Plágio conceitual</h3><p>Apropriação de ideias, teorias ou interpretações de outro autor sem dar a referência.</p></div>
+<div class="card"><h3>Coerência textual</h3><p>Relação lógica e significativa entre todas as partes do texto, do geral ao parágrafo isolado.</p></div>
+<div class="card"><h3>Referência órfã</h3><p>Obra listada nas referências finais mas nunca de fato citada dentro do corpo do trabalho.</p></div>
+</div>
+</div><div class="folio">27</div></div>
+<div class="page cover-page" data-density="hard"><div class="page-inner">
+<div class="kicker">Síntese</div>
+<h1>A matéria em uma frase</h1>
+<div class="rule"></div>
+<p class="lead">Um projeto de pesquisa nasce de um tema bem delimitado, vira pergunta, a pergunta vira objetivo, o objetivo pede justificativa e hipótese, e cada etapa só se sustenta se as fontes citadas forem, de fato, as fontes usadas.</p>
+<div class="units">
+<span>U1 · O alicerce</span><span>U2 · O projeto</span><span>U3 · A leitura</span><span>U4 · A entrega</span>
+</div>
+<p style="margin-top:20px">Do tema amplo sobre o Evangelho de Marcos até a hipótese fechada sobre perdão e autoridade em Marcos 2.1-12, um só percurso, testado e replicável para qualquer tema teológico que você escolher para o seu próprio TCC.</p>
+<p>Guarde este resumão como referência viva: toda vez que travar em uma etapa do seu projeto, volte ao exemplo de Marcos 2 e veja como cada peça se encaixa na seguinte.</p>
+</div></div>
+</div>  </div>
+  </div>
+</div>
+<button id="flipPrev" class="flipbtn" onclick="flipPrev()">&#8592;</button>
+<button id="flipNext" class="flipbtn" onclick="flipNext()">&#8594;</button>
+<div class="reader-hint">setas do teclado ou clique na borda da página pra virar</div>
+<div id="idx"><span class="close" onclick="closeIdx()">&#10005;</span><div class="wrap" id="idxWrap">
+  <h4>Projeto de Pesquisa</h4>
+  <div class="item" onclick="jumpTo(1)"><span class="n">01</span><span class="t">Capa</span></div>
+  <div class="item" onclick="jumpTo(2)"><span class="n">02</span><span class="t">O fio condutor da matéria</span></div>
+  <div class="item" onclick="jumpTo(3)"><span class="n">03</span><span class="t">Unidade 1 · O que é ciência e conhecimento científico</span></div>
+  <div class="item" onclick="jumpTo(5)"><span class="n">05</span><span class="t">Unidade 1 · Tipos e métodos de pesquisa</span></div>
+  <div class="item" onclick="jumpTo(6)"><span class="n">06</span><span class="t">Unidade 1 · Estrutura do trabalho e regras da ABNT</span></div>
+  <div class="item" onclick="jumpTo(7)"><span class="n">07</span><span class="t">Unidade 1 · Ética na pesquisa e normas legais</span></div>
+  <div class="item" onclick="jumpTo(8)"><span class="n">08</span><span class="t">Unidade 2 · Escolha e delimitação do tema</span></div>
+  <div class="item" onclick="jumpTo(10)"><span class="n">10</span><span class="t">Unidade 2 · Formulação do problema de pesquisa</span></div>
+  <div class="item" onclick="jumpTo(11)"><span class="n">11</span><span class="t">Unidade 2 · Objetivo geral e objetivos específicos</span></div>
+  <div class="item" onclick="jumpTo(12)"><span class="n">12</span><span class="t">Unidade 2 · Justificativa e relevância da pesquisa</span></div>
+  <div class="item" onclick="jumpTo(13)"><span class="n">13</span><span class="t">Unidade 2 · Hipóteses e perguntas norteadoras</span></div>
+  <div class="item" onclick="jumpTo(14)"><span class="n">14</span><span class="t">Unidade 3 · Leitura científica</span></div>
+  <div class="item" onclick="jumpTo(15)"><span class="n">15</span><span class="t">Unidade 3 · Fichamento: conceito e tipos</span></div>
+  <div class="item" onclick="jumpTo(16)"><span class="n">16</span><span class="t">Unidade 3 · Fichamento de citação e de resumo</span></div>
+  <div class="item" onclick="jumpTo(17)"><span class="n">17</span><span class="t">Unidade 3 · Introdução, desenvolvimento e conclusão</span></div>
+  <div class="item" onclick="jumpTo(18)"><span class="n">18</span><span class="t">Unidade 4 · Redação acadêmica e linguagem científica</span></div>
+  <div class="item" onclick="jumpTo(19)"><span class="n">19</span><span class="t">Unidade 4 · Construção do argumento acadêmico</span></div>
+  <div class="item" onclick="jumpTo(21)"><span class="n">21</span><span class="t">Unidade 4 · Análise crítica de fontes bibliográficas</span></div>
+  <div class="item" onclick="jumpTo(22)"><span class="n">22</span><span class="t">Unidade 4 · Fundamentação teórica e revisão final</span></div>
+  <div class="item" onclick="jumpTo(23)"><span class="n">23</span><span class="t">Unidade 4 · Preparação e entrega da monografia final</span></div>
+  <div class="item" onclick="jumpTo(25)"><span class="n">25</span><span class="t">O estudo de caso completo: Marcos 2.1-12</span></div>
+  <div class="item" onclick="jumpTo(26)"><span class="n">26</span><span class="t">Como usar bem as suas próprias referências</span></div>
+  <div class="item" onclick="jumpTo(27)"><span class="n">27</span><span class="t">Glossário de termos</span></div>
+  <div class="item" onclick="jumpTo(28)"><span class="n">28</span><span class="t">Síntese final</span></div>
+</div></div>
+<button id="notesBtn" style="display:block" onclick="toggleNotes()" title="Minhas anotações" aria-label="Minhas anotações">&#9998; NOTAS</button>
+<div id="notesPanel">
+  <div class="notes-head">
+    <div class="notes-head-top">
+      <span class="notes-title" id="notesTitle">Notas &middot; Projeto de Pesquisa</span>
+      <span class="notes-status" id="notesStatus">salvo</span>
+      <span class="notes-close" onclick="closeNotes()" title="Fechar anotações">&#10005;</span>
+    </div>
+    <div class="notes-toolbar">
+      <button type="button" class="toolbtn" data-cmd="bold" title="Negrito"><b>N</b></button>
+      <button type="button" class="toolbtn" data-cmd="italic" title="Itálico"><i>I</i></button>
+      <button type="button" class="toolbtn" data-cmd="underline" title="Sublinhado"><u>S</u></button>
+      <span class="toolbar-sep"></span>
+      <button type="button" class="toolbtn" data-block="H2" title="Título">Título</button>
+      <button type="button" class="toolbtn" data-block="H3" title="Subtítulo">Subtítulo</button>
+      <button type="button" class="toolbtn" data-block="P" title="Corpo">Corpo</button>
+      <span class="toolbar-sep"></span>
+      <button type="button" class="toolbtn" id="notesCopyBtn" title="Copiar anotação">Copiar</button>
+    </div>
+  </div>
+  <div id="notesBody" contenteditable="true" spellcheck="false" data-placeholder="Escreva sua anotação..."></div>
+</div>
+<script src="../../assets/pageflip.js"></script>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

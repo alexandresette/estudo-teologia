@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exegese do Novo Testamento · Biblioteca de Estudos · Xande</title>
+<meta name="description" content="Biblioteca viva de resumões de estudo do curso de Teologia. Cada disciplina, um livro na estante.">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body data-rel="../../">
+<div id="gate">
+  <video id="gateVideo" autoplay muted loop playsinline preload="auto" poster="../../assets/gate-poster.jpg">
+    <source src="../../assets/gate.mp4" type="video/mp4">
+  </video>
+  <div class="gate-veil"></div>
+  <div class="gate-scroll">
+    <div class="gate-content">
+      <div class="gate-kicker">Êxodo 24:15&ndash;18</div>
+      <h1 class="gate-title">Sobe ao monte</h1>
+      <p class="gate-verse">&ldquo;Então Moisés subiu ao monte, e a nuvem cobriu o monte... e a aparência da glória do Senhor era como um fogo consumidor no cume do monte, aos olhos dos filhos de Israel. E entrou Moisés no meio da nuvem, depois que subiu ao monte.&rdquo;</p>
+      <button id="gateKnockBtn" type="button" onclick="gateReveal()">Entrar</button>
+      <form id="gateForm" onsubmit="return gateSubmit(event)" autocomplete="off">
+        <input type="password" id="gatePass" name="gatePass" placeholder="a senha para entrar" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <button type="submit">Entrar</button>
+      </form>
+      <div id="gateError"></div>
+    </div>
+  </div>
+</div><div id="bar"></div>
+<div id="topLeftBtns" class="show">
+  <a id="backBtn" href="../../corredor/teologia.html">&#8592; Estante</a>
+  <button id="homeBtn" onclick="goBookStart()" title="Voltar ao início do livro">&#8607; Início</button>
+</div>
+<button id="menuBtn" style="display:block" onclick="openIdx()">&#9776; ÍNDICE</button>
+<div class="motes" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+<button id="sfxBtn" onclick="toggleSfx()" title="Ativar ou desativar som" aria-label="Ativar ou desativar som">&#9834;</button>
+<div id="counter"></div>
+<div id="reader" class="show shown" data-book-id="exnote">
+  <div class="reader-slot">
+  <div class="reader-stage">
+<div id="book-exnote" class="stbook" data-theme="exnote">
+<div class="page cover-page" data-density="hard"><div class="page-inner">
+<div class="kicker">Resumão de Estudo · Módulo 2</div>
+<h1>Exegese do<br/>Novo Testamento</h1>
+<div class="rule"></div>
+<p class="lead">Do grego original de Efésios 2.8 aos sete erros hermenêuticos mais comuns do púlpito, o caminho completo entre ler um versículo e pregá-lo com responsabilidade.</p>
+<div class="units">
+<span>1 · Fundamentos</span><span>2 · Gêneros e contexto</span><span>3 · Léxico, sintaxe e teologia</span><span>4 · Aplicação e pregação</span>
+</div>
+<div class="meta">Prof. Josias Costa, MSc · Faculdade das Nações<br/>Base: ebooks das Unidades 1 a 4</div>
+<div class="hint">Use as setas do teclado, os botões da tela, ou o índice no canto.</div>
+</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker">Visão geral</div>
+<h2>O fio condutor da matéria</h2>
+<div class="rule"></div>
+<p>Exegese do Novo Testamento ensina a responder duas perguntas em ordem certa: primeiro, o que um texto significava para quem o recebeu no primeiro século, depois, o que esse texto significa hoje. A Unidade 1 monta o alicerce, distinguindo hermenêutica de exegese e situando o Novo Testamento no seu contexto romano, judaico e helenista. A Unidade 2 percorre os gêneros literários, dos Evangelhos ao Apocalipse, e ensina a ler cada um segundo suas próprias regras. A Unidade 3 desce ao nível da palavra e da frase, com análise lexical, sintática e teológica do grego original. A Unidade 4 fecha o percurso levando tudo isso ao púlpito, nomeando os erros hermenêuticos mais comuns e defendendo Cristo como centro de toda leitura do Novo Testamento.</p>
+<div class="chain">
+<div class="step"><b>U1 · O alicerce</b><span>Exegese, hermenêutica, inspiração, contexto histórico e grego koiné.</span></div>
+<div class="step"><b>U2 · Os gêneros</b><span>Evangelhos, Atos, epístolas, Apocalipse, e os três níveis de contexto.</span></div>
+<div class="step"><b>U3 · A análise</b><span>Campos semânticos, sintaxe grega, estrutura das epístolas, temas centrais.</span></div>
+<div class="step"><b>U4 · A aplicação</b><span>Da exegese à Teologia Bíblica, erros comuns, centralidade de Cristo.</span></div>
+</div>
+</div><div class="folio">02</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> Fundamentos da exegese do Novo Testamento</div>
+<h2>Exegese e hermenêutica</h2>
+<div class="rule"></div>
+<div class="verse">"A exegese bíblica é a disciplina que busca interpretar e explicar o significado original de um texto das Escrituras a partir de seu contexto histórico, cultural, literário, linguístico e teológico."<span class="ref">Ebook Unidade 1 · conceito e finalidade da exegese</span></div>
+<p>O termo vem do grego <em>exēgēsis</em>, "explicação" ou "extração do sentido". Hermenêutica e exegese trabalham juntas, mas em papéis diferentes: a hermenêutica fornece a teoria da interpretação, a exegese aplica essa teoria a um texto específico. Um exemplo simples ilustra a diferença: diante da Parábola do Semeador (Marcos 4.1-20), a hermenêutica reconhece que se trata de um gênero parabólico, e a exegese entra depois para analisar o que cada tipo de solo representa.</p>
+</div><div class="folio">03</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 1 · continua</div>
+<p>Três doutrinas sustentam todo o edifício da interpretação bíblica. A <b>inspiração</b> é a ação sobrenatural de Deus sobre os autores humanos, capacitando-os a registrar fielmente sua revelação, sem apagar o estilo pessoal de cada um: Lucas investiga cuidadosamente antes de escrever (Lucas 1.1-4), Paulo e João têm vozes literárias bem distintas. A <b>autoridade</b> reconhece a Bíblia como norma suprema de fé e prática, o que já aparece em Jesus respondendo à tentação com "Está escrito" (Mateus 4.1-11). A <b>suficiência</b> ensina que as Escrituras contêm tudo que é necessário para a salvação e para a vida cristã.</p>
+<div class="verse">"A inspiração não implica um ditado mecânico, mas uma cooperação entre a ação divina e a participação consciente dos autores humanos."<span class="ref">Ebook Unidade 1 · inspiração, autoridade e suficiência</span></div>
+</div><div class="folio">04</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> Três forças que moldaram o texto</div>
+<h2>O contexto do Novo Testamento</h2>
+<div class="rule"></div>
+<p class="lead">Os 27 livros nascem num período de cerca de duzentos anos, entre o fim do século 2 antes de Cristo e o fim do século 1 depois, sob a pressão simultânea de três forças.</p>
+<div class="grid g3">
+<div class="card"><span class="tag">Roma</span><p>Domínio político sob a Pax Romana, estradas e estabilidade que facilitaram a expansão do evangelho.</p></div>
+<div class="card"><span class="tag">Judaísmo</span><p>A realidade religiosa e social da Judeia, com Templo, sinagoga e uma expectativa messiânica variada.</p></div>
+<div class="card"><span class="tag">Helenismo</span><p>Influência cultural grega desde as conquistas de Alexandre, com o grego koiné como língua franca.</p></div>
+</div>
+</div><div class="folio">05</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> Quatro grupos, quatro respostas à ocupação</div>
+<h2>O cenário religioso e social da Judeia</h2>
+<div class="rule"></div>
+<div class="grid g2">
+<div class="card"><span class="tag">Fariseus</span><p>O grupo mais próximo do povo, dedicado ao cumprimento rigoroso da Lei e das tradições orais. Criam na ressurreição dos mortos e na intervenção de Deus na história.</p></div>
+<div class="card"><span class="tag">Saduceus</span><p>Elite sacerdotal ligada ao Templo. Mais conservadores no sentido oposto: aceitavam só os cinco primeiros livros da Bíblia e negavam a ressurreição.</p></div>
+<div class="card"><span class="tag">Essênios</span><p>Viviam em comunidades separadas, em busca de pureza e preparação para o fim dos tempos. Não aparecem diretamente no Novo Testamento.</p></div>
+<div class="card"><span class="tag">Zelotes</span><p>Defendiam a luta armada contra Roma, convictos de que a libertação de Israel viria pela força.</p></div>
+</div>
+</div><div class="folio">06</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> O idioma original como ferramenta</div>
+<h2>O grego do Novo Testamento e o método histórico-gramatical</h2>
+<div class="rule"></div>
+<p>O objetivo do curso é dar acesso instrumental ao grego koiné por meio de léxicos, concordâncias, interlineares e dicionários teológicos, sem a pretensão de formar filólogos. Em João 21.15-17, por exemplo, os verbos gregos <em>agapaō</em> e <em>phileō</em>, ambos traduzidos "amar", carregam distinções semânticas discutidas por estudiosos no diálogo entre Jesus e Pedro. Em Efésios 2.8, o termo <em>charis</em> (graça) envolve favor imerecido, benevolência divina e ação redentora, um sentido que a simples tradução "graça" só entrega parcialmente.</p>
+<div class="verse">"A interpretação histórico-gramatical é um método de análise bíblica que busca compreender o significado original do texto a partir de seu contexto histórico e das características gramaticais da língua em que foi escrito."<span class="ref">Ebook Unidade 1 · a interpretação histórico-gramatical</span></div>
+<p class="footnote">Três princípios guiam esse método: o gramatical (respeitar as regras da língua original), o contextual (nenhum versículo isolado do que vem antes e depois) e o teológico (unidade da revelação, sem contradições entre textos).</p>
+</div><div class="folio">07</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Contexto literário e análise textual</div>
+<h2>Formação e cânon do Novo Testamento</h2>
+<div class="rule"></div>
+<div class="verse">"O termo 'cânon' deriva da palavra grega kanon, que significa 'regra', 'padrão' ou 'medida'."<span class="ref">Ebook Unidade 2 · formação e cânon do Novo Testamento</span></div>
+<p>Quatro critérios decidiram quais livros entrariam no cânon: apostolicidade, antiguidade, conformidade doutrinária e aceitação universal nas igrejas. O processo se consolidou por etapas, do Fragmento Muratoriano, por volta de 170 depois de Cristo, à Carta de Atanásio de Alexandria, em 367, até os concílios de Hipona e Cartago fixarem a lista que permanece até hoje.</p>
+</div><div class="folio">08</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Cada gênero, sua própria chave de leitura</div>
+<h2>Gêneros literários do Novo Testamento</h2>
+<div class="rule"></div>
+<div class="verse">"Uma parábola, por exemplo, não deve ser interpretada da mesma forma que uma narrativa histórica, assim como uma visão apocalíptica exige critérios interpretativos diferentes daqueles utilizados para uma carta apostólica."<span class="ref">Ebook Unidade 2 · gêneros literários</span></div>
+<p>Os Evangelhos são narrativas teológicas, Atos é narrativa histórica, as epístolas são cartas doutrinárias e pastorais, o Apocalipse é literatura apocalíptica, cheia de símbolos e visões. Errar o gênero é o primeiro passo para errar a interpretação inteira.</p>
+</div><div class="folio">09</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 2 · continua</div>
+<div class="grid g2">
+<div class="card"><span class="tag">Marcos · c. 65-75 d.C.</span><p>O mais antigo. Foco em Jesus como Filho de Deus, Messias e Servo Sofredor, num caminho de glória que passa pela cruz.</p></div>
+<div class="card"><span class="tag">Mateus · c. 70-85 d.C.</span><p>Estruturado em cinco blocos de ensino, paralelos aos cinco livros da Lei. Foco no Messias, Filho de Davi, Rei que inaugura o Reino dos Céus.</p></div>
+</div>
+</div><div class="folio">10</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 2 · continua</div>
+<div class="grid g2">
+<div class="card"><span class="tag">Lucas · c. 75-90 d.C.</span><p>Primeira parte de uma obra em dois volumes que continua em Atos. Foco no Salvador universal, com ênfase em misericórdia e nos marginalizados.</p></div>
+<div class="card"><span class="tag">João · c. 85-100 d.C.</span><p>Estruturado em sinais e discursos "Eu Sou". Foco no Verbo eterno feito carne, escrito para que o leitor creia que Jesus é o Cristo.</p></div>
+</div>
+<p class="footnote">Quatro retratos, um só Jesus: cada evangelista escolhe uma lente teológica sem contradizer as outras três.</p>
+</div><div class="folio">11</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> O programa missionário em movimento</div>
+<h2>Atos dos Apóstolos</h2>
+<div class="rule"></div>
+<div class="verse">"Escrito por Lucas como continuação de seu Evangelho, o livro de Atos narra o surgimento, a organização e a expansão da Igreja cristã nas primeiras décadas após a ressurreição e a ascensão de Jesus, abrangendo aproximadamente o período entre 30 e 62 d.C."<span class="ref">Ebook Unidade 2 · narrativas dos Evangelhos e Atos</span></div>
+<p>A estrutura segue o programa anunciado em Atos 1.8: a igreja em Jerusalém, na Judeia e em Samaria ocupa os capítulos 1 a 12, e a expansão pelo mundo greco-romano toma os capítulos 13 a 28. No caminho, Pentecostes, o martírio de Estêvão como primeiro mártir cristão, a conversão de Saulo, a visão de Pedro e a conversão do centurião Cornélio, as viagens missionárias de Paulo, até a chegada a Roma.</p>
+</div><div class="folio">12</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Vinte e uma cartas em vinte e sete livros</div>
+<h2>Literatura epistolar e argumentação paulina</h2>
+<div class="rule"></div>
+<p>O termo epístola vem do grego <em>epistolē</em>, "carta" ou "mensagem escrita", e domina o Novo Testamento: das 27 obras que o compõem, 21 pertencem a esse gênero. A estrutura padrão segue saudação inicial, ação de graças, desenvolvimento do conteúdo, exortações práticas e bênção final.</p>
+<div class="verse">"Um dos aspectos mais relevantes da argumentação paulina é a estreita relação entre doutrina e prática."<span class="ref">Ebook Unidade 2 · literatura epistolar e argumentação paulina</span></div>
+</div><div class="folio">13</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Quando a imagem carrega o sentido</div>
+<h2>Linguagem simbólica e literatura apocalíptica</h2>
+<div class="rule"></div>
+<div class="verse">"O símbolo é um sinal visível ou uma imagem concreta que representa uma realidade mais ampla, oculta ou transcendente. Diferente da metáfora, que faz uma comparação passageira, o símbolo carrega um significado mais rico e permanente."<span class="ref">Ebook Unidade 2 · linguagem simbólica</span></div>
+<p>Apocalipse vem do grego <em>apokálypsis</em>, "revelação" ou "retirada do véu". Alguns símbolos recorrentes: água (vida, purificação, Espírito Santo), luz (verdade, vitória), cordeiro (sacrifício, Cristo), e os números, em que o sete expressa plenitude, o três a realidade divina, o doze o povo de Deus, e o 666 a imperfeição que se opõe a Deus. A mensagem central permanece cristocêntrica: Jesus é o Cordeiro morto e ressuscitado, o Senhor soberano da história.</p>
+</div><div class="folio">14</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Três círculos ao redor de cada versículo</div>
+<h2>Contexto imediato, remoto e paralelo</h2>
+<div class="rule"></div>
+<div class="grid g2">
+<div class="card"><span class="tag">Contexto imediato</span><p>Os versículos e parágrafos que antecedem e sucedem a passagem. Exemplo: ler Filipenses 4.13 dentro da seção sobre contentamento em Cristo, não isolado.</p></div>
+<div class="card"><span class="tag">Contexto remoto</span><p>A relação com unidades literárias maiores, do capítulo ao livro inteiro. Exemplo: o tema do discipulado ao longo de todo o Evangelho de Marcos.</p></div>
+<div class="card"><span class="tag">Contexto paralelo</span><p>Comparação de textos que tratam do mesmo tema em partes diferentes da Bíblia. Exemplo: os relatos da multiplicação dos pães nos três Evangelhos Sinóticos.</p></div>
+</div>
+</div><div class="folio">15</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> Análise lexical, sintática e teológica do texto bíblico</div>
+<h2>Análise lexical e campos semânticos</h2>
+<div class="rule"></div>
+<p class="lead">Nenhuma palavra grega vive sozinha. Seu sentido pleno aparece quando ela é lida ao lado de suas vizinhas de campo semântico.</p>
+<div class="verse">"Quando o Novo Testamento utiliza a palavra 'fé', em grego koiné pistis, seu significado torna-se mais claro quando analisado juntamente com outros termos do mesmo campo semântico, como confiança, fidelidade, esperança, crença e obediência."<span class="ref">Ebook Unidade 3 · análise lexical</span></div>
+<p>O vocabulário da salvação reúne justificação (<em>dikaiōsis</em>), redenção (<em>apolytrōsis</em>), reconciliação (<em>katallassō</em>), perdão (<em>aphesis</em>) e regeneração (<em>palingenesia</em>), cada termo com um matiz próprio dentro do mesmo campo. O cuidado a evitar aqui tem nome: a falácia da transferência de totalidade, o erro de atribuir a uma palavra todos os seus significados possíveis ao mesmo tempo, como se ela carregasse tudo isso em cada ocorrência.</p>
+</div><div class="folio">16</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> As ferramentas na prática</div>
+<h2>Léxicos, concordâncias e interlineares</h2>
+<div class="rule"></div>
+<div class="verse">"Considere o termo grego dikaiosýnē, normalmente traduzido como 'justiça'. Utilizando um léxico, o pesquisador pode verificar seus diversos significados possíveis. Por meio de uma concordância, pode localizar todas as ocorrências do termo nas cartas paulinas. Em seguida, utilizando um interlinear, pode observar como a palavra está inserida na estrutura gramatical de Romanos 3.21-26."<span class="ref">SILVA, Moisés. Palavras e seus significados. São Paulo: Vida Nova, 2018, p. 52, citado na Unidade 3</span></div>
+<p>Três ferramentas, três funções: o léxico abre o leque de significados possíveis, a concordância mostra onde mais a palavra aparece, o interlinear revela sua posição exata dentro da gramática da frase. Nenhuma delas substitui a leitura cuidadosa do contexto, mas juntas tiram a interpretação do campo do achismo.</p>
+</div><div class="folio">17</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> Onde a gramática decide a teologia</div>
+<h2>Sintaxe do grego bíblico</h2>
+<div class="rule"></div>
+<p class="lead">Efésios 2.8 recebe, nesta unidade, a análise gramatical mais detalhada de todo o curso.</p>
+<div class="verse">"No texto grego, a expressão 'tē gar chariti este sesōsmenoi dia pisteōs' apresenta o substantivo chariti (graça) no dativo, indicando meio ou instrumento, enquanto pisteōs (fé) aparece ligada à preposição dia (por meio de). A análise sintática demonstra que a graça é apresentada como a causa instrumental da salvação, enquanto a fé é o meio pelo qual essa salvação é recebida."<span class="ref">Ebook Unidade 3 · noções de sintaxe do grego bíblico</span></div>
+<p>Uma única preposição grega, nesse caso, carrega o peso de toda a doutrina da graça: a salvação vem de Deus como causa, a fé é apenas o canal por onde ela chega até a pessoa.</p>
+</div><div class="folio">18</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> Doutrina que vira prática</div>
+<h2>Estrutura argumentativa das epístolas</h2>
+<div class="rule"></div>
+<div class="verse">"A carta aos Romanos apresenta uma das mais elaboradas estruturas argumentativas do Novo Testamento. Nos capítulos 1 a 11, Paulo desenvolve uma exposição teológica sobre o pecado, a justificação pela fé e a graça divina. A partir do capítulo 12, o apóstolo passa a aplicar esses ensinamentos à vida prática dos cristãos."<span class="ref">Ebook Unidade 3 · estrutura argumentativa das epístolas</span></div>
+<p>Por isso o pedido de Romanos 12.1, para que os crentes ofereçam seus corpos como "sacrifício vivo", não vem do nada: ele se apoia em onze capítulos inteiros de doutrina construída antes dele. Apresentação do tema, exposição doutrinária, fundamentação teológica e aplicação prática, nessa ordem, é o esqueleto que sustenta a maioria das cartas do Novo Testamento.</p>
+</div><div class="folio">19</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> Cristologia, salvação e Reino de Deus</div>
+<h2>Temas teológicos centrais do Novo Testamento</h2>
+<div class="rule"></div>
+<div class="verse">"Em Marcos 1.15, Jesus inicia seu ministério proclamando: 'O tempo está cumprido, e o Reino de Deus está próximo; arrependei-vos e crede no evangelho.' Nesse versículo encontram-se os três temas reunidos."<span class="ref">Ebook Unidade 3 · temas teológicos centrais</span></div>
+<p>O episódio da conversão de Cornélio, em Atos 10, marca o momento em que a mensagem de salvação ultrapassa as fronteiras étnicas de Israel e alcança também os gentios, tornando-se referência da universalidade da graça. Em Colossenses 1.13-14, Paulo reafirma o mesmo trio: os crentes foram transportados para o Reino do Filho amado, em quem têm redenção e perdão dos pecados. Cristo, salvação e Reino não são três assuntos separados, são três ângulos do mesmo evento.</p>
+</div><div class="folio">20</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> Exegese aplicada à pregação, ensino e vida da Igreja</div>
+<h2>Da exegese à Teologia Bíblica</h2>
+<div class="rule"></div>
+<div class="verse">"Pode-se afirmar, portanto, que a exegese responde à pergunta: 'O que este texto significava para seus primeiros destinatários?', enquanto a Teologia Bíblica busca responder: 'Como esse texto contribui para a revelação global das Escrituras?'"<span class="ref">Ebook Unidade 4 · da exegese à Teologia Bíblica</span></div>
+<p>As duas disciplinas precisam andar juntas. Uma teologia que se descola da exegese corre o risco de impor ideias ao texto em vez de extraí-las dele, e uma exegese que ignora a unidade das Escrituras se limita a observações fragmentadas, sem nunca juntar as peças num quadro maior.</p>
+</div><div class="folio">21</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> Do texto ao púlpito</div>
+<h2>Aplicação pastoral e homilética</h2>
+<div class="rule"></div>
+<div class="verse">"A aplicação pastoral não consiste em adaptar arbitrariamente o texto às necessidades da comunidade, mas em identificar os princípios permanentes da revelação divina."<span class="ref">Ebook Unidade 4 · aplicação pastoral e homilética</span></div>
+<p>As orientações de Paulo sobre a unidade da igreja em Corinto nasceram de divisões concretas daquela comunidade específica, mas o princípio por trás delas, comunhão e preservação da unidade, permanece válido para qualquer igreja hoje. O Salmo 23 segue o mesmo caminho: a análise exegética identifica seu contexto, estrutura poética e linguagem metafórica, e a aplicação pastoral mostra como a figura do Senhor como Pastor ainda oferece segurança a quem enfrenta perda ou crise.</p>
+</div><div class="folio">22</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> O que evitar no púlpito</div>
+<h2>Sete erros hermenêuticos contemporâneos</h2>
+<div class="rule"></div>
+<p class="lead">Esta é a seção mais rica em exemplos concretos de toda a Unidade 4, e vale conhecer cada erro pelo nome.</p>
+<div class="grid g3">
+<div class="card"><span class="tag">Subjetivismo</span><p>Perguntar "o que esse texto significa para mim" antes de perguntar o que ele significava para os primeiros ouvintes.</p></div>
+<div class="card"><span class="tag">Descontextualização</span><p>O clássico proof-texting: extrair uma frase isolada do contexto para provar uma ideia que ela não sustenta sozinha.</p></div>
+<div class="card"><span class="tag">Falácia etimológica</span><p>Explicar uma palavra apenas pela origem histórica, ignorando como ela era usada de fato no contexto em que foi escrita.</p></div>
+</div>
+</div><div class="folio">23</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 4 · continua</div>
+<div class="grid g2">
+<div class="card"><span class="tag">Descontextualização, na prática</span><p>Jeremias 29.11 ("planos de paz, e não de mal") foi dirigido aos judeus exilados na Babilônia, não é uma promessa genérica de prosperidade individual.</p></div>
+<div class="card"><span class="tag">Alegorização excessiva</span><p>Na Parábola do Bom Samaritano, atribuir significado simbólico ao animal e às moedas, quando o propósito real é ensinar sobre o amor ao próximo.</p></div>
+<div class="card"><span class="tag">Anacronismo</span><p>Projetar debates modernos, como individualismo ou direitos humanos, sobre cartas escritas para comunidades do primeiro século.</p></div>
+<div class="card"><span class="tag">Literalismo inadequado</span><p>"Os rios batem palmas" (Salmo 98.8) não descreve um fenômeno físico, é figura de linguagem para a alegria da criação diante de Deus.</p></div>
+</div>
+</div><div class="folio">24</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> O peso de interpretar em nome da Igreja</div>
+<h2>Interpretação bíblica e responsabilidade ministerial</h2>
+<div class="rule"></div>
+<p>Interpretar a Bíblia para uma congregação é um ato público, que exige preparo teológico contínuo, honestidade intelectual, humildade e dependência do Espírito Santo. O material descreve o pregador fiel como guardião da sã doutrina, alguém cuja competência exegética é dever ministerial, não talento opcional.</p>
+<div class="verse">"A pregação biblicamente fiel não se fundamenta na criatividade do pregador, em experiências pessoais ou em mensagens motivacionais, mas na exposição da Palavra de Deus."<span class="ref">Ebook Unidade 4 · aplicação pastoral como ministério de formação espiritual</span></div>
+</div><div class="folio">25</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> O eixo que organiza tudo</div>
+<h2>A centralidade de Cristo na interpretação do Novo Testamento</h2>
+<div class="rule"></div>
+<div class="verse">"A centralidade de Cristo constitui um princípio teológico e hermenêutico. Isso significa que a interpretação do Novo Testamento deve reconhecer Cristo não apenas como personagem principal dos Evangelhos, mas como o eixo em torno do qual se desenvolvem a missão da Igreja, a doutrina apostólica, a esperança escatológica e o cumprimento das promessas veterotestamentárias."<span class="ref">Ebook Unidade 4 · a centralidade de Cristo</span></div>
+<p>O Apocalipse resume esse princípio de forma visual: Cristo aparece ali como Senhor da história, Rei dos reis e Juiz escatológico, cuja vitória final restaura toda a criação. Como fecha a própria conclusão do curso, é em Cristo que convergem a Lei, os Profetas, os Evangelhos, as Epístolas e a esperança escatológica da Igreja.</p>
+</div><div class="folio">26</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker">Repetição como reforço</div>
+<h2>Um único fio: as passagens que voltam</h2>
+<div class="rule"></div>
+<p class="lead">Algumas passagens aparecem mais de uma vez ao longo das quatro unidades, cada vez sob um ângulo diferente, o que ajuda a fixar o método.</p>
+<div class="grid g2">
+<div class="card"><span class="tag">Filipenses 4.13</span><p>Reaparece três vezes como o exemplo padrão de não isolar um versículo: trata da capacidade de enfrentar abundância e escassez, não de sucesso ilimitado.</p></div>
+<div class="card"><span class="tag">Efésios 2.8</span><p>Na Unidade 1, foco lexical no termo grego para graça. Na Unidade 3, análise sintática completa da frase inteira.</p></div>
+<div class="card"><span class="tag">Marcos 1.15</span><p>Na Unidade 1, exemplo de exegese sobre o Reino de Deus. Na Unidade 3, ponto de encontro entre Cristologia, salvação e Reino.</p></div>
+<div class="card"><span class="tag">Bom Samaritano</span><p>Na Unidade 1, exemplo de contexto histórico-cultural. Na Unidade 4, exemplo do erro de alegorização excessiva.</p></div>
+</div>
+</div><div class="folio">27</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker">Um modelo a seguir</div>
+<h2>Como citar bem os autores que você lê</h2>
+<div class="rule"></div>
+<p>Vale reparar em como a Unidade 3 cita Moisés Silva: nome do autor, título completo da obra, editora, ano e página exata. É a citação mais tecnicamente correta de todo o material, e funciona como modelo para qualquer trabalho que você escrever depois deste curso. O hábito contrário, listar uma bibliografia extensa no fim sem nunca voltar a ela dentro do texto, é fácil de cair, porque dá a impressão de profundidade sem exigir o trabalho de realmente dialogar com cada autor.</p>
+<p>A lição prática é simples: toda vez que uma afirmação sua se apoiar num estudioso, escreva o nome dele ali mesmo, no corpo do texto, não apenas na lista de referências ao final.</p>
+</div><div class="folio">28</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker">Referência rápida</div>
+<h2>Glossário de termos</h2>
+<div class="rule"></div>
+<div class="grid g2">
+<div class="card"><h3>Exegese</h3><p>Interpretação do significado original de um texto a partir de seu contexto histórico, literário e teológico.</p></div>
+<div class="card"><h3>Hermenêutica</h3><p>A teoria da interpretação, os princípios que a exegese aplica na prática a um texto específico.</p></div>
+<div class="card"><h3>Cânon</h3><p>Do grego "regra" ou "medida": a lista definitiva de livros reconhecidos como Escritura inspirada.</p></div>
+<div class="card"><h3>Campo semântico</h3><p>Rede de palavras aparentadas em sentido que, lidas juntas, esclarecem o significado pleno de um termo.</p></div>
+<div class="card"><h3>Proof-texting</h3><p>Extrair uma frase isolada de seu contexto original para justificar uma ideia que ela não sustenta sozinha.</p></div>
+<div class="card"><h3>Teologia Bíblica</h3><p>Disciplina que mostra como cada texto contribui para a revelação global das Escrituras, unindo o que a exegese isola.</p></div>
+</div>
+</div><div class="folio">29</div></div>
+<div class="page cover-page" data-density="hard"><div class="page-inner">
+<div class="kicker">Síntese</div>
+<h1>A matéria em uma frase</h1>
+<div class="rule"></div>
+<p class="lead">Exegese pergunta o que o texto significava para seus primeiros leitores, Teologia Bíblica pergunta como isso se conecta ao resto das Escrituras, e a aplicação pastoral só é fiel quando respeita as duas respostas antes de pregar a terceira.</p>
+<div class="units">
+<span>U1 · O alicerce</span><span>U2 · Os gêneros</span><span>U3 · A análise</span><span>U4 · A aplicação</span>
+</div>
+<p style="margin-top:20px">Do dativo instrumental de Efésios 2.8 ao Cordeiro que reina no Apocalipse, um só percurso: da palavra grega isolada até Cristo como centro de toda leitura do Novo Testamento.</p>
+<p>Guarde este resumão como referência viva: toda vez que for preparar uma pregação, volte aqui antes de escolher entre os sete erros hermenêuticos e o caminho que este curso ensina.</p>
+</div></div>
+</div>  </div>
+  </div>
+</div>
+<button id="flipPrev" class="flipbtn" onclick="flipPrev()">&#8592;</button>
+<button id="flipNext" class="flipbtn" onclick="flipNext()">&#8594;</button>
+<div class="reader-hint">setas do teclado ou clique na borda da página pra virar</div>
+<div id="idx"><span class="close" onclick="closeIdx()">&#10005;</span><div class="wrap" id="idxWrap">
+  <h4>Exegese do Novo Testamento</h4>
+  <div class="item" onclick="jumpTo(1)"><span class="n">01</span><span class="t">Capa</span></div>
+  <div class="item" onclick="jumpTo(2)"><span class="n">02</span><span class="t">O fio condutor da matéria</span></div>
+  <div class="item" onclick="jumpTo(3)"><span class="n">03</span><span class="t">Unidade 1 · Exegese e hermenêutica</span></div>
+  <div class="item" onclick="jumpTo(5)"><span class="n">05</span><span class="t">Unidade 1 · O contexto do Novo Testamento</span></div>
+  <div class="item" onclick="jumpTo(6)"><span class="n">06</span><span class="t">Unidade 1 · O cenário religioso e social da Judeia</span></div>
+  <div class="item" onclick="jumpTo(7)"><span class="n">07</span><span class="t">Unidade 1 · O grego do Novo Testamento</span></div>
+  <div class="item" onclick="jumpTo(8)"><span class="n">08</span><span class="t">Unidade 2 · Formação e cânon do Novo Testamento</span></div>
+  <div class="item" onclick="jumpTo(9)"><span class="n">09</span><span class="t">Unidade 2 · Gêneros literários do Novo Testamento</span></div>
+  <div class="item" onclick="jumpTo(12)"><span class="n">12</span><span class="t">Unidade 2 · Atos dos Apóstolos</span></div>
+  <div class="item" onclick="jumpTo(13)"><span class="n">13</span><span class="t">Unidade 2 · Literatura epistolar e argumentação paulina</span></div>
+  <div class="item" onclick="jumpTo(14)"><span class="n">14</span><span class="t">Unidade 2 · Linguagem simbólica e literatura apocalíptica</span></div>
+  <div class="item" onclick="jumpTo(15)"><span class="n">15</span><span class="t">Unidade 2 · Contexto imediato, remoto e paralelo</span></div>
+  <div class="item" onclick="jumpTo(16)"><span class="n">16</span><span class="t">Unidade 3 · Análise lexical e campos semânticos</span></div>
+  <div class="item" onclick="jumpTo(17)"><span class="n">17</span><span class="t">Unidade 3 · Léxicos, concordâncias e interlineares</span></div>
+  <div class="item" onclick="jumpTo(18)"><span class="n">18</span><span class="t">Unidade 3 · Sintaxe do grego bíblico</span></div>
+  <div class="item" onclick="jumpTo(19)"><span class="n">19</span><span class="t">Unidade 3 · Estrutura argumentativa das epístolas</span></div>
+  <div class="item" onclick="jumpTo(20)"><span class="n">20</span><span class="t">Unidade 3 · Temas teológicos centrais do Novo Testamento</span></div>
+  <div class="item" onclick="jumpTo(21)"><span class="n">21</span><span class="t">Unidade 4 · Da exegese à Teologia Bíblica</span></div>
+  <div class="item" onclick="jumpTo(22)"><span class="n">22</span><span class="t">Unidade 4 · Aplicação pastoral e homilética</span></div>
+  <div class="item" onclick="jumpTo(23)"><span class="n">23</span><span class="t">Unidade 4 · Sete erros hermenêuticos contemporâneos</span></div>
+  <div class="item" onclick="jumpTo(25)"><span class="n">25</span><span class="t">Unidade 4 · Interpretação bíblica e responsabilidade ministerial</span></div>
+  <div class="item" onclick="jumpTo(26)"><span class="n">26</span><span class="t">Unidade 4 · A centralidade de Cristo na interpretação do Novo Testamento</span></div>
+  <div class="item" onclick="jumpTo(27)"><span class="n">27</span><span class="t">Um único fio: as passagens que voltam</span></div>
+  <div class="item" onclick="jumpTo(28)"><span class="n">28</span><span class="t">Como citar bem os autores que você lê</span></div>
+  <div class="item" onclick="jumpTo(29)"><span class="n">29</span><span class="t">Glossário de termos</span></div>
+  <div class="item" onclick="jumpTo(30)"><span class="n">30</span><span class="t">Síntese final</span></div>
+</div></div>
+<button id="notesBtn" style="display:block" onclick="toggleNotes()" title="Minhas anotações" aria-label="Minhas anotações">&#9998; NOTAS</button>
+<div id="notesPanel">
+  <div class="notes-head">
+    <div class="notes-head-top">
+      <span class="notes-title" id="notesTitle">Notas &middot; Exegese do Novo Testamento</span>
+      <span class="notes-status" id="notesStatus">salvo</span>
+      <span class="notes-close" onclick="closeNotes()" title="Fechar anotações">&#10005;</span>
+    </div>
+    <div class="notes-toolbar">
+      <button type="button" class="toolbtn" data-cmd="bold" title="Negrito"><b>N</b></button>
+      <button type="button" class="toolbtn" data-cmd="italic" title="Itálico"><i>I</i></button>
+      <button type="button" class="toolbtn" data-cmd="underline" title="Sublinhado"><u>S</u></button>
+      <span class="toolbar-sep"></span>
+      <button type="button" class="toolbtn" data-block="H2" title="Título">Título</button>
+      <button type="button" class="toolbtn" data-block="H3" title="Subtítulo">Subtítulo</button>
+      <button type="button" class="toolbtn" data-block="P" title="Corpo">Corpo</button>
+      <span class="toolbar-sep"></span>
+      <button type="button" class="toolbtn" id="notesCopyBtn" title="Copiar anotação">Copiar</button>
+    </div>
+  </div>
+  <div id="notesBody" contenteditable="true" spellcheck="false" data-placeholder="Escreva sua anotação..."></div>
+</div>
+<script src="../../assets/pageflip.js"></script>
+<script src="../../assets/site.js"></script>
+</body>
+</html>
