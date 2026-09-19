@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homilética · Biblioteca de Estudos · Xande</title>
+<meta name="description" content="Biblioteca viva de resumões de estudo do curso de Teologia. Cada disciplina, um livro na estante.">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body data-rel="../../">
+<div id="gate">
+  <video id="gateVideo" autoplay muted loop playsinline preload="auto" poster="../../assets/gate-poster.jpg">
+    <source src="../../assets/gate.mp4" type="video/mp4">
+  </video>
+  <div class="gate-veil"></div>
+  <div class="gate-scroll">
+    <div class="gate-content">
+      <div class="gate-kicker">Êxodo 24:15&ndash;18</div>
+      <h1 class="gate-title">Sobe ao monte</h1>
+      <p class="gate-verse">&ldquo;Então Moisés subiu ao monte, e a nuvem cobriu o monte... e a aparência da glória do Senhor era como um fogo consumidor no cume do monte, aos olhos dos filhos de Israel. E entrou Moisés no meio da nuvem, depois que subiu ao monte.&rdquo;</p>
+      <button id="gateKnockBtn" type="button" onclick="gateReveal()">Entrar</button>
+      <form id="gateForm" onsubmit="return gateSubmit(event)" autocomplete="off">
+        <input type="password" id="gatePass" name="gatePass" placeholder="a senha para entrar" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <button type="submit">Entrar</button>
+      </form>
+      <div id="gateError"></div>
+    </div>
+  </div>
+</div><div id="bar"></div>
+<div id="topLeftBtns" class="show">
+  <a id="backBtn" href="../../corredor/teologia.html">&#8592; Estante</a>
+  <button id="homeBtn" onclick="goBookStart()" title="Voltar ao início do livro">&#8607; Início</button>
+</div>
+<button id="menuBtn" style="display:block" onclick="openIdx()">&#9776; ÍNDICE</button>
+<div class="motes" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+<button id="sfxBtn" onclick="toggleSfx()" title="Ativar ou desativar som" aria-label="Ativar ou desativar som">&#9834;</button>
+<div id="counter"></div>
+<div id="reader" class="show shown" data-book-id="homiletica">
+  <div class="reader-slot">
+  <div class="reader-stage">
+<div id="book-homiletica" class="stbook" data-theme="homi">
+<div class="page cover-page" data-density="hard"><div class="page-inner">
+<div class="kicker">Resumão de Estudo · Módulo 1</div>
+<h1>Homilética</h1>
+<div class="rule"></div>
+<p class="lead">Da definição de pregação ao púlpito digital: as quatro unidades condensadas para revisar antes de subir de novo ao púlpito.</p>
+<div class="units">
+<span>1 · Fundamentos</span><span>2 · Estrutura do sermão</span><span>3 · Comunicação pastoral</span><span>4 · Ética e redes sociais</span>
+</div>
+<div class="meta">Profa. Dra. Denise Santana · Faculdade das Nações<br/>Base: resumo de estudo e ebooks das Unidades 1 a 4</div>
+<div class="hint">Use as setas do teclado, os botões da tela, ou o índice no canto.</div>
+</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker">Visão geral</div>
+<h2>O fio condutor da matéria</h2>
+<div class="rule"></div>
+<p>Homilética é a disciplina teológica dedicada ao estudo sistemático da pregação cristã, entendida como o ato de comunicar a Palavra de Deus com fidelidade ao texto e relevância para quem ouve. A matéria caminha do conceito à prática: primeiro define o que é pregar e por quê, depois ensina a estruturar um sermão, em seguida amplia o olhar para a comunicação pastoral fora do púlpito tradicional (funeral, imprensa, redes) e termina discutindo os limites éticos de tudo isso.</p>
+<div class="chain">
+<div class="step"><b>U1 · O quê e por quê</b><span>Conceito de Homilética, tipos de pregação, as etapas de preparar uma mensagem.</span></div>
+<div class="step"><b>U2 · Como estruturar</b><span>Os cinco tipos de sermão e um esboço completo, do texto à aplicação.</span></div>
+<div class="step"><b>U3 · Além do púlpito</b><span>Oratória, culto fúnebre, entrevista, crise institucional, escuta pastoral.</span></div>
+<div class="step"><b>U4 · Com que responsabilidade</b><span>Igreja nas redes sociais, fake news, ética na pregação.</span></div>
+</div>
+</div><div class="folio">02</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> Fundamentos bíblico-teológicos da pregação</div>
+<h2>O que é Homilética, afinal</h2>
+<div class="rule"></div>
+<p class="lead">Antes de qualquer técnica de fala, a Homilética é a disciplina que estuda, de forma sistemática, como a Igreja comunica fielmente a Palavra de Deus.</p>
+<p>A palavra vem do grego <em>homilía</em>, conversação ou convivência: a pregação nasce para ser um encontro, não um monólogo distante. John A. Broadus a definiu como "a adaptação da retórica às finalidades especiais da pregação cristã", deixando claro que a técnica está a serviço do conteúdo, nunca o contrário.</p>
+</div><div class="folio">03</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 1 · continua</div>
+<p>A pregação articula três tempos: o <b>passado</b>, do texto e seu contexto original; o <b>presente</b>, onde a mensagem se aplica à vida de quem ouve; e o <b>futuro</b>, os compromissos e esperanças que a fé desperta. Por isso a Homilética é ao mesmo tempo ciência, porque se apoia em princípios teológicos e hermenêuticos sistematizados, e arte, porque exige sensibilidade pastoral e criatividade para adaptar a mensagem sem trair o texto.</p>
+<div class="verse">"Simplicidade na pregação não equivale a superficialidade."<span class="ref">Ebook Unidade 1 · princípio central da seção 1.1</span></div>
+<p>O pregador não precisa de exibicionismo intelectual. O desafio é apresentar o conteúdo das Escrituras com clareza, profundidade e relevância ao mesmo tempo.</p>
+</div><div class="folio">04</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> Classificando a pregação</div>
+<h2>Os quatro tipos de pregação</h2>
+<div class="rule"></div>
+<div class="grid g2">
+<div class="card"><span class="tag">Expositiva</span><h3>O texto conduz</h3><p>A estrutura do sermão nasce do próprio texto bíblico, respeitando contexto histórico, literário e teológico. É o tipo mais valorizado por evitar interpretação subjetiva.</p></div>
+<div class="card"><span class="tag">Temática</span><h3>O tema conduz</h3><p>Desenvolve um assunto (fé, salvação, família) à luz de vários textos relacionados. Boa para questões doutrinárias e pastorais, exige rigor hermenêutico.</p></div>
+<div class="card"><span class="tag">Textual</span><h3>Um versículo, vários pontos</h3><p>Parte de um único versículo ou trecho curto, do qual se extraem os pontos principais do sermão.</p></div>
+<div class="card"><span class="tag">Biográfica</span><h3>Uma vida, uma lição</h3><p>Usa a vida de um personagem bíblico para transmitir lições espirituais e morais, ligando a experiência dele à realidade de quem ouve.</p></div>
+</div>
+<p class="footnote">A Unidade 2 detalha um quinto tipo, o sermão narrativo, e aprofunda cada um destes quatro com exemplo bíblico específico.</p>
+</div><div class="folio">05</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> Da pesquisa ao púlpito</div>
+<h2>As etapas da preparação</h2>
+<div class="rule"></div>
+<p class="lead">O material organiza a preparação da mensagem em três grandes etapas: pesquisa e elaboração, proclamação, e a recepção pelo ouvinte.</p>
+<div class="verse">"O pregador deve, antes de tudo, submeter-se à Palavra que irá anunciar, pregando primeiramente a si mesmo."<span class="ref">Ebook Unidade 1 · primeira etapa</span></div>
+</div><div class="folio">06</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 1 · continua</div>
+<p>Dentro da primeira etapa, três movimentos estruturam o sermão:</p>
+<div class="chain">
+<div class="step"><b>Explicar</b><span>Apresentar com fidelidade o sentido original do texto. "Explicar significa permitir que a própria Escritura fale."</span></div>
+<div class="step"><b>Ilustrar</b><span>Tornar o conteúdo acessível e memorável, sem substituir a exposição bíblica pela ilustração.</span></div>
+<div class="step"><b>Aplicar</b><span>Conectar a verdade revelada à vida prática. Sem aplicação, o sermão vira apenas informação.</span></div>
+</div>
+<p>Na segunda etapa, a da proclamação, o pregador assume quatro compromissos: com Deus, autor da Palavra; com a Bíblia, fonte da mensagem; com os limites do sermão, respeitando tempo e contexto do culto; e com os ouvintes, buscando clareza e sensibilidade.</p>
+</div><div class="folio">07</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> Diagnóstico</div>
+<h2>O que a Homilética critica no púlpito de hoje</h2>
+<div class="rule"></div>
+<ul class="clean">
+<li><b>O texto vira pretexto</b>: lê-se a passagem, mas ela não se desdobra em explicação, contexto ou aplicação.</li>
+<li><b>Falta de preparo teológico</b>, resultando em mensagens rasas.</li>
+<li><b>"Fast food espiritual"</b>: profundidade bíblica trocada por conteúdo rápido e emotivo, sem compromisso com a verdade revelada.</li>
+<li><b>Uso indevido do púlpito</b> para relato pessoal em excesso ou autopromoção ministerial.</li>
+<li><b>Relativizar verdades fundamentais</b> da fé, enfraquecendo o testemunho cristão.</li>
+</ul>
+</div><div class="folio">08</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 1</span> O que a tradição diz sobre pregar</div>
+<h2>Vozes da tradição sobre pregar</h2>
+<div class="rule"></div>
+<div class="grid g2">
+<div class="card"><span class="tag">John Stott</span><p>"A comunicação da verdade divina por meio da personalidade humana."</p></div>
+<div class="card"><span class="tag">Martinho Lutero</span><p>"A pregação é o principal ofício da igreja."</p></div>
+<div class="card"><span class="tag">João Calvino</span><p>"Quando a Palavra é pregada fielmente, Deus fala ao seu povo."</p></div>
+<div class="card"><span class="tag">Agostinho de Hipona</span><p>"A eloquência sem verdade é vazia, e a verdade sem amor é dura."</p></div>
+<div class="card"><span class="tag">Charles Spurgeon</span><p>"Um sermão nasce no estudo, cresce na oração e é entregue no poder do Espírito."</p></div>
+<div class="card"><span class="tag">Haddon W. Robinson</span><p>"A essência da pregação bíblica é comunicar uma ideia principal extraída do texto."</p></div>
+</div>
+<p class="footnote">Dietrich Bonhoeffer, martirizado na Alemanha nazista por sua oposição ao regime, resumiu assim: "a Palavra de Deus não é ideia, mas acontecimento."</p>
+</div><div class="folio">09</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Estrutura e tipos de sermão</div>
+<h2>Cinco formas de organizar um sermão</h2>
+<div class="rule"></div>
+<p class="lead">"A forma do sermão deve servir ao conteúdo bíblico, e não o contrário." Esta é a unidade mais prática do módulo: cada tipo de sermão vem com um exemplo real de texto bíblico.</p>
+<p>Conhecer os cinco tipos amplia a capacidade de comunicar a Palavra a diferentes públicos e ocasiões, evitando que o pregador sempre improvise da mesma forma.</p>
+</div><div class="folio">10</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Os cinco tipos, com exemplo</div>
+<h2>Os cinco tipos, com exemplo</h2>
+<div class="rule"></div>
+<div class="grid g3">
+<div class="card"><span class="tag">Expositivo</span><h3>Efésios 2.1-10</h3><p>Versículo por versículo, o tema da salvação pela graça: o estado do ser humano sem Cristo, a iniciativa divina, o propósito das boas obras.</p></div>
+<div class="card"><span class="tag">Temático</span><h3>Mt 18.21-22 · Ef 4.32 · Cl 3.13</h3><p>O tema do perdão, sua importância espiritual e sua aplicação nos relacionamentos, à luz de três passagens diferentes.</p></div>
+<div class="card"><span class="tag">Textual</span><h3>Provérbios 3.5-6</h3><p>A confiança no Senhor, o reconhecimento de Deus em todos os caminhos, a promessa de direção divina.</p></div>
+<div class="card"><span class="tag">Biográfico</span><h3>José do Egito</h3><p>Fidelidade em meio às adversidades, confiança em Deus, propósito divino mesmo no sofrimento e na injustiça.</p></div>
+<div class="card"><span class="tag">Narrativo</span><h3>Lucas 15.11-32</h3><p>A parábola do filho pródigo: o amor gracioso do Pai, o arrependimento genuíno, a restauração pela misericórdia.</p></div>
+</div>
+</div><div class="folio">11</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 2</span> Estudo de caso completo</div>
+<h2>Um esboço homilético, do título à aplicação</h2>
+<div class="rule"></div>
+<p class="lead">O ebook fecha a unidade com um esboço de pregação inteiro, do título ao fechamento. É o exemplo mais desenvolvido de todo o material.</p>
+<div class="verse">João 20.11-18, com apoio de Lucas 8.1-3 e Marcos 16.9<span class="ref">Texto bíblico base</span></div>
+<p><b>Título:</b> "Maria Madalena: da libertação ao testemunho da ressurreição". <b>Tema central:</b> a transformação operada por Cristo na vida de Maria Madalena e seu chamado para ser testemunha da ressurreição. <b>Objetivo:</b> ensinar que o encontro pessoal com Cristo transforma vidas e gera compromisso com o testemunho do Evangelho.</p>
+</div><div class="folio">12</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Estudo de caso · continua</div>
+<p>No contexto cultural do século I, o testemunho feminino não tinha valor jurídico, o que torna ainda mais significativo Jesus se revelar primeiro a uma mulher depois da ressurreição. A divisão homilética segue quatro pontos, cada um nascendo diretamente do texto:</p>
+<div class="grid g2">
+<div class="card"><span class="tag">I · Lucas 8.2</span><h3>Uma vida transformada pela graça</h3><p>Maria representa quem foi profundamente alcançado pelo poder libertador de Cristo.</p></div>
+<div class="card"><span class="tag">II · João 20.11</span><h3>Uma discípula fiel em meio à dor</h3><p>Ela permanece junto ao sepulcro quando outros discípulos se afastam.</p></div>
+<div class="card"><span class="tag">III · João 20.14-16</span><h3>Um encontro pessoal com o Cristo ressurreto</h3><p>Jesus a chama pelo nome: o reconhecimento acontece quando Ele se revela.</p></div>
+<div class="card"><span class="tag">IV · João 20.17-18</span><h3>Uma missão confiada a uma testemunha</h3><p>Deus usa pessoas transformadas para proclamar grandes verdades.</p></div>
+</div>
+<p class="footnote">O esboço encerra com um princípio simples: os pontos não são impostos ao texto, eles nascem dele, em progressão lógica até a aplicação.</p>
+</div><div class="folio">13</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> Comunicação pastoral além do púlpito</div>
+<h2>Quando o pregador vira porta-voz</h2>
+<div class="rule"></div>
+<p class="lead">A Unidade 3 amplia o campo de visão: comunicar a fé não acontece só no domingo, no púlpito. Acontece também no velório, na entrevista de jornal, na crise institucional e na tela do celular.</p>
+<p>"A oratória cristã não tem como finalidade o destaque pessoal do comunicador, mas o serviço à mensagem bíblica." A unidade cobre oratória, condução de culto fúnebre, entrevista à imprensa (inclusive em crise), comunicação digital e escuta pastoral.</p>
+</div><div class="folio">14</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> Falar bem para servir melhor</div>
+<h2>Oratória a serviço da mensagem</h2>
+<div class="rule"></div>
+<div class="verse">"Prega a palavra, insta, quer seja oportuno, quer não; corrige, repreende, exorta com toda longanimidade e doutrina."<span class="ref">2 Timóteo 4.2</span></div>
+<p>Oratória é definida como "a arte da eloquência, o talento de convencer, exaltar ou comover falando", uma responsabilidade com quem ouve, não vaidade pessoal. Um esboço curto e legível, tom de voz moderado, linguagem coloquial sem jargão religioso e postura natural valem mais do que qualquer recurso visual.</p>
+<p class="footnote">Regra prática do material: nunca pedir desculpas por falta de preparo. Em vez disso, se preparar.</p>
+</div><div class="folio">15</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> O momento mais delicado do ministério</div>
+<h2>Como conduzir um culto fúnebre</h2>
+<div class="rule"></div>
+<p class="lead">"O pastor é o maestro do sepultamento, todos estão aguardando a sua iniciativa, do início ao final do velório."</p>
+<p>A programação típica dentro da igreja segue nove passos: entrada do esquife, oração, hino, leitura em memória, leitura bíblica, breve reflexão, palavras de amigos e familiares, bênção apostólica, saída do esquife. Na capela do cemitério o culto deve ser rápido, cerca de vinte minutos: um versículo pequeno, bem explicado, no máximo duas músicas.</p>
+</div><div class="folio">16</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> O que evitar num velório</div>
+<h2>O que evitar num velório</h2>
+<div class="rule"></div>
+<ul class="clean">
+<li><b>Sermão longo e expositivo</b>: o certo é uma palavra breve, bíblica e genuinamente consoladora.</li>
+<li><b>Julgar espiritualmente a vida do falecido</b>: o lugar é de prudência teológica diante do mistério da vida e da morte.</li>
+<li><b>Falar demais</b>: ouvir mais e falar só o necessário, com escuta atenta e presença silenciosa.</li>
+<li><b>Debater doutrina</b>: "o sepultamento não é horário para debater teorias, crenças e dogmas polêmicos."</li>
+<li><b>Fazer apelo financeiro</b>: classificado no material como erro grave.</li>
+</ul>
+<p class="footnote">"Em velórios e sepultamentos, menos palavras e mais presença costumam comunicar mais do que longas explicações teológicas."</p>
+</div><div class="folio">17</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> Um repertório para o momento de consolar</div>
+<h2>Textos bíblicos para velório</h2>
+<div class="rule"></div>
+<div class="grid g2">
+<div class="card"><span class="tag">Consolo e esperança</span><p>Salmos 23.1-4 · 34.18 · 46.1 · 121.1-2</p></div>
+<div class="card"><span class="tag">A presença de Deus</span><p>Isaías 41.10 · 43.1-2 · Lamentações 3.31-33</p></div>
+<div class="card"><span class="tag">Esperança e ressurreição</span><p>João 11.25-26 · 14.1-3 · 1 Coríntios 15.51-57 · 1 Tessalonicenses 4.13-18</p></div>
+<div class="card"><span class="tag">Conforto pastoral</span><p>Romanos 8.18 · 8.38-39 · Apocalipse 21.3-4</p></div>
+</div>
+<div class="verse">"Não temas, porque eu sou contigo."<span class="ref">Isaías 41.10</span></div>
+</div><div class="folio">18</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 3</span> Quando o microfone aponta pra você</div>
+<h2>Entrevista, crise e escuta pastoral</h2>
+<div class="rule"></div>
+<p>Em entrevista: falar só sobre sua área de responsabilidade, nunca mentir, nunca dizer "sem comentários" ou "nada a declarar". Em situação de crise institucional, o caso usado como referência é o desabamento do teto da Igreja Renascer, em janeiro de 2009, em São Paulo. O princípio central: <b>o silêncio não ajuda</b>. Uma instituição que não fala pode ser vista como culpada, e a lentidão passa impressão de inação.</p>
+<p>Recomenda-se um porta-voz único, com backup informado, e a regra de nunca responder pergunta com outra pergunta.</p>
+</div><div class="folio">19</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 3 · continua</div>
+<p>Na comunicação digital, "a tecnologia deve servir à mensagem, e não a substituir". E fechando a unidade, a escuta pastoral: a capacidade de ouvir com atenção, respeito e empatia, criando um ambiente de confiança em vez de respostas apressadas.</p>
+<div class="verse">"Muitas vezes, o silêncio atento e a presença cuidadosa comunicam mais consolo do que discursos extensos."<span class="ref">Ebook Unidade 3 · escuta pastoral</span></div>
+</div><div class="folio">20</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> Igreja e redes sociais</div>
+<h2>A nova praça pública</h2>
+<div class="rule"></div>
+<p class="lead">"A facilidade de conexão não gera qualidade no conteúdo postado. Não basta usar as redes sociais. O desafio hoje é ser relevante diante de tanta informação disponível."</p>
+<p>A comunicação cristã sempre se adaptou ao meio disponível: Paulo escrevia cartas e viajava de navio, Lutero usou a prensa de Gutenberg, hoje a Igreja usa a internet. Para o público de fora da igreja, o material recomenda evitar linguagem "igrejeira", expressões como "tá amarrado" ou "glória a Deus" que fazem sentido só para quem já está dentro.</p>
+</div><div class="folio">21</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> Discernimento antes de compartilhar</div>
+<h2>Como reconhecer fake news</h2>
+<div class="rule"></div>
+<div class="grid g2">
+<div class="card"><span class="tag">Sinais de alerta</span><p>Termos alarmistas, ausência de fonte, promessa de consequência trágica ou ganho fácil, pedido de repasse em corrente, título mais chamativo que o texto.</p></div>
+<div class="card"><span class="tag">Boas práticas</span><p>Ler o texto inteiro, checar a data, verificar quem assina, comparar com outros veículos, buscar as agências de checagem.</p></div>
+</div>
+<p>Três agências de checagem citadas: <span class="term">Boatos.org</span><span class="term alt">E-Farsas</span><span class="term r">Projeto Comprova</span></p>
+<p class="footnote">Regra final do material, sem exceção: na dúvida, não compartilhe.</p>
+</div><div class="folio">22</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker"><span class="u">Unidade 4</span> Os limites do púlpito</div>
+<h2>Ética na pregação</h2>
+<div class="rule"></div>
+<div class="verse">"Pregar não é apenas falar em público ou transmitir informações bíblicas, mas exercer um ministério que envolve responsabilidade espiritual, compromisso com a verdade e respeito à dignidade das pessoas."<span class="ref">Ebook Unidade 4 · abertura da seção 4.4</span></div>
+<p>Entre os erros éticos mais comuns que o material lista: distorcer o texto bíblico para defender interesse pessoal, manipular emoções para respostas imediatas, prometer bênçãos que a Bíblia não promete, usar o púlpito para ataque pessoal ou para fins político-partidários, e pregar sem preparo teológico adequado.</p>
+</div><div class="folio">23</div></div>
+<div class="page"><div class="page-inner">
+<div class="pagehead">Unidade 4 · continua</div>
+<p>Dois teólogos fundamentam a reflexão ética da unidade. Para Agostinho, a ética cristã nasce do amor ordenado, o <em>ordo amoris</em>: age corretamente quem ama a Deus acima de tudo e organiza suas ações a partir desse amor. Para Calvino, a ética decorre da obediência à vontade de Deus revelada nas Escrituras, expressão prática da fé e da gratidão do crente pela salvação recebida.</p>
+<p>"A ética na pregação protege a comunidade de abusos espirituais e contribui para uma fé madura, consciente e comprometida com os valores do Reino de Deus."</p>
+</div><div class="folio">24</div></div>
+<div class="page"><div class="page-inner">
+<div class="kicker">Referência rápida</div>
+<h2>Glossário de termos</h2>
+<div class="rule"></div>
+<div class="grid g2">
+<div class="card"><h3>Homilética</h3><p>Do grego <em>homilía</em>, conversação. Disciplina teológica que estuda sistematicamente a pregação cristã.</p></div>
+<div class="card"><h3>Sermão expositivo</h3><p>A estrutura do sermão nasce diretamente do texto bíblico, versículo por versículo.</p></div>
+<div class="card"><h3>Ideia central</h3><p>A proposição única que organiza todo o sermão, extraída do texto, não imposta a ele.</p></div>
+<div class="card"><h3>Porta-voz</h3><p>Pessoa única designada para falar pela instituição numa crise, evitando informações contraditórias.</p></div>
+<div class="card"><h3>Escuta pastoral</h3><p>Capacidade de ouvir com atenção, respeito e empatia antes de responder ou aconselhar.</p></div>
+<div class="card"><h3>Fake news</h3><p>Informação falsa ou distorcida, geralmente alarmista, sem fonte verificável.</p></div>
+</div>
+</div><div class="folio">25</div></div>
+<div class="page cover-page" data-density="hard"><div class="page-inner">
+<div class="kicker">Síntese</div>
+<h1>A matéria em uma frase</h1>
+<div class="rule"></div>
+<p class="lead">Pregar é comunicar a Palavra de Deus com fidelidade ao texto, estrutura clara e responsabilidade ética, seja no púlpito de domingo, seja no velório, na entrevista ou na tela do celular.</p>
+<div class="units">
+<span>U1 · O que é pregar e por quê</span><span>U2 · Como estruturar um sermão</span><span>U3 · Comunicar além do púlpito</span><span>U4 · Com que responsabilidade</span>
+</div>
+<p style="margin-top:20px">Da definição de Homilética ao esboço de Maria Madalena, do culto fúnebre à checagem de fake news: um só percurso, da teoria à prática do ministério da Palavra.</p>
+<p>Guarde este resumão como referência viva: toda vez que precisar preparar uma mensagem, conduzir um funeral ou responder a uma crise, comece por aqui.</p>
+</div></div>
+</div>  </div>
+  </div>
+</div>
+<button id="flipPrev" class="flipbtn" onclick="flipPrev()">&#8592;</button>
+<button id="flipNext" class="flipbtn" onclick="flipNext()">&#8594;</button>
+<div class="reader-hint">setas do teclado ou clique na borda da página pra virar</div>
+<div id="idx"><span class="close" onclick="closeIdx()">&#10005;</span><div class="wrap" id="idxWrap">
+  <h4>Homilética</h4>
+  <div class="item" onclick="jumpTo(1)"><span class="n">01</span><span class="t">Capa</span></div>
+  <div class="item" onclick="jumpTo(2)"><span class="n">02</span><span class="t">O fio condutor da matéria</span></div>
+  <div class="item" onclick="jumpTo(3)"><span class="n">03</span><span class="t">Unidade 1 · Fundamentos bíblico-teológicos da pregação</span></div>
+  <div class="item" onclick="jumpTo(5)"><span class="n">05</span><span class="t">Unidade 1 · Os quatro tipos de pregação</span></div>
+  <div class="item" onclick="jumpTo(6)"><span class="n">06</span><span class="t">Unidade 1 · As etapas da preparação</span></div>
+  <div class="item" onclick="jumpTo(8)"><span class="n">08</span><span class="t">Unidade 1 · O que a Homilética critica no púlpito de hoje</span></div>
+  <div class="item" onclick="jumpTo(9)"><span class="n">09</span><span class="t">Unidade 1 · Vozes da tradição sobre pregar</span></div>
+  <div class="item" onclick="jumpTo(10)"><span class="n">10</span><span class="t">Unidade 2 · Estrutura e tipos de sermão</span></div>
+  <div class="item" onclick="jumpTo(11)"><span class="n">11</span><span class="t">Unidade 2 · Os cinco tipos de sermão</span></div>
+  <div class="item" onclick="jumpTo(12)"><span class="n">12</span><span class="t">Unidade 2 · Estudo de caso: Maria Madalena</span></div>
+  <div class="item" onclick="jumpTo(14)"><span class="n">14</span><span class="t">Unidade 3 · Comunicação pastoral além do púlpito</span></div>
+  <div class="item" onclick="jumpTo(15)"><span class="n">15</span><span class="t">Unidade 3 · Oratória a serviço da mensagem</span></div>
+  <div class="item" onclick="jumpTo(16)"><span class="n">16</span><span class="t">Unidade 3 · Como conduzir um culto fúnebre</span></div>
+  <div class="item" onclick="jumpTo(17)"><span class="n">17</span><span class="t">Unidade 3 · O que evitar num velório</span></div>
+  <div class="item" onclick="jumpTo(18)"><span class="n">18</span><span class="t">Unidade 3 · Textos bíblicos para velório</span></div>
+  <div class="item" onclick="jumpTo(19)"><span class="n">19</span><span class="t">Unidade 3 · Entrevista, crise e escuta pastoral</span></div>
+  <div class="item" onclick="jumpTo(21)"><span class="n">21</span><span class="t">Unidade 4 · Igreja e redes sociais</span></div>
+  <div class="item" onclick="jumpTo(22)"><span class="n">22</span><span class="t">Unidade 4 · Como reconhecer fake news</span></div>
+  <div class="item" onclick="jumpTo(23)"><span class="n">23</span><span class="t">Unidade 4 · Ética na pregação</span></div>
+  <div class="item" onclick="jumpTo(25)"><span class="n">25</span><span class="t">Glossário de termos</span></div>
+  <div class="item" onclick="jumpTo(26)"><span class="n">26</span><span class="t">Síntese final</span></div>
+</div></div>
+<button id="notesBtn" style="display:block" onclick="toggleNotes()" title="Minhas anotações" aria-label="Minhas anotações">&#9998; NOTAS</button>
+<div id="notesPanel">
+  <div class="notes-head">
+    <div class="notes-head-top">
+      <span class="notes-title" id="notesTitle">Notas &middot; Homilética</span>
+      <span class="notes-status" id="notesStatus">salvo</span>
+      <span class="notes-close" onclick="closeNotes()" title="Fechar anotações">&#10005;</span>
+    </div>
+    <div class="notes-toolbar">
+      <button type="button" class="toolbtn" data-cmd="bold" title="Negrito"><b>N</b></button>
+      <button type="button" class="toolbtn" data-cmd="italic" title="Itálico"><i>I</i></button>
+      <button type="button" class="toolbtn" data-cmd="underline" title="Sublinhado"><u>S</u></button>
+      <span class="toolbar-sep"></span>
+      <button type="button" class="toolbtn" data-block="H2" title="Título">Título</button>
+      <button type="button" class="toolbtn" data-block="H3" title="Subtítulo">Subtítulo</button>
+      <button type="button" class="toolbtn" data-block="P" title="Corpo">Corpo</button>
+      <span class="toolbar-sep"></span>
+      <button type="button" class="toolbtn" id="notesCopyBtn" title="Copiar anotação">Copiar</button>
+    </div>
+  </div>
+  <div id="notesBody" contenteditable="true" spellcheck="false" data-placeholder="Escreva sua anotação..."></div>
+</div>
+<script src="../../assets/pageflip.js"></script>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

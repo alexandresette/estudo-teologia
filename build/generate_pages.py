@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Segunda etapa: usa o que extract_multipage.py já preparou em site_v2/
+Segunda etapa: usa o que extract_multipage.py já preparou na raiz do repo
 (_meta.json, livro/<id>/_content.html, livro/<id>/cover.jpg|img/*, assets/*)
 pra montar as páginas HTML de verdade: index.html (landing), corredor/*.html
-e livro/*.html -- cada uma um arquivo físico próprio, sem hash-routing.
+e livro/<id>/index.html -- cada uma um arquivo físico próprio, sem
+hash-routing. _meta.json/_content.html são intermediários: apagar depois
+que o rebuild estiver validado (não afetam o site publicado).
 """
 import json
 import os
 import shutil
 
-OUT = "/home/claude/estudo-teologia/site_v2"
+OUT = "/home/claude/estudo-teologia"
 BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
 
 TITLE_SITE = "Biblioteca de Estudos · Xande"

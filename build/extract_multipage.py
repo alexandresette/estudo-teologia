@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Extrai o index.html monolítico atual (single-file, tudo embutido em base64)
-e gera uma árvore de site multi-página de verdade: cada corredor e cada
-livro vira um arquivo HTML fisicamente separado, com uma URL própria, e as
-imagens (que hoje são base64 embutido) viram arquivos de imagem reais,
-referenciados por caminho relativo -- cacheáveis pelo navegador, inspecionáveis,
-e que não obrigam a rebaixar o site inteiro (49MB) só pra ler uma página.
+Extrai o monólito antigo (build/source_monolith.html -- single-file, tudo
+embutido em base64) e gera a árvore de site multi-página de verdade: cada
+corredor e cada livro é um arquivo HTML fisicamente separado, com uma URL
+própria, e as imagens (que no monólito são base64 embutido) viram arquivos
+de imagem reais, referenciados por caminho relativo -- cacheáveis pelo
+navegador, inspecionáveis, e que não obrigam a baixar o site inteiro (49MB)
+só pra ler uma página.
 
-Roda uma vez sobre o index.html atual (fonte da verdade de conteúdo) e
-escreve tudo em SRC/OUT (nunca sobrescreve o index.html original -- a troca
-pro output final é manual, depois de testar).
+Lê build/source_monolith.html (fonte da verdade de conteúdo, nunca é
+sobrescrito por este script) e escreve o site direto na raiz do repo
+(index.html, corredor/, livro/, assets/) -- rodar de novo é sempre um
+rebuild completo e seguro.
 """
 import base64
 import json
@@ -19,8 +21,8 @@ import re
 import sys
 import hashlib
 
-SRC = "/home/claude/estudo-teologia/index.html"
-OUT = "/home/claude/estudo-teologia/site_v2"
+SRC = "/home/claude/estudo-teologia/build/source_monolith.html"
+OUT = "/home/claude/estudo-teologia"
 
 def read_src():
     return open(SRC, encoding="utf-8").read()
