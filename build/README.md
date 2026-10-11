@@ -151,10 +151,22 @@ O sandbox na nuvem não tem credencial de git push (a VM é isolada de
 propósito) — commit pode ser feito por lá, mas o `git push` final é
 sempre no terminal real do Mac do usuário.
 
+## Domínio e páginas avulsas
+
+Publicado pelo GitHub Pages (branch `main`, raiz) no domínio
+`vamosestudar.com`, definido pelo arquivo `CNAME` na raiz do repo (não
+apagar). O DNS fica no GoDaddy: apex com os 4 IPs A do GitHub Pages e
+`www` como CNAME pra `alexandresette.github.io`.
+
+`word-explorer/` é uma cópia estática do Word Explorer que antes vivia no
+app Firebase (`vamos-estudar/public/word-explorer`). Não passa pelo build:
+é arquivo pronto, servido como está em `vamosestudar.com/word-explorer/`.
+
 ## Arquivos versionados no repo
 
 `index.html`, `corredor/*.html`, `livro/<id>/index.html` + `img/*`,
-`assets/*`, `build/*.py`, `build/site.js`, `build/site-fixes.css`, `build/source_monolith.html`,
+`assets/*`, `build/*.py`, `build/site.js`, `build/site-fixes.css`,
+`CNAME`, `word-explorer/*`, `build/source_monolith.html`,
 este README. Os `RESUMO-*.html`/`RESUMAO-*.html` soltos na raiz são
 material de trabalho antigo, de antes da consolidação no monólito — por
 histórico, não por regra.
