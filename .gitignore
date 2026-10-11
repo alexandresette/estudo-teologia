@@ -1,0 +1,7 @@
+# Intermediarios do pipeline de build multi-pagina (extract_multipage.py),
+# nunca sao conteudo final, so lixo de etapa.
+_meta.json
+livro/*/_content.html
+_gate.html
+
+.DS_Store
