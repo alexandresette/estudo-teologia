@@ -21,8 +21,8 @@ import re
 import sys
 import hashlib
 
-SRC = "/home/claude/estudo-teologia/build/source_monolith.html"
-OUT = "/home/claude/estudo-teologia"
+OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC = os.path.join(OUT, "build", "source_monolith.html")
 
 def read_src():
     return open(SRC, encoding="utf-8").read()

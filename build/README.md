@@ -43,10 +43,16 @@ python3 build/generate_pages.py      # lê _meta.json + _content.html, escreve a
 ```
 
 Rodar os dois de novo é sempre um rebuild completo e seguro (não precisa
-de passo manual depois). Os arquivos intermediários (`_meta.json`,
-`livro/<id>/_content.html`) não vão pro commit — já estão no
-`.gitignore`? **Confirmar isso**; se não estiverem, adicionar, porque
-são lixo de build, não conteúdo.
+de passo manual depois). Os caminhos são relativos à pasta do repo, então
+os scripts rodam de qualquer lugar onde o repo estiver. Os arquivos
+intermediários (`_meta.json`, `livro/<id>/_content.html`) não vão pro
+commit: estão no `.gitignore`.
+
+`build/site-fixes.css` também é **autoral**: ajustes de CSS da versão
+multi-página que não vêm do monólito (ex.: tirar o sublinhado de link dos
+corredores/capas, posição do botão "Corredores"). `generate_pages.py`
+copia pra `assets/site-fixes.css`, carregado depois de `site.css`. Mudança
+de CSS vai aqui, não no monólito.
 
 `build/site.js` é **autoral** (não é gerado a partir do monólito) — é o
 motor compartilhado de flip/notas/portão/som que toda página de livro
@@ -148,7 +154,7 @@ sempre no terminal real do Mac do usuário.
 ## Arquivos versionados no repo
 
 `index.html`, `corredor/*.html`, `livro/<id>/index.html` + `img/*`,
-`assets/*`, `build/*.py`, `build/site.js`, `build/source_monolith.html`,
+`assets/*`, `build/*.py`, `build/site.js`, `build/site-fixes.css`, `build/source_monolith.html`,
 este README. Os `RESUMO-*.html`/`RESUMAO-*.html` soltos na raiz são
 material de trabalho antigo, de antes da consolidação no monólito — por
 histórico, não por regra.

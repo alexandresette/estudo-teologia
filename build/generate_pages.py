@@ -12,8 +12,8 @@ import json
 import os
 import shutil
 
-OUT = "/home/claude/estudo-teologia"
 BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.dirname(BUILD_DIR)
 
 TITLE_SITE = "Biblioteca de Estudos · Xande"
 DESC_SITE = "Biblioteca viva de resumões de estudo do curso de Teologia. Cada disciplina, um livro na estante."
@@ -37,7 +37,8 @@ def head(rel, title):
         '<title>%s</title>\n'
         '<meta name="description" content="%s">\n'
         '<link rel="stylesheet" href="%sassets/site.css">\n'
-        '</head>\n<body data-rel="%s">\n' % (title, DESC_SITE, rel, rel)
+        '<link rel="stylesheet" href="%sassets/site-fixes.css">\n'
+        '</head>\n<body data-rel="%s">\n' % (title, DESC_SITE, rel, rel, rel)
     )
 
 
@@ -217,6 +218,9 @@ def main():
     # e é copiado pra dentro do site a cada geração, pra "rm -rf site_v2 &&
     # extract && generate" ser sempre um rebuild completo e confiável.
     shutil.copyfile(os.path.join(BUILD_DIR, "site.js"), os.path.join(OUT, "assets", "site.js"))
+    # site-fixes.css também é autoral: ajustes de CSS da versão multi-página
+    # que não vêm do monólito. Carregado depois de site.css, então ganha dele.
+    shutil.copyfile(os.path.join(BUILD_DIR, "site-fixes.css"), os.path.join(OUT, "assets", "site-fixes.css"))
 
     meta = json.load(open(os.path.join(OUT, "_meta.json"), encoding="utf-8"))
     by_corr = {"teologia": [], "secreto": [], "livros": []}

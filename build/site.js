@@ -211,7 +211,8 @@
       if(!pf) return;
       pf.turnToPage(0);
       history.replaceState(null,'','#1');
-      setTimeout(()=>{ if(pf) pf.turnToPage(0); }, 700);
+      updateCounter();
+      setTimeout(()=>{ if(pf){ pf.turnToPage(0); updateCounter(); } }, 700);
     };
     window.openIdx=function(){
       const idx=document.getElementById('idx');
@@ -334,9 +335,16 @@
 
     ensureFlip();
     updateCounter();
+    /* Reabre na página da URL (#N) depois de um reload. turnToPage não
+       dispara o evento 'flip', então o contador é atualizado à mão; e,
+       como em goBookStart, repete depois de 700ms porque a capa dura
+       ainda assentando pode engolir o primeiro salto. */
     const hashPage=parseInt((location.hash||'').replace('#',''),10);
     if(hashPage && hashPage>1){
-      requestAnimationFrame(()=>requestAnimationFrame(()=>{ pf.turnToPage(Math.max(0,hashPage-1)); }));
+      const target=Math.min(hashPage, pf.getPageCount())-1;
+      const go=()=>{ if(pf){ pf.turnToPage(target); updateCounter(); } };
+      requestAnimationFrame(()=>requestAnimationFrame(go));
+      setTimeout(go, 700);
     }
   }
 })();

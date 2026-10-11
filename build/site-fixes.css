@@ -1,0 +1,14 @@
+/* Ajustes da versão multi-página (autoral, não vem do monólito).
+   Copiado pra assets/site-fixes.css por generate_pages.py e carregado
+   depois de site.css. Só CSS estrutural, nunca conteúdo de livro. */
+
+/* Corredores, capas e "Estante" viraram <a href> de verdade na migração;
+   sem isso herdam o sublinhado azul padrão de link. */
+a.corridor-zone, a.bcover, a#backBtn{text-decoration:none;color:inherit}
+a#backBtn{color:#f0e2bc;display:inline-block}
+
+/* O botão "Corredores" agora mora dentro de #viewport (abaixo do header),
+   então o deslocamento de --hdrH que ele tinha no monólito o empurrava pra
+   cima das capas. Fica no canto do palco, acima da prateleira. */
+.corridorExitBtn{top:28px;left:30px}
+@media(max-width:640px){.corridorExitBtn{top:24px;left:24px}}
