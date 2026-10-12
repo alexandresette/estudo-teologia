@@ -15,7 +15,7 @@ import shutil
 BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.dirname(BUILD_DIR)
 
-TITLE_SITE = "Biblioteca de Estudos · Xande"
+TITLE_SITE = "Vamos Estudar"
 DESC_SITE = "Biblioteca viva de resumões de estudo do curso de Teologia. Cada disciplina, um livro na estante."
 
 MOTES_HTML = '<div class="motes" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>'
@@ -25,7 +25,7 @@ GATE_HTML = open(os.path.join(OUT, "_gate.html"), encoding="utf-8").read()
 CORRIDOR_TITLES = {
     "teologia": ("1", "Teologia"),
     "secreto": ("2", "No Secreto"),
-    "livros": ("3", "Resumo de Livros"),
+    "livros": ("3", "Livros"),
 }
 
 
@@ -57,7 +57,7 @@ def ambient(rel):
 def shelf_header():
     return (
         '<header id="libHeader">\n'
-        '  <h1 class="hdr-title">Biblioteca de Estudos</h1>\n'
+        '  <h1 class="hdr-title">Vamos Estudar</h1>\n'
         '  <div class="hdr-verse">Colossenses 3:23-24</div>\n'
         '  <button id="gateExitBtn" class="gateExitBtn" onclick="exitToGate()" '
         'title="Sair da biblioteca">&#8592; Sair</button>\n'
